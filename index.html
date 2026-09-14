@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metastable Design — VLSI webinars & community</title>
+<meta name="description" content="Live webinars on timing closure, verification, and physical design for VLSI engineers. Plus a forum for working through hard problems together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="logo">Metastable Design</a>
+    <nav class="main-nav">
+      <a href="#webinars">Webinars</a>
+      <a href="#forum">Forum</a>
+      <a href="#about">About</a>
+      <a href="#" class="nav-signin">Sign in</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <h1>Where signals settle.</h1>
+      <p class="hero-sub">Live webinars on VLSI design — timing closure, verification, physical design — taught by engineers who've shipped silicon. Bring your hardest bugs to the forum after.</p>
+      <div class="hero-actions">
+        <a href="#webinars" class="btn btn-primary">Browse upcoming webinars</a>
+        <a href="#forum" class="btn btn-outline">Join the forum</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg id="waveform" viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="110" x2="480" y2="110" class="wf-axis" />
+        <path id="wf-path" class="wf-path" d="" />
+      </svg>
+    </div>
+  </section>
+
+  <section id="webinars" class="webinars wrap">
+    <h2>Upcoming webinars</h2>
+    <p class="section-sub">Small cohorts, live Q&amp;A, recordings included with purchase.</p>
+
+    <div class="webinar-grid">
+
+      <article class="webinar-card">
+        <div class="wc-meta">
+          <span class="wc-date">Oct&nbsp;03</span>
+          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
+        </div>
+        <h3>Static timing analysis, from first principles</h3>
+        <p>Setup and hold margins, clock skew, false paths, and how to actually read a timing report instead of just chasing WNS to zero.</p>
+        <div class="wc-footer">
+          <span class="wc-price">$79</span>
+          <stripe-buy-button
+            buy-button-id="buy_btn_REPLACE_ME_1"
+            publishable-key="pk_live_REPLACE_ME">
+          </stripe-buy-button>
+        </div>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta">
+          <span class="wc-date">Oct&nbsp;17</span>
+          <span class="wc-time">9:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;120&nbsp;min</span>
+        </div>
+        <h3>Clock domain crossing: finding the bugs simulation won't show you</h3>
+        <p>Synchronizer topologies, metastability failure rates, and building a CDC checklist your review process will actually follow.</p>
+        <div class="wc-footer">
+          <span class="wc-price">$99</span>
+          <stripe-buy-button
+            buy-button-id="buy_btn_REPLACE_ME_2"
+            publishable-key="pk_live_REPLACE_ME">
+          </stripe-buy-button>
+        </div>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta">
+          <span class="wc-date">Nov&nbsp;07</span>
+          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
+        </div>
+        <h3>Low-power techniques for SoC front-end design</h3>
+        <p>Clock gating, power domains, and UPF basics — what to specify before RTL freeze so the back-end team isn't stuck with your defaults.</p>
+        <div class="wc-footer">
+          <span class="wc-price">$79</span>
+          <stripe-buy-button
+            buy-button-id="buy_btn_REPLACE_ME_3"
+            publishable-key="pk_live_REPLACE_ME">
+          </stripe-buy-button>
+        </div>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta">
+          <span class="wc-date">Nov&nbsp;21</span>
+          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
+        </div>
+        <h3>Reading a DRC report without losing your mind</h3>
+        <p>Triage strategy for physical verification: which violations to fix first, which to waive, and how to talk to your foundry about the rest.</p>
+        <div class="wc-footer">
+          <span class="wc-price">$79</span>
+          <stripe-buy-button
+            buy-button-id="buy_btn_REPLACE_ME_4"
+            publishable-key="pk_live_REPLACE_ME">
+          </stripe-buy-button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="forum" class="forum wrap">
+    <h2>From the forum</h2>
+    <p class="section-sub">Open discussion between webinars. No question is too basic; no bug report is too weird.</p>
+
+    <div class="forum-grid">
+      <a class="forum-item" href="#">
+        <span class="forum-tag">Timing closure</span>
+        <span class="forum-title">Multicycle path exception not being respected in PrimeTime — what am I missing?</span>
+        <span class="forum-replies">14 replies</span>
+      </a>
+      <a class="forum-item" href="#">
+        <span class="forum-tag">DFT &amp; test</span>
+        <span class="forum-title">Scan chain stuck-at coverage plateaued at 91% — ATPG pattern strategies that helped you</span>
+        <span class="forum-replies">9 replies</span>
+      </a>
+      <a class="forum-item" href="#">
+        <span class="forum-tag">Layout &amp; DRC</span>
+        <span class="forum-title">Antenna violations after metal fill — fixing at the source vs. adding diodes</span>
+        <span class="forum-replies">21 replies</span>
+      </a>
+    </div>
+
+    <a href="#" class="btn btn-outline forum-cta">Visit the forum</a>
+  </section>
+
+  <section id="about" class="about wrap">
+    <h2>About</h2>
+    <p>Metastable Design is run by a small group of VLSI engineers who got tired of watching good design practices stay locked inside individual companies. Webinars are taught by people who've actually taped out the chips they're describing, kept small enough for real Q&amp;A, and recorded so you can revisit the parts that didn't click the first time.</p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>© 2026 Metastable Design</span>
+    <a href="mailto:hello@metastable.design">hello@metastable.design</a>
+  </div>
+</footer>
+
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
