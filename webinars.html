@@ -1,581 +1,443 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Webinars — Metastable Design</title>
-<meta name="description" content="The full Metastable Design webinar catalog: physical design, STA, power, synthesis, DRC, scripting drills and mock interviews, taught by practicing VLSI engineers.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webinar catalog — Metastable Design</title>
+<meta name="description" content="22 recorded VLSI webinars on physical design, STA, power and synthesis, plus scripting modules and mock interviews.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap nav">
-    <a href="index.html" class="brand">Metastable<span class="dot">.</span>Design</a>
-    <div class="nav-right">
-      <nav class="navlinks">
-      <a href="index.html">Home</a>
-      <a href="webinars.html" class="active">Webinars</a>
-      <a href="index.html#host">Host a webinar</a>
-      <a href="index.html#contact">Contact</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="/" class="logo">Metastable Design</a>
+    <nav class="main-nav">
+      <a href="webinars.html">Webinars</a>
+      <a href="/#teach">Teach</a>
+      <a href="/#community">Community</a>
+      <a href="https://discord.gg/4RN7esTd3G" class="nav-signin" target="_blank" rel="noopener">Discord</a>
     </nav>
-          <button id="cart-toggle" class="cart-btn" aria-label="View cart">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      <span class="cart-count">0</span>
-    </button>
-    </div>
   </div>
 </header>
 
 <main>
 
-  <div class="wrap catalog-header">
-    <p class="catalog-meta">/ physical-design-webinars</p>
-    <h1 style="margin-bottom:12px;">Deep-dive webinars on physical design, STA, power and synthesis</h1>
-    <p class="lede" style="margin-bottom:22px;">Every recording is taught by a practitioner and built for engineers who want to go past the basics. Tap a session to see what it covers.</p>
-    <nav class="jump-nav">
-      <a href="#available">Available recordings</a>
-      <a href="#scripting">Scripting modules</a>
-      <a href="#mock-interviews">Mock interviews</a>
-      <a href="#coming-up">Coming up</a>
-    </nav>
-  </div>
-
-  <!-- AVAILABLE RECORDINGS -->
-  <section class="catalog-group" id="available">
-    <div class="wrap">
-      <p class="group-title first">Available recordings</p>
-      <div class="course-list">
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Essential DFT Fundamentals <span class="course-by">— lacks annotations</span></span>
-            <span class="course-right"><span class="course-price">$25</span><button class="add-cart-btn" data-id="dft-fundamentals" data-name="Essential DFT Fundamentals" data-price="25">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Why DFT?</li><li>Types of Defect</li><li>Fault Models</li><li>Stuck-At Faults + Quiz</li>
-              <li>Scan Insertion & Scan Chains</li><li>Shift Mode and Capture Mode</li><li>Clock Staggering</li>
-              <li>Transition Faults</li><li>At-Speed Capture</li><li>Scan Chains Crossing Clock Domains</li>
-              <li>Lock-Up Latch</li><li>Quiz: posedge/negedge connections</li><li>Controlling Resets/Enables of ICGs</li>
-              <li>CODEC</li><li>Timing Constraints</li><li>Memory Testing</li><li>Single vs Split MBIST Controller</li>
-              <li>MARCH Test for Memory</li><li>Bridging Faults and IDDQ Faults</li><li>Path Delay Fault</li>
-              <li>Test Point Insertion</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Static Timing Analysis — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="static-timing-analysis-part-1" data-name="Static Timing Analysis — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Inputs and Outputs of STA</li><li>Origin of Setup/Hold Time + Quiz</li><li>Timing Arcs</li>
-              <li>NLDM Library: Combo Gates</li><li>Timing Arcs: Setup and Hold</li><li>NLDM: Interpolation & Extrapolation</li>
-              <li>Clock Definitions + Quiz</li><li>Case Analysis + Quiz</li><li>Clock Gating Checks</li>
-              <li>Integrated Clock Gating Cell</li><li>Why ICG Enable Paths Are Critical + Quiz</li>
-              <li>Multi-cycle Paths (Same & Different Freq)</li><li>MCP: "start" and "end" options + Quiz</li>
-              <li>Clock Groups</li><li>Reading a Timing Report: Setup & Hold</li><li>Hierarchical Block Implementation</li>
-              <li>I/O Constraints</li><li>Timing Report: In2Reg, Reg2Out</li><li>DRVs</li>
-              <li>report_timing: max_paths vs nworst</li><li>Validating Constraints, check_timing</li>
-              <li>report_analysis_coverage</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Static Timing Analysis — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="static-timing-analysis-part-2" data-name="Static Timing Analysis — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>GBA vs PBA + Quiz</li><li>PBA Mode: Path vs Exhaustive + Quiz</li><li>Miller Effect</li>
-              <li>Long Tail Effect</li><li>CCS Libraries & Receiver Capacitance</li><li>set_driving_cell vs set_input_tran</li>
-              <li>Common Path Pessimism Removal</li><li>Crosstalk on Common Clock Path</li><li>CPPR for Half Cycle Paths</li>
-              <li>Interconnect RC Corners + Quiz</li><li>Simultaneous Setup/Hold Critical Paths</li>
-              <li>Negative Net Delays</li><li>OCV vs AOCV</li><li>AOCV Path Depth with GBA vs PBA</li>
-              <li>POCV: LUT for sigma, Path Delay, Timing Report</li><li>Crosstalk: Noise and Crosstalk Delay</li>
-              <li>Crosstalk Noise Immunity</li><li>Latch Based Timing + Quiz</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Power Optimization Techniques</span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="power-optimization-techniques" data-name="Power Optimization Techniques" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>MV Design & DVFS</li><li>Power Gating & Clock Gating</li><li>Clock Gating: Timing vs Power</li>
-              <li>Multi-level Clock Gating</li><li>ICG Cloning</li><li>Data Bus Inversion (DBI AC & DC)</li>
-              <li>Datapath Restructuring & Gating</li><li>Architectural vs Inferred ICG</li><li>Multi VT Synthesis</li>
-              <li>Glitch Power & Side Effects</li><li>Miscorrelation</li><li>Register Banking</li>
-              <li>Power Optimization with SAIF Files</li><li>Self Gating (Data Driven Clock Gating)</li>
-              <li>Mixed Cell-Height Implementation</li><li>Threshold Voltage</li><li>Body Biasing</li>
-              <li>Stack Effect</li><li>Quiz × 2</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Power Gating</span>
-            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="power-gating" data-name="Power Gating" data-price="35">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Power Switches: Headers and Footers</li><li>In-Rush Current</li><li>Headers or Footers?</li>
-              <li>Power Switch Placement</li><li>In Rush Current vs Wake Up Time</li><li>Star-Daisy Switch Chaining</li>
-              <li>Mother-Daughter Configuration</li><li>Hammer and Trickle Chains</li><li>Hammer End Logic</li>
-              <li>Power Switch with In-built Buffer</li><li>Power Switch with Separate Well</li>
-              <li>State Retention Power Gating (SRPG)</li><li>Isolation Cells: Source or Destination</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Special Physical Cells</span>
-            <span class="course-right"><span class="course-price">$25</span><button class="add-cart-btn" data-id="special-physical-cells" data-name="Special Physical Cells" data-price="25">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Decap Cells</li><li>Tie Cells</li><li>Filler Cells</li><li>Tap Cells</li>
-              <li>Latch-up (Recap)</li><li>Endcaps / Boundary Cells</li><li>ESD Clamps</li>
-              <li>Die Level Process Monitors (DLPM)</li><li>Quiz</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Antenna Effect</span>
-            <span class="course-right"><span class="course-price">$20</span><button class="add-cart-btn" data-id="antenna-effect" data-name="Antenna Effect" data-price="20">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Antenna Effect</li><li>Causes of Antenna</li><li>Fixes for Antenna</li>
-              <li>Cost of Antenna Fixing</li><li>Quiz</li><li>Reverse Antenna Effect</li><li>NWELL Antenna Effect</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Signal Routing</span>
-            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="signal-routing" data-name="Signal Routing" data-price="35">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Routing Sequence & Virtual Routing</li><li>Global Routing & GCELL</li>
-              <li>Global Routing Congestion (GRC)</li><li>Timing & Crosstalk Driven Global Routing + Quiz</li>
-              <li>RC Estimation Techniques</li><li>Detail Routing</li><li>Post Route Optimizations</li>
-              <li>Redundant Via Insertion</li><li>Antenna Fixing</li><li>Dummy Metal Fill</li><li>Wire Spreading</li>
-              <li>Debugging Route Results</li><li>Maze Router (Lee's Algorithm)</li>
-              <li>Routing Guides & Corridors</li><li>Min/Max Layer Constraints</li><li>Via Ladder Insertion</li>
-              <li>Fixing Route Detours</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Multi-Input Switching (MIS)</span>
-            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="multi-input-switching-mis" data-name="Multi-Input Switching (MIS)" data-price="35">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Recording available on request. Reach out via Discord or email to gain access.</p>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Clock Tree Synthesis — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="clock-tree-synthesis-part-1" data-name="Clock Tree Synthesis — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Objectives of CTS & CTS Flow</li><li>Design Initialization</li><li>Primary CTS Corner</li>
-              <li>Max Cap and Max Trans</li><li>Clock Tree References</li><li>Inverter vs Buffer Based Clock Tree + Quiz</li>
-              <li>Clock NDRs + Quiz</li><li>Clock Routing Layers</li><li>Target Skew and Latency</li>
-              <li>Max Fanout and Max Net Length</li><li>Clock Cell Spacing Rules</li>
-              <li>CTS Topologies: Conventional, MS-CTS, CTMesh + Quiz</li><li>Clock Balance Points</li>
-              <li>Clock Skew Groups + Quiz</li><li>Concurrent Clock and Data Opt (CCD) + Quiz</li>
-              <li>Trial Clock Tree</li><li>Clock Tree Exceptions</li><li>Valid vs Invalid Clock Tree Network</li>
-              <li>IO Latency postCTS</li><li>Zero Clock Skew</li><li>Clock Jitter Factors</li>
-              <li>ICG Cloning and Merging</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Clock Tree Synthesis — Part 2</span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="clock-tree-synthesis-part-2" data-name="Clock Tree Synthesis — Part 2" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Covers common issues encountered while running CTS and the full solution space. Heavily interview-focused, with practical discussion — a companion to Part 1 that goes well beyond textbook coverage.</p>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Placement — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="placement-part-1" data-name="Placement — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Goal of Placement & Placement Flow</li><li>Placement Density Controls</li>
-              <li>place.coarse.max_density (detailed)</li><li>congestion_driven_max_util (detailed)</li>
-              <li>Target Routing Density Control</li><li>Path Groups and Path Weights</li>
-              <li>Placement Bounds, Attractions & Blockages</li><li>Legalization & Debugging</li>
-              <li>Legalization Options & Stream Legalization</li><li>Congestion Driven Restructuring</li>
-              <li>Register Banking</li><li>Mixed Cell Height Implementation</li><li>SAIF Based Placement</li>
-              <li>Global Routing Controls & RC Estimation</li><li>IR Aware Placement</li>
-              <li>Scan Chain Reordering</li><li>Relative Placement</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Placement — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="placement-part-2" data-name="Placement — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Covers practical issues seen in real designs, compiled from 10+ years of experience. Rated above Part 1 by past attendees — covers solution spaces not readily available online. Ideal for interview prep and real-world debugging.</p>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Crosstalk Analysis</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="crosstalk-analysis" data-name="Crosstalk Analysis" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Why Signal Integrity Matters</li><li>Effects of Crosstalk</li><li>Types of Noise</li>
-              <li>Driver Weakening Effect</li><li>Multi-Input Glitch</li><li>Timing Window Overlap</li>
-              <li>Techniques to Reduce Pessimism</li><li>Crosstalk Delay Analysis Mode</li><li>Composite Aggressors</li>
-              <li>Logical Correlation</li><li>Clock Groups and Clock Exclusivity</li><li>Quiz × 2</li>
-              <li>Aggressor Exclusion</li><li>Noise Margins, Immunity, Slack</li><li>Crosstalk Computation</li>
-              <li>Noise Reporting: Source vs Endpoint</li><li>Crosstalk on Common Clock Path</li>
-              <li>Crosstalk Miscorrelation: Top vs Tile</li><li>Systematic & Pointed Fixes + Quiz × 2</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">EM / IR Drop Analysis</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="em-ir-drop-analysis" data-name="EM / IR Drop Analysis" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Inputs for EM/IR Analysis</li><li>What is IR Drop? Effects</li><li>Static & Dynamic Drop</li>
-              <li>Key Ingredients of IR Analysis</li><li>Power Grid Design Implications</li>
-              <li>Effective & Shortest Path Resistance + Quiz</li><li>BQM, PeakTW, Combinations + Quiz</li>
-              <li>Ways to Mitigate IR Drop</li><li>IR Aware Placement</li><li>Cell Spacing vs Padding</li>
-              <li>Cell Downsizing</li><li>Power Grid Augmentation</li><li>Decoupling Capacitors</li>
-              <li>Dynamic Power Shaping</li><li>Vector Based IR Analysis</li>
-              <li>Voltage Stats: minTW, avgTW, eff-DVD</li><li>Backside Power Delivery + Quiz × 3</li>
-              <li>Electromigration Fundamentals</li><li>Factors Affecting EM & Self Heating</li>
-              <li>Wire Width & Length Effects on EM</li><li>Types of EM Rules</li>
-              <li>Frequency Dependence on EM</li><li>Power EM vs Signal EM</li><li>Fixing Power & Signal EM</li>
-              <li>Physically Broken & Dropped Nets + Quiz × 2</li><li>Via Chopping Distance</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Power Estimation — Part 1 <span class="course-by">— by Gigawatt</span></span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="power-estimation-part-1" data-name="Power Estimation — Part 1" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Why Do Power Estimation?</li><li>Types of Power for a Circuit</li>
-              <li>Energy Stored in a Capacitor</li><li>Why is Power Increasing? + Quiz × 2</li>
-              <li>Inputs for Power Estimation + Quiz</li><li>Power Analysis Modes + Quiz</li>
-              <li>How Tools Calculate Switching Activity + Quiz</li><li>Vector File Format (FSDB vs SAIF)</li>
-              <li>Types of Activity Files</li><li>Vector Based Power Analysis Modes</li>
-              <li>Power Saving at Design Milestones</li><li>RTL Power + Quiz</li>
-              <li>Gate/Netlist Power with RTL Activity + Quiz</li><li>Common Reports from Power Tool</li>
-              <li>Activity File Generation</li><li>When to Use Different Tests</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Power Estimation — Part 2 <span class="course-by">— by Gigawatt</span></span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="power-estimation-part-2" data-name="Power Estimation — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Energy-Delay Product Metric</li><li>Energy vs Delay Tradeoff + Quiz</li>
-              <li>Physical Design POV on Energy/Delay</li><li>PVT Limitation on Power/Performance</li>
-              <li>VF Curve + Quiz</li><li>State Dependent Leakage Power + Quiz</li>
-              <li>SDPD Based Power Estimation</li><li>Pre-Si to Post-Si Power Correlation</li>
-              <li>Simple CPU Power Model + Quiz</li><li>RTL Power: Clock Enable Checker</li>
-              <li>RTL Power: Register Data Checker</li><li>RTL Power: Memory Power Checker</li>
-              <li>RTL Power: MUX Power Checker</li><li>RTL Power: Observability Don't Care</li>
-              <li>RTL Power: Operand Isolation + Quiz</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Synthesis 2.0 — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="synthesis-2-0-part-1" data-name="Synthesis 2.0 — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Inputs/Outputs of Logical Synthesis</li><li>Synthesis Flow, Elaboration, Uniquification</li>
-              <li>Linting Issues</li><li>Liberty Files</li><li>WNS/TNS Optimization Passes</li>
-              <li>Path Groups, Critical Range & Weights</li><li>Boundary Optimization</li>
-              <li>Constant Propagation</li><li>Register Retiming, Ungrouping</li>
-              <li>Sequential Removal & Merging</li><li>CCD</li><li>Preferred MUX Implementation</li>
-              <li>Register Replication + Quiz × 7</li><li>RC Estimation during Synthesis</li>
-              <li>Wire Load Models & Custom WLMs</li><li>TLU+ File</li>
-              <li>Scan Insertion & Scan Stitching</li><li>Know Your Scan DEF</li>
-              <li>DFT PREDRCs</li><li>Zero Wire Load Timing Model</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Synthesis 2.0 — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="synthesis-2-0-part-2" data-name="Synthesis 2.0 — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Inputs/Outputs of Physical Synthesis</li><li>Physical Layout Estimation (PLE)</li>
-              <li>Spatial Flow & iSpatial Flow (CRR)</li><li>Global Routing</li><li>Synthesis Timing Constraints</li>
-              <li>Post-Synthesis Checks</li><li>Triple Modular Redundancy (TMR)</li>
-              <li>Providing RTL Feedback & Path Selection</li><li>Understanding Critical Paths</li>
-              <li>Power Optimization during Synthesis</li><li>SAIF Files</li>
-              <li>Clock Gating & Multi-Level CG</li><li>Arch vs Inferred ICGs</li>
-              <li>CG Style: Max Fan-Out, Min Bit Width + Quiz</li><li>Cell/VT Selection during Synthesis</li>
-              <li>Register Banking / MBCI</li><li>Redundant Bit Removal</li><li>Low Power Settings</li>
-              <li>Feasibility Analysis & PPA Optimization</li><li>Shmoo Plots, Perf/Leakage/Area Curves</li>
-              <li>Flop Profiling</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">Unified Power Format (UPF) — Part 1 <span class="course-by">— by Subhechcha Banerjee</span></span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="unified-power-format-upf-part-1" data-name="Unified Power Format (UPF) — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Components of Power</li><li>LP Design Challenges</li><li>Need for Unified Power Intent</li>
-              <li>UPF History & UPF vs CPF</li><li>Contents & Types of UPF</li>
-              <li>Voltage Domain / Power Domain / Voltage Area</li><li>Power Domains: UPF View</li>
-              <li>Power Supply Network: UPF View</li><li>Supply Sets and Handles</li>
-              <li>NWELL Connection through Abutment</li><li>Supply Sets: NWELL/PWELL + MCQ</li>
-              <li>Macro / Hierarchical Cell Supply Connection</li><li>Why set transitive true/false? + Quiz</li>
-              <li>Power Supply States & Supply Level</li><li>MCQ, Power State Tables, PST Case Study</li>
-              <li>HighConn and LowConn Side of Ports</li><li>Upper vs Lower Boundary</li>
-              <li>Tool in Out-of-Context Mode</li><li>Setting Context & Port Attributes</li>
-              <li>MCQs × 2, Tips & Tricks</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">DRC — Part 1</span>
-            <span class="course-right"><span class="course-price">$50</span><button class="add-cart-btn" data-id="drc-part-1" data-name="DRC — Part 1" data-price="50">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
-              <li>Physical Verification Design Sequence</li><li>FEOL/Base DRCs</li><li>What is the OD Layer?</li>
-              <li>How Break OD Cells Work</li><li>The Problem: Continuous Poly in FinFET</li>
-              <li>GP_BREAK: LVS Implications</li><li>Endcap Cells: Purpose & DRC Rules</li>
-              <li>Endcap Cells: LVS Property Mismatches</li><li>Latch Up: The Problem Well Taps Solve</li>
-              <li>Vt Boundary DRCs</li><li>BEOL/Metal DRCs</li><li>DRC Definitions & Impact</li>
-              <li>Multi-Patterning</li><li>Multi-Patterning DRCs</li><li>Anchor/Seed in MP</li><li>Quiz</li>
-              <li>Complex MP DRC: Anchor/SeedPath DRC</li><li>ERC: Electrical Rule Check</li>
-              <li>DRC vs ERC vs DFM</li><li>Metal Fill Types</li><li>Density DRCs — Why They Exist?</li>
-              <li>Density DRCs: Rule Types</li><li>Voltage Aware DRCs</li><li>Antenna Effect</li>
-              <li>Antenna Fixes</li><li>DFM</li><li>Pattern Matching</li><li>Via Redundancy (Via Fill)</li>
-            </ul>
-          </div>
-        </details>
-
-        <details class="course">
-          <summary>
-            <span class="course-name">DRC — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="drc-part-2" data-name="DRC — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">30 MCQ-based questions and answers covering practical issues, use-cases and questions drawn from Part 1. Ideal for interview preparation and consolidating real-world DRC knowledge.</p>
-          </div>
-        </details>
-
-      </div>
-    </div>
+  <section class="catalog-hero wrap">
+    <h1>Webinar catalog</h1>
+    <p class="hero-sub">22 recorded deep-dives on physical design, STA, power and synthesis, plus scripting modules and mock interviews — taught by people who've actually taped out the chips they're describing.</p>
   </section>
 
-  <!-- PHASED OUT -->
-  <section class="catalog-group" id="phased-out">
-    <div class="wrap">
-      <p class="group-title">Phased out</p>
-      <div class="course-list">
-        <details class="course">
-          <summary>
-            <span class="course-name">Synthesis (v1.0)</span>
-            <span class="course-right"><span class="course-price na">no longer available</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Superseded by Synthesis 2.0, Parts 1 and 2.</p></div>
-        </details>
-        <details class="course">
-          <summary>
-            <span class="course-name">EMIR 1.0</span>
-            <span class="course-right"><span class="course-price na">no longer available</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Superseded by EM / IR Drop Analysis.</p></div>
-        </details>
-      </div>
-    </div>
-  </section>
+  <section class="webinars wrap">
+    <h3 class="catalog-heading">Available recordings</h3>
+    <div class="webinar-grid">
 
-  <!-- SCRIPTING MODULES -->
-  <section class="catalog-group" id="scripting">
-    <div class="wrap">
-      <p class="group-title">Scripting modules — with solution keys</p>
-      <div class="course-list">
-        <details class="course">
-          <summary>
-            <span class="course-name">Physical Implementation Scripting (Tcl)</span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="physical-implementation-scripting-tcl" data-name="Physical Implementation Scripting (Tcl)" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">10 physical implementation tool-based scripting problems covering data gathering, design analysis and efficient reporting. Each problem includes background and context. Solutions are based on the purple EDA vendor's tool, and are portable to others.</p>
-            <p class="note">Pre-requisite: tool access and a post-route design database · Level: mid-senior to advanced.</p>
-          </div>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$25</span><span class="wc-note">Lacks annotations</span></div>
+        <h4>Essential DFT Fundamentals</h4>
+        <details class="wc-topics">
+          <summary>21 topics covered</summary>
+          <ul>
+            <li>Why DFT? / Types of Defect / Fault Models</li>
+            <li>Stuck-At Faults, Transition Faults, Path Delay Fault</li>
+            <li>Scan Insertion, Scan Chains, Shift/Capture Mode</li>
+            <li>Clock Staggering, At-Speed Capture, CDC Scan Chains</li>
+            <li>Lock-Up Latch, ICG Reset/Enable Control</li>
+            <li>CODEC, Timing Constraints, Test Point Insertion</li>
+            <li>Memory Testing, Single vs Split MBIST, MARCH Test</li>
+            <li>Bridging Faults and IDDQ Faults</li>
+          </ul>
         </details>
-        <details class="course">
-          <summary>
-            <span class="course-name">Tool Independent Scripting (Tcl + Python)</span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="tool-independent-scripting-tcl-python" data-name="Tool Independent Scripting (Tcl + Python)" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">10 practical file-parsing problems using Tcl or Python — DEF, Verilog, reports, CSV and .lib files. Drawn from real-world scenarios. Ideal for interview prep or scripting foundations. All input files and downloadable solutions included.</p>
-          </div>
-        </details>
-      </div>
-    </div>
-  </section>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Essential DFT Fundamentals">Contact to purchase</a>
+      </article>
 
-  <!-- MOCK INTERVIEWS -->
-  <section class="catalog-group" id="mock-interviews">
-    <div class="wrap">
-      <p class="group-title">Mock interviews — some with solutions</p>
-      <div class="course-list">
-        <details class="course">
-          <summary>
-            <span class="course-name">PNR Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="pnr-mock" data-name="PNR Mock" data-price="40">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">15 analytical questions on circuits, synthesis, placement, CTS and routing.</p></div>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Static Timing Analysis — Part 1</h4>
+        <details class="wc-topics">
+          <summary>22 topics covered</summary>
+          <ul>
+            <li>Inputs/Outputs of STA, Setup/Hold Origin, Timing Arcs</li>
+            <li>NLDM Library: Combo Gates, Interpolation &amp; Extrapolation</li>
+            <li>Clock Definitions, Case Analysis, Clock Gating Checks</li>
+            <li>Integrated Clock Gating Cell &amp; Enable Path Criticality</li>
+            <li>Multi-cycle Paths (start/end options), Clock Groups</li>
+            <li>Reading a Timing Report: Setup &amp; Hold, In2Reg, Reg2Out</li>
+            <li>Hierarchical Block Implementation, I/O Constraints, DRVs</li>
+            <li>report_timing max_paths vs nworst, check_timing, coverage</li>
+          </ul>
         </details>
-        <details class="course">
-          <summary>
-            <span class="course-name">RCG Comp. Arch & PD Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="rcg-comp-arch-pd-mock" data-name="RCG Comp. Arch & PD Mock" data-price="35">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Computer architecture and physical design questions in a mock-interview format, with worked solutions.</p></div>
-        </details>
-        <details class="course">
-          <summary>
-            <span class="course-name">Power Analysis Mock</span>
-            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="power-analysis-mock" data-name="Power Analysis Mock" data-price="35">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">A mock interview focused on power analysis fundamentals and estimation.</p></div>
-        </details>
-        <details class="course">
-          <summary>
-            <span class="course-name">Analytical CMOS Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$30</span><button class="add-cart-btn" data-id="analytical-cmos-mock" data-name="Analytical CMOS Mock" data-price="30">Add to cart</button><span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Analytical CMOS circuit questions in a mock-interview format, with worked solutions.</p></div>
-        </details>
-      </div>
-      <p class="note" style="margin-top:18px; color:var(--text-dim);">Tailor-made mock interviews are also available for physical design, implementation, STA, EM/IR and power optimization profiles. Reach out to discuss.</p>
-    </div>
-  </section>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: STA Part 1">Contact to purchase</a>
+      </article>
 
-  <!-- COMING UP -->
-  <section class="catalog-group" id="coming-up">
-    <div class="wrap">
-      <p class="group-title">Coming up</p>
-      <div class="panel">
-        <div class="coming-list">
-          <div class="coming-row"><span>Fundamentals of UPF</span><span class="status scheduled">Feb 2026</span></div>
-          <div class="coming-row"><span>Logical Equivalence Checking</span><span class="status scheduled">Feb – Mar 2026</span></div>
-          <div class="coming-row"><span>Low Power Checks (VCLP)</span><span class="status scheduled">Mar 2026</span></div>
-          <div class="coming-row"><span>Clock Domain Crossing</span><span class="status">being scoped</span></div>
-          <div class="coming-row"><span>Library Characterization</span><span class="status">being scoped</span></div>
-          <div class="coming-row"><span>Floorplanning</span><span class="status seeking">seeking an expert</span></div>
-          <div class="coming-row"><span>Full Chip Timing</span><span class="status seeking">seeking an expert</span></div>
-          <div class="coming-row"><span>DRC and LVS</span><span class="status seeking">seeking an expert</span></div>
-          <div class="coming-row"><span>Machine Learning for PD</span><span class="status seeking">seeking an expert</span></div>
-        </div>
-      </div>
-      <p class="note" style="margin-top:16px; color:var(--text-dim);">Want to host one of these — or a topic that's not listed? If you're an experienced design verification or RTL engineer willing to lead a session, write to <a href="mailto:metastable01@gmail.com" style="color:var(--accent);">metastable01@gmail.com</a>.</p>
-    </div>
-  </section>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Static Timing Analysis — Part 2</h4>
+        <details class="wc-topics">
+          <summary>17 topics covered</summary>
+          <ul>
+            <li>GBA vs PBA, Path vs Exhaustive, Miller &amp; Long Tail Effects</li>
+            <li>CCS Libraries, set_driving_cell vs set_input_tran</li>
+            <li>Common Path Pessimism Removal (incl. half-cycle paths)</li>
+            <li>Interconnect RC Corners, Negative Net Delays</li>
+            <li>OCV vs AOCV, AOCV Path Depth, POCV LUTs</li>
+            <li>Crosstalk on Common Clock Path &amp; Noise Immunity</li>
+            <li>Latch Based Timing</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: STA Part 2">Contact to purchase</a>
+      </article>
 
-  <div class="wrap">
-    <div class="panel access-note">
-      <h3>How checkout works</h3>
-      <p>Add whichever sessions you want to the cart, then check out securely via Razorpay. Once payment goes through, recordings and materials are shared over Discord or email — so keep an eye on your inbox after checkout.</p>
-      <p>Questions before you buy? Reach us on <a href="https://discord.gg/4RN7esTd3G" style="color:var(--accent2);">Discord (metastable.design)</a> or at <a href="mailto:metastable01@gmail.com" style="color:var(--accent2);">metastable01@gmail.com</a>.</p>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span></div>
+        <h4>Power Optimization Techniques</h4>
+        <details class="wc-topics">
+          <summary>18 topics covered</summary>
+          <ul>
+            <li>MV Design &amp; DVFS, Power/Clock Gating, Multi-level Gating</li>
+            <li>ICG Cloning, Data Bus Inversion, Datapath Gating</li>
+            <li>Architectural vs Inferred ICG, Multi-VT Synthesis</li>
+            <li>Glitch Power, Miscorrelation, Register Banking</li>
+            <li>SAIF-based Power Optimization, Self Gating</li>
+            <li>Mixed Cell-Height, Threshold Voltage, Body Biasing, Stack Effect</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Power Optimization Techniques">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$35</span></div>
+        <h4>Power Gating</h4>
+        <details class="wc-topics">
+          <summary>13 topics covered</summary>
+          <ul>
+            <li>Power Switches: Headers, Footers, In-Rush Current</li>
+            <li>Star-Daisy Chaining, Mother-Daughter Configuration</li>
+            <li>Hammer and Trickle Chains, Hammer End Logic</li>
+            <li>Built-in Buffer / Separate Well Switches</li>
+            <li>State Retention Power Gating (SRPG), Isolation Cells</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Power Gating">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$25</span></div>
+        <h4>Special Physical Cells</h4>
+        <details class="wc-topics">
+          <summary>9 topics covered</summary>
+          <ul>
+            <li>Decap, Tie, Filler and Tap Cells</li>
+            <li>Latch-up recap, Endcaps / Boundary Cells</li>
+            <li>ESD Clamps, Die Level Process Monitors</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Special Physical Cells">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$20</span></div>
+        <h4>Antenna Effect</h4>
+        <details class="wc-topics">
+          <summary>7 topics covered</summary>
+          <ul>
+            <li>Causes and fixes for antenna, cost of fixing</li>
+            <li>Reverse Antenna Effect, NWELL Antenna Effect</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Antenna Effect">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$35</span></div>
+        <h4>Signal Routing</h4>
+        <details class="wc-topics">
+          <summary>16 topics covered</summary>
+          <ul>
+            <li>Routing Sequence, Virtual &amp; Global Routing, GCELL</li>
+            <li>Global Routing Congestion, RC Estimation, Detail Routing</li>
+            <li>Post-Route Optimizations, Redundant Via Insertion</li>
+            <li>Antenna Fixing, Dummy Metal Fill, Wire Spreading</li>
+            <li>Maze Router (Lee's Algorithm), Routing Guides &amp; Corridors</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Signal Routing">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$35</span></div>
+        <h4>Multi-Input Switching (MIS)</h4>
+        <p class="wc-desc">Recording available on request. Reach out via Discord or email to gain access.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Multi-Input Switching">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Clock Tree Synthesis — Part 1</h4>
+        <details class="wc-topics">
+          <summary>21 topics covered</summary>
+          <ul>
+            <li>CTS Objectives &amp; Flow, Design Initialization, Primary Corner</li>
+            <li>Max Cap/Trans, Clock Tree References, Inverter vs Buffer</li>
+            <li>Clock NDRs, Routing Layers, Target Skew &amp; Latency</li>
+            <li>Max Fanout, Clock Cell Spacing, CTS Topologies</li>
+            <li>Clock Balance Points, Skew Groups, Concurrent Clock/Data Opt</li>
+            <li>Trial Clock Tree, Exceptions, Zero Clock Skew, Jitter</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: CTS Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span></div>
+        <h4>Clock Tree Synthesis — Part 2</h4>
+        <p class="wc-desc">Covers common issues encountered while running CTS and the full solution space. Heavily interview-focused with practical discussion — a companion to Part 1 that goes well beyond textbook coverage.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: CTS Part 2">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Placement — Part 1</h4>
+        <details class="wc-topics">
+          <summary>16 topics covered</summary>
+          <ul>
+            <li>Placement Goal &amp; Flow, Density Controls, Target Routing Density</li>
+            <li>Path Groups &amp; Weights, Bounds/Attractions/Blockages</li>
+            <li>Legalization &amp; Debugging, Congestion Driven Restructuring</li>
+            <li>Register Banking, Mixed Cell Height, SAIF-Based Placement</li>
+            <li>Global Routing Controls, IR-Aware Placement, Scan Reordering</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Placement Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Placement — Part 2</h4>
+        <p class="wc-desc">Covers practical issues seen in real designs, compiled from 10+ years of experience. Audience-rated above Part 1 — covers solution spaces not readily available online. Ideal for interview prep and real-world debugging.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Placement Part 2">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Crosstalk Analysis</h4>
+        <details class="wc-topics">
+          <summary>19 topics covered</summary>
+          <ul>
+            <li>Why Signal Integrity Matters, Effects &amp; Types of Noise</li>
+            <li>Driver Weakening, Multi-Input Glitch, Timing Window Overlap</li>
+            <li>Techniques to Reduce Pessimism, Crosstalk Delay Analysis Mode</li>
+            <li>Composite Aggressors, Logical Correlation, Aggressor Exclusion</li>
+            <li>Noise Margins/Immunity/Slack, Source vs Endpoint Reporting</li>
+            <li>Crosstalk Miscorrelation: Top vs Tile, Systematic &amp; Pointed Fixes</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Crosstalk Analysis">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>EM / IR Drop Analysis</h4>
+        <details class="wc-topics">
+          <summary>26 topics covered</summary>
+          <ul>
+            <li>Inputs for EM/IR Analysis, What Is IR Drop, Static &amp; Dynamic Drop</li>
+            <li>Power Grid Design Implications, Effective/Shortest Path Resistance</li>
+            <li>Mitigating IR Drop: Placement, Spacing, Downsizing, Grid Augmentation</li>
+            <li>Decoupling Capacitors, Dynamic Power Shaping, Vector-Based IR Analysis</li>
+            <li>Backside Power Delivery, Electromigration Fundamentals</li>
+            <li>EM Rule Types, Frequency Dependence, Power vs Signal EM</li>
+            <li>Physically Broken &amp; Dropped Nets, Via Chopping Distance</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: EM/IR Drop Analysis">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span><span class="wc-note">by Gigawatt</span></div>
+        <h4>Power Estimation — Part 1</h4>
+        <details class="wc-topics">
+          <summary>15 topics covered</summary>
+          <ul>
+            <li>Why Power Estimation, Types of Power, Energy Stored in a Capacitor</li>
+            <li>Power Analysis Modes, How Tools Calculate Switching Activity</li>
+            <li>Vector File Formats (FSDB vs SAIF), Activity File Generation</li>
+            <li>RTL Power, Gate/Netlist Power with RTL Activity</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Power Estimation Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span><span class="wc-note">by Gigawatt</span></div>
+        <h4>Power Estimation — Part 2</h4>
+        <details class="wc-topics">
+          <summary>14 topics covered</summary>
+          <ul>
+            <li>Energy-Delay Product, Energy vs Delay Tradeoff, PVT Limitations</li>
+            <li>VF Curve, State Dependent Leakage Power, SDPD Estimation</li>
+            <li>Pre-Si to Post-Si Power Correlation, Simple CPU Power Model</li>
+            <li>RTL Power Checkers: Clock Enable, Register Data, Memory, MUX</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Power Estimation Part 2">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Synthesis 2.0 — Part 1</h4>
+        <details class="wc-topics">
+          <summary>19 topics covered</summary>
+          <ul>
+            <li>Logical Synthesis Inputs/Outputs, Elaboration, Uniquification</li>
+            <li>Liberty Files, WNS/TNS Optimization Passes, Path Groups</li>
+            <li>Boundary Optimization, Constant Propagation, Register Retiming</li>
+            <li>RC Estimation, Wire Load Models, TLU+ File</li>
+            <li>Scan Insertion &amp; Stitching, DFT PREDRCs</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Synthesis 2.0 Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>Synthesis 2.0 — Part 2</h4>
+        <details class="wc-topics">
+          <summary>20 topics covered</summary>
+          <ul>
+            <li>Physical Synthesis Inputs/Outputs, Layout Estimation (PLE)</li>
+            <li>Spatial Flow (CRR), Global Routing, Synthesis Timing Constraints</li>
+            <li>Triple Modular Redundancy, Critical Path Understanding</li>
+            <li>Power Opt During Synthesis, Clock Gating, Cell/VT Selection</li>
+            <li>Register Banking/MBCI, Feasibility Analysis &amp; PPA Opt, Flop Profiling</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Synthesis 2.0 Part 2">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span><span class="wc-note">by Subhechcha Banerjee</span></div>
+        <h4>Unified Power Format (UPF) — Part 1</h4>
+        <details class="wc-topics">
+          <summary>19 topics covered</summary>
+          <ul>
+            <li>Components of Power, LP Design Challenges, UPF History vs CPF</li>
+            <li>Voltage Domain / Power Domain / Voltage Area</li>
+            <li>Supply Sets, NWELL/PWELL, Macro Supply Connection</li>
+            <li>Power Supply States, Power State Tables, HighConn/LowConn</li>
+            <li>Out-of-Context Mode, Context &amp; Port Attributes</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: UPF Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$50</span></div>
+        <h4>DRC — Part 1</h4>
+        <details class="wc-topics">
+          <summary>27 topics covered</summary>
+          <ul>
+            <li>Physical Verification Sequence, FEOL/Base DRCs, OD Layer</li>
+            <li>Break OD Cells, Continuous Poly in FinFET, GP_BREAK LVS</li>
+            <li>Endcap Cells, Latch-Up &amp; Well Taps, Vt Boundary DRCs</li>
+            <li>BEOL/Metal DRCs, Multi-Patterning DRCs, Anchor/Seed</li>
+            <li>ERC, DRC vs ERC vs DFM, Metal Fill, Density DRCs</li>
+            <li>Voltage Aware DRCs, Antenna Effect &amp; Fixes, Via Redundancy</li>
+          </ul>
+        </details>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: DRC Part 1">Contact to purchase</a>
+      </article>
+
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$45</span></div>
+        <h4>DRC — Part 2</h4>
+        <p class="wc-desc">30 MCQ-based Q&amp;A covering practical issues, use-cases and questions around the topics from Part 1. Ideal for interview preparation and consolidating real-world DRC knowledge.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: DRC Part 2">Contact to purchase</a>
+      </article>
+
     </div>
-  </div>
+
+    <h3 class="catalog-heading">Phased out</h3>
+    <div class="webinar-grid webinar-grid-small">
+      <article class="webinar-card webinar-card-dim">
+        <h4>Synthesis (v1.0)</h4>
+        <p class="wc-desc">No longer available</p>
+      </article>
+      <article class="webinar-card webinar-card-dim">
+        <h4>EMIR 1.0</h4>
+        <p class="wc-desc">No longer available</p>
+      </article>
+    </div>
+
+    <h3 class="catalog-heading">Scripting modules <span class="catalog-heading-note">with solution keys</span></h3>
+    <div class="webinar-grid webinar-grid-small">
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span></div>
+        <h4>Physical Implementation Scripting (Tcl)</h4>
+        <p class="wc-desc">10 physical implementation tool-based scripting problems covering data gathering, design analysis and efficient reporting. Solutions based on the purple EDA vendor — portable to others. Pre-requisite: tool access + postRoute design database · Level: mid-senior to advanced.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Physical Implementation Scripting">Contact to purchase</a>
+      </article>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span></div>
+        <h4>Tool Independent Scripting (Tcl + Python)</h4>
+        <p class="wc-desc">10 practical file-parsing problems using Tcl or Python — DEF, Verilog, reports, CSV and .lib files. Drawn from real-world scenarios. Ideal for interview prep or scripting foundations. All input files and downloadable solutions included.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Tool Independent Scripting">Contact to purchase</a>
+      </article>
+    </div>
+
+    <h3 class="catalog-heading">Mock interviews <span class="catalog-heading-note">some with solutions</span></h3>
+    <div class="webinar-grid webinar-grid-small">
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$40</span></div>
+        <h4>PNR Mock <span class="wc-inline-note">with solutions</span></h4>
+        <p class="wc-desc">15 analytical questions on circuits, synthesis, placement, CTS &amp; routing.</p>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: PNR Mock">Contact to purchase</a>
+      </article>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$35</span></div>
+        <h4>RCG Comp. Arch &amp; PD Mock <span class="wc-inline-note">with solutions</span></h4>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: RCG Comp Arch and PD Mock">Contact to purchase</a>
+      </article>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$35</span></div>
+        <h4>Power Analysis Mock</h4>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Power Analysis Mock">Contact to purchase</a>
+      </article>
+      <article class="webinar-card">
+        <div class="wc-meta"><span class="wc-price">$30</span></div>
+        <h4>Analytical CMOS Mock <span class="wc-inline-note">with solutions</span></h4>
+        <a class="btn btn-outline btn-small wc-cta" href="mailto:metastable01@gmail.com?subject=Purchase: Analytical CMOS Mock">Contact to purchase</a>
+      </article>
+    </div>
+    <p class="section-sub">Tailor-made mock interviews also available for Physical Design, Implementation, STA, EM/IR and Power Optimization profiles. <a href="mailto:metastable01@gmail.com">Reach out to discuss</a>.</p>
+
+    <h3 class="catalog-heading">Coming up</h3>
+    <ul class="coming-up-list">
+      <li><span class="cu-badge">📅 Feb 2026</span><span class="cu-title">Fundamentals of UPF</span></li>
+      <li><span class="cu-badge">📅 Feb–Mar 2026</span><span class="cu-title">Logical Equivalence Checking</span></li>
+      <li><span class="cu-badge">📅 Mar 2026</span><span class="cu-title">Low Power Checks (VCLP)</span></li>
+      <li><span class="cu-badge">🔍 Being scoped</span><span class="cu-title">Clock Domain Crossing</span></li>
+      <li><span class="cu-badge">🔍 Being scoped</span><span class="cu-title">Library Characterization</span></li>
+      <li><span class="cu-badge">🙋 Seeking experts</span><span class="cu-title">Floorplanning</span></li>
+      <li><span class="cu-badge">🙋 Seeking experts</span><span class="cu-title">Full Chip Timing</span></li>
+      <li><span class="cu-badge">🙋 Seeking experts</span><span class="cu-title">DRC and LVS</span></li>
+      <li><span class="cu-badge">🙋 Seeking experts</span><span class="cu-title">Machine Learning for PD</span></li>
+    </ul>
+    <p class="section-sub">Want to host a webinar? See the <a href="/#teach">Teach with us</a> section below.</p>
+  </section>
 
 </main>
 
-<div id="cart-overlay" class="cart-overlay"></div>
-<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
-  <div class="cart-drawer-head">
-    <h3>Your cart</h3>
-    <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
-  </div>
-  <div id="cart-items" class="cart-items"></div>
-  <div class="cart-drawer-foot">
-    <div class="cart-subtotal-row">
-      <span>Subtotal</span>
-      <span id="cart-subtotal">$0</span>
-    </div>
-    <button id="cart-checkout" class="btn btn-primary cart-checkout-btn" disabled>Checkout with Razorpay</button>
-  </div>
-</aside>
-
-<footer id="contact">
+<footer class="site-footer">
   <div class="wrap footer-row">
-    <span>Metastable Design — where industry teaches.</span>
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="https://discord.gg/4RN7esTd3G">Discord</a>
-      <a href="mailto:metastable01@gmail.com">metastable01@gmail.com</a>
-    </div>
+    <span>© 2026 Metastable Design</span>
+    <a href="mailto:metastable01@gmail.com">metastable01@gmail.com</a>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
