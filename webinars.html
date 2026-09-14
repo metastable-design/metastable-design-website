@@ -15,12 +15,18 @@
 <header class="site">
   <div class="wrap nav">
     <a href="index.html" class="brand">Metastable<span class="dot">.</span>Design</a>
-    <nav class="navlinks">
+    <div class="nav-right">
+      <nav class="navlinks">
       <a href="index.html">Home</a>
       <a href="webinars.html" class="active">Webinars</a>
       <a href="index.html#host">Host a webinar</a>
       <a href="index.html#contact">Contact</a>
     </nav>
+          <button id="cart-toggle" class="cart-btn" aria-label="View cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-count">0</span>
+    </button>
+    </div>
   </div>
 </header>
 
@@ -28,20 +34,26 @@
 
   <div class="wrap catalog-header">
     <p class="catalog-meta">/ physical-design-webinars</p>
-    <h1 style="margin-bottom:14px;">Deep-dive webinars on physical design, STA, power and synthesis</h1>
-    <p class="lede" style="margin-bottom:0;">Every recording below is taught by a practitioner and built for engineers who want to go past the basics. Tap a session to see what it covers.</p>
+    <h1 style="margin-bottom:12px;">Deep-dive webinars on physical design, STA, power and synthesis</h1>
+    <p class="lede" style="margin-bottom:22px;">Every recording is taught by a practitioner and built for engineers who want to go past the basics. Tap a session to see what it covers.</p>
+    <nav class="jump-nav">
+      <a href="#available">Available recordings</a>
+      <a href="#scripting">Scripting modules</a>
+      <a href="#mock-interviews">Mock interviews</a>
+      <a href="#coming-up">Coming up</a>
+    </nav>
   </div>
 
   <!-- AVAILABLE RECORDINGS -->
-  <section class="catalog-group">
+  <section class="catalog-group" id="available">
     <div class="wrap">
-      <p class="group-title">Available recordings</p>
+      <p class="group-title first">Available recordings</p>
       <div class="course-list">
 
         <details class="course">
           <summary>
             <span class="course-name">Essential DFT Fundamentals <span class="course-by">— lacks annotations</span></span>
-            <span class="course-right"><span class="course-price">$25</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$25</span><button class="add-cart-btn" data-id="dft-fundamentals" data-name="Essential DFT Fundamentals" data-price="25">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -59,7 +71,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Static Timing Analysis — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="static-timing-analysis-part-1" data-name="Static Timing Analysis — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -79,7 +91,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Static Timing Analysis — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="static-timing-analysis-part-2" data-name="Static Timing Analysis — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -97,7 +109,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Power Optimization Techniques</span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="power-optimization-techniques" data-name="Power Optimization Techniques" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -115,7 +127,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Power Gating</span>
-            <span class="course-right"><span class="course-price">$35</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="power-gating" data-name="Power Gating" data-price="35">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -131,7 +143,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Special Physical Cells</span>
-            <span class="course-right"><span class="course-price">$25</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$25</span><button class="add-cart-btn" data-id="special-physical-cells" data-name="Special Physical Cells" data-price="25">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -145,7 +157,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Antenna Effect</span>
-            <span class="course-right"><span class="course-price">$20</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$20</span><button class="add-cart-btn" data-id="antenna-effect" data-name="Antenna Effect" data-price="20">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -158,7 +170,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Signal Routing</span>
-            <span class="course-right"><span class="course-price">$35</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="signal-routing" data-name="Signal Routing" data-price="35">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -176,7 +188,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Multi-Input Switching (MIS)</span>
-            <span class="course-right"><span class="course-price">$35</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="multi-input-switching-mis" data-name="Multi-Input Switching (MIS)" data-price="35">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">Recording available on request. Reach out via Discord or email to gain access.</p>
@@ -186,7 +198,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Clock Tree Synthesis — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="clock-tree-synthesis-part-1" data-name="Clock Tree Synthesis — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -206,7 +218,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Clock Tree Synthesis — Part 2</span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="clock-tree-synthesis-part-2" data-name="Clock Tree Synthesis — Part 2" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">Covers common issues encountered while running CTS and the full solution space. Heavily interview-focused, with practical discussion — a companion to Part 1 that goes well beyond textbook coverage.</p>
@@ -216,7 +228,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Placement — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="placement-part-1" data-name="Placement — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -235,7 +247,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Placement — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="placement-part-2" data-name="Placement — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">Covers practical issues seen in real designs, compiled from 10+ years of experience. Rated above Part 1 by past attendees — covers solution spaces not readily available online. Ideal for interview prep and real-world debugging.</p>
@@ -245,7 +257,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Crosstalk Analysis</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="crosstalk-analysis" data-name="Crosstalk Analysis" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -263,7 +275,7 @@
         <details class="course">
           <summary>
             <span class="course-name">EM / IR Drop Analysis</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="em-ir-drop-analysis" data-name="EM / IR Drop Analysis" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -285,7 +297,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Power Estimation — Part 1 <span class="course-by">— by Gigawatt</span></span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="power-estimation-part-1" data-name="Power Estimation — Part 1" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -304,7 +316,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Power Estimation — Part 2 <span class="course-by">— by Gigawatt</span></span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="power-estimation-part-2" data-name="Power Estimation — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -323,7 +335,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Synthesis 2.0 — Part 1</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="synthesis-2-0-part-1" data-name="Synthesis 2.0 — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -343,7 +355,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Synthesis 2.0 — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="synthesis-2-0-part-2" data-name="Synthesis 2.0 — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -364,7 +376,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Unified Power Format (UPF) — Part 1 <span class="course-by">— by Subhechcha Banerjee</span></span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="unified-power-format-upf-part-1" data-name="Unified Power Format (UPF) — Part 1" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -385,7 +397,7 @@
         <details class="course">
           <summary>
             <span class="course-name">DRC — Part 1</span>
-            <span class="course-right"><span class="course-price">$50</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$50</span><button class="add-cart-btn" data-id="drc-part-1" data-name="DRC — Part 1" data-price="50">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <ul class="topics">
@@ -406,7 +418,7 @@
         <details class="course">
           <summary>
             <span class="course-name">DRC — Part 2</span>
-            <span class="course-right"><span class="course-price">$45</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$45</span><button class="add-cart-btn" data-id="drc-part-2" data-name="DRC — Part 2" data-price="45">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">30 MCQ-based questions and answers covering practical issues, use-cases and questions drawn from Part 1. Ideal for interview preparation and consolidating real-world DRC knowledge.</p>
@@ -448,7 +460,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Physical Implementation Scripting (Tcl)</span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="physical-implementation-scripting-tcl" data-name="Physical Implementation Scripting (Tcl)" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">10 physical implementation tool-based scripting problems covering data gathering, design analysis and efficient reporting. Each problem includes background and context. Solutions are based on the purple EDA vendor's tool, and are portable to others.</p>
@@ -458,7 +470,7 @@
         <details class="course">
           <summary>
             <span class="course-name">Tool Independent Scripting (Tcl + Python)</span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="tool-independent-scripting-tcl-python" data-name="Tool Independent Scripting (Tcl + Python)" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body">
             <p class="note">10 practical file-parsing problems using Tcl or Python — DEF, Verilog, reports, CSV and .lib files. Drawn from real-world scenarios. Ideal for interview prep or scripting foundations. All input files and downloadable solutions included.</p>
@@ -476,28 +488,28 @@
         <details class="course">
           <summary>
             <span class="course-name">PNR Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$40</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$40</span><button class="add-cart-btn" data-id="pnr-mock" data-name="PNR Mock" data-price="40">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body"><p class="note">15 analytical questions on circuits, synthesis, placement, CTS and routing.</p></div>
         </details>
         <details class="course">
           <summary>
             <span class="course-name">RCG Comp. Arch & PD Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$35</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="rcg-comp-arch-pd-mock" data-name="RCG Comp. Arch & PD Mock" data-price="35">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body"><p class="note">Computer architecture and physical design questions in a mock-interview format, with worked solutions.</p></div>
         </details>
         <details class="course">
           <summary>
             <span class="course-name">Power Analysis Mock</span>
-            <span class="course-right"><span class="course-price">$35</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$35</span><button class="add-cart-btn" data-id="power-analysis-mock" data-name="Power Analysis Mock" data-price="35">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body"><p class="note">A mock interview focused on power analysis fundamentals and estimation.</p></div>
         </details>
         <details class="course">
           <summary>
             <span class="course-name">Analytical CMOS Mock <span class="course-by">— with solutions</span></span>
-            <span class="course-right"><span class="course-price">$30</span><span class="chevron">›</span></span>
+            <span class="course-right"><span class="course-price">$30</span><button class="add-cart-btn" data-id="analytical-cmos-mock" data-name="Analytical CMOS Mock" data-price="30">Add to cart</button><span class="chevron">›</span></span>
           </summary>
           <div class="course-body"><p class="note">Analytical CMOS circuit questions in a mock-interview format, with worked solutions.</p></div>
         </details>
@@ -529,12 +541,29 @@
 
   <div class="wrap">
     <div class="panel access-note">
-      <h3>Getting access</h3>
-      <p>Recordings and materials are shared through Discord or email — this page is the catalog, not a checkout. Contact us on <a href="https://discord.gg/4RN7esTd3G" style="color:var(--accent2);">Discord (metastable.design)</a> or at <a href="mailto:metastable01@gmail.com" style="color:var(--accent2);">metastable01@gmail.com</a> to purchase or gain access to any session above.</p>
+      <h3>How checkout works</h3>
+      <p>Add whichever sessions you want to the cart, then check out securely via Razorpay. Once payment goes through, recordings and materials are shared over Discord or email — so keep an eye on your inbox after checkout.</p>
+      <p>Questions before you buy? Reach us on <a href="https://discord.gg/4RN7esTd3G" style="color:var(--accent2);">Discord (metastable.design)</a> or at <a href="mailto:metastable01@gmail.com" style="color:var(--accent2);">metastable01@gmail.com</a>.</p>
     </div>
   </div>
 
 </main>
+
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer-head">
+    <h3>Your cart</h3>
+    <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
+  </div>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-drawer-foot">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">$0</span>
+    </div>
+    <button id="cart-checkout" class="btn btn-primary cart-checkout-btn" disabled>Checkout with Razorpay</button>
+  </div>
+</aside>
 
 <footer id="contact">
   <div class="wrap footer-row">
@@ -547,5 +576,6 @@
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
