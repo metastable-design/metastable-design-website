@@ -446,22 +446,21 @@ details.product-card:hover{
   margin-bottom: 14px;
 }
 .thumb-icon{
-  width: 34px;
-  height: 34px;
-  opacity: 0.95;
+  width: 52px;
+  height: 52px;
+  opacity: 0.9;
 }
 .thumb-mark{
   font-family: var(--mono);
   font-weight: 500;
   font-size: 0.7rem;
   letter-spacing: 0.02em;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  color: inherit;
 }
-.thumb-available{ background-color: var(--accent); }
-.thumb-scripting{ background-color: var(--accent2); }
-.thumb-mock{ background-color: var(--green); }
-.thumb-phased{ background-color: var(--text-mute); }
+.thumb-available{ background-color: var(--accent-dim); color: var(--accent); }
+.thumb-scripting{ background-color: var(--accent2-dim); color: var(--accent2); }
+.thumb-mock{ background-color: var(--green-dim); color: var(--green); }
+.thumb-phased{ background-color: var(--bg-raise); color: var(--text-mute); }
 
 .product-name{
   padding: 0 16px;
