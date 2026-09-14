@@ -587,6 +587,40 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
 .access-note h3{ margin: 0 0 8px; font-size: 1.05rem; }
 .access-note p{ color: var(--text-dim); font-size: 0.94rem; margin: 0 0 6px; }
 
+/* ---------- testimonials ---------- */
+
+.testimonial-grid{
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.testimonial-card{
+  break-inside: avoid;
+  margin: 0 0 20px;
+  padding: 24px 22px;
+  border: 1px solid var(--panel-border);
+  border-top: 3px solid var(--accent);
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(10,10,10,0.05), 0 2px 8px rgba(10,10,10,0.04);
+}
+.testimonial-card:nth-child(3n+2){ border-top-color: var(--accent2); }
+.testimonial-card:nth-child(3n){ border-top-color: var(--green); }
+
+.testimonial-card blockquote{
+  margin: 0 0 14px;
+  font-family: var(--display);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.testimonial-card figcaption{
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
 /* ---------- cart drawer ---------- */
 
 .cart-overlay{
@@ -693,9 +727,11 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
 }
 @media (max-width: 980px){
   .product-grid{ grid-template-columns: repeat(3, 1fr); }
+  .testimonial-grid{ column-count: 2; }
 }
 @media (max-width: 700px){
   .product-grid{ grid-template-columns: repeat(2, 1fr); }
+  .testimonial-grid{ column-count: 1; }
 }
 @media (max-width: 460px){
   .product-grid{ grid-template-columns: 1fr; }
