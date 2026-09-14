@@ -1,161 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metastable Design — VLSI webinars & community</title>
-<meta name="description" content="Live webinars on timing closure, verification, and physical design for VLSI engineers. Plus a forum for working through hard problems together.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metastable Design — Industry teaches VLSI</title>
+<meta name="description" content="Metastable Design brings active VLSI engineers — the people taping out chips and debugging silicon right now — into high-signal webinars for engineers who want to grow faster.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap header-row">
-    <a href="/" class="logo">Metastable Design</a>
-    <nav class="main-nav">
-      <a href="#webinars">Webinars</a>
-      <a href="#forum">Forum</a>
-      <a href="#about">About</a>
-      <a href="#" class="nav-signin">Sign in</a>
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand">Metastable<span class="dot">.</span>Design</a>
+    <nav class="navlinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="webinars.html">Webinars</a>
+      <a href="#host">Host a webinar</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <h1>Where signals settle.</h1>
-      <p class="hero-sub">Live webinars on VLSI design — timing closure, verification, physical design — taught by engineers who've shipped silicon. Bring your hardest bugs to the forum after.</p>
-      <div class="hero-actions">
-        <a href="#webinars" class="btn btn-primary">Browse upcoming webinars</a>
-        <a href="#forum" class="btn btn-outline">Join the forum</a>
+  <section class="no-rule">
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">// state: unresolved → settled</p>
+        <h1>Learn VLSI from people who are still building it.</h1>
+        <p class="lede">The best physical design engineers rarely teach — they're in the trenches, taping out chips and debugging silicon under real constraints. Metastable Design brings them into the room anyway, one high-signal webinar at a time.</p>
+        <div class="cta-row">
+          <a href="webinars.html" class="btn btn-primary">Browse webinars</a>
+          <a href="#host" class="btn btn-ghost">Host a session</a>
+        </div>
+      </div>
+
+      <div class="wave-box">
+        <svg viewBox="0 0 460 220" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="195" x2="440" y2="195" stroke="#24313d" stroke-width="1"/>
+          <polyline points="20,160 150,160 165,140 180,175 195,125 210,180 225,120 240,170 255,130 270,155 290,150 330,50 440,50"
+            fill="none" stroke="#5fd9d4" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="20" cy="160" r="4" fill="#74818d"/>
+          <circle cx="440" cy="50" r="4" fill="#f0a542"/>
+          <rect x="150" y="30" width="140" height="150" fill="#f0a542" opacity="0.06"/>
+          <line x1="150" y1="30" x2="150" y2="180" stroke="#f0a542" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+          <line x1="290" y1="30" x2="290" y2="180" stroke="#f0a542" stroke-width="1" stroke-dasharray="3 4" opacity="0.5"/>
+        </svg>
+        <div class="wave-caption">
+          <span>classroom knowledge</span>
+          <span class="mid">metastable design</span>
+          <span>industry-ready</span>
+        </div>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
-      <svg id="waveform" viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg">
-        <line x1="0" y1="110" x2="480" y2="110" class="wf-axis" />
-        <path id="wf-path" class="wf-path" d="" />
-      </svg>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <h2>Not a course. An investment.</h2>
+      <p class="section-lede">A small price for a webinar can unlock the insight that helps you crack your dream role, negotiate better compensation, or step into a bigger title — the kind of knowledge that usually only comes from years in a design team.</p>
+
+      <div class="grid-3">
+        <div class="tile">
+          <span class="tag">01 · who teaches</span>
+          <h3>Active engineers, not instructors</h3>
+          <p>Every session is led by someone taping out chips, debugging silicon, and making real trade-off decisions today — not someone who used to.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">02 · what you get</span>
+          <h3>Curated, high-signal sessions</h3>
+          <p>Each webinar is scoped tightly around one area — STA, CTS, placement, power, DFT — and goes deep enough to hold up in a real interview or a real design review.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">03 · why it pays off</span>
+          <h3>Leverage, not just learning</h3>
+          <p>The goal isn't a certificate. It's the specific, practiced knowledge that changes how you're evaluated — for a role, a raise, or a title.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="webinars" class="webinars wrap">
-    <h2>Upcoming webinars</h2>
-    <p class="section-sub">Small cohorts, live Q&amp;A, recordings included with purchase.</p>
-
-    <div class="webinar-grid">
-
-      <article class="webinar-card">
-        <div class="wc-meta">
-          <span class="wc-date">Oct&nbsp;03</span>
-          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
-        </div>
-        <h3>Static timing analysis, from first principles</h3>
-        <p>Setup and hold margins, clock skew, false paths, and how to actually read a timing report instead of just chasing WNS to zero.</p>
-        <div class="wc-footer">
-          <span class="wc-price">$79</span>
-          <stripe-buy-button
-            buy-button-id="buy_btn_REPLACE_ME_1"
-            publishable-key="pk_live_REPLACE_ME">
-          </stripe-buy-button>
-        </div>
-      </article>
-
-      <article class="webinar-card">
-        <div class="wc-meta">
-          <span class="wc-date">Oct&nbsp;17</span>
-          <span class="wc-time">9:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;120&nbsp;min</span>
-        </div>
-        <h3>Clock domain crossing: finding the bugs simulation won't show you</h3>
-        <p>Synchronizer topologies, metastability failure rates, and building a CDC checklist your review process will actually follow.</p>
-        <div class="wc-footer">
-          <span class="wc-price">$99</span>
-          <stripe-buy-button
-            buy-button-id="buy_btn_REPLACE_ME_2"
-            publishable-key="pk_live_REPLACE_ME">
-          </stripe-buy-button>
-        </div>
-      </article>
-
-      <article class="webinar-card">
-        <div class="wc-meta">
-          <span class="wc-date">Nov&nbsp;07</span>
-          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
-        </div>
-        <h3>Low-power techniques for SoC front-end design</h3>
-        <p>Clock gating, power domains, and UPF basics — what to specify before RTL freeze so the back-end team isn't stuck with your defaults.</p>
-        <div class="wc-footer">
-          <span class="wc-price">$79</span>
-          <stripe-buy-button
-            buy-button-id="buy_btn_REPLACE_ME_3"
-            publishable-key="pk_live_REPLACE_ME">
-          </stripe-buy-button>
-        </div>
-      </article>
-
-      <article class="webinar-card">
-        <div class="wc-meta">
-          <span class="wc-date">Nov&nbsp;21</span>
-          <span class="wc-time">10:00&nbsp;AM&nbsp;PT&nbsp;·&nbsp;90&nbsp;min</span>
-        </div>
-        <h3>Reading a DRC report without losing your mind</h3>
-        <p>Triage strategy for physical verification: which violations to fix first, which to waive, and how to talk to your foundry about the rest.</p>
-        <div class="wc-footer">
-          <span class="wc-price">$79</span>
-          <stripe-buy-button
-            buy-button-id="buy_btn_REPLACE_ME_4"
-            publishable-key="pk_live_REPLACE_ME">
-          </stripe-buy-button>
-        </div>
-      </article>
-
+  <section id="catalog-preview">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Physical design, taught the way it's practiced</h2>
+        <p class="section-lede" style="margin-bottom:20px;">Recordings and live sessions cover the full flow — synthesis, CTS, placement, routing, STA, power, DRC and more — plus scripting drills and mock interviews built from real design reviews.</p>
+        <a href="webinars.html" class="btn btn-ghost">See the full catalog →</a>
+      </div>
+      <div class="quote-block">
+        If you want to learn VLSI the way it's actually practiced — not the way a textbook simplifies it — this is where industry teaches.
+      </div>
     </div>
   </section>
 
-  <section id="forum" class="forum wrap">
-    <h2>From the forum</h2>
-    <p class="section-sub">Open discussion between webinars. No question is too basic; no bug report is too weird.</p>
+  <section id="host">
+    <div class="wrap">
+      <h2>Two ways to be part of this</h2>
+      <p class="section-lede">Metastable Design is as much about collective learning as it is about expert teaching.</p>
 
-    <div class="forum-grid">
-      <a class="forum-item" href="#">
-        <span class="forum-tag">Timing closure</span>
-        <span class="forum-title">Multicycle path exception not being respected in PrimeTime — what am I missing?</span>
-        <span class="forum-replies">14 replies</span>
-      </a>
-      <a class="forum-item" href="#">
-        <span class="forum-tag">DFT &amp; test</span>
-        <span class="forum-title">Scan chain stuck-at coverage plateaued at 91% — ATPG pattern strategies that helped you</span>
-        <span class="forum-replies">9 replies</span>
-      </a>
-      <a class="forum-item" href="#">
-        <span class="forum-tag">Layout &amp; DRC</span>
-        <span class="forum-title">Antenna violations after metal fill — fixing at the source vs. adding diodes</span>
-        <span class="forum-replies">21 replies</span>
-      </a>
+      <div class="split-cta">
+        <div class="panel">
+          <h3>Host a webinar</h3>
+          <p>If you're an experienced professional who considers yourself an expert in any domain — physical design, DV, RTL, architecture, or something adjacent — we'd love to hear from you. Bring your knowledge to engineers who need it most.</p>
+          <a href="mailto:metastable01@gmail.com" class="btn btn-primary">Reach out to host</a>
+        </div>
+        <div class="panel">
+          <h3>Share a lesson</h3>
+          <p>Have an idea, a practice, or a hard-won lesson — technical or otherwise — that helps engineers grow into better professionals? We're building a collective body of knowledge, not just a lecture series. Send it our way.</p>
+          <a href="mailto:metastable01@gmail.com" class="btn btn-ghost">Send us your idea</a>
+        </div>
+      </div>
     </div>
-
-    <a href="#" class="btn btn-outline forum-cta">Visit the forum</a>
-  </section>
-
-  <section id="about" class="about wrap">
-    <h2>About</h2>
-    <p>Metastable Design is run by a small group of VLSI engineers who got tired of watching good design practices stay locked inside individual companies. Webinars are taught by people who've actually taped out the chips they're describing, kept small enough for real Q&amp;A, and recorded so you can revisit the parts that didn't click the first time.</p>
   </section>
 
 </main>
 
-<footer class="site-footer">
+<footer id="contact">
   <div class="wrap footer-row">
-    <span>© 2026 Metastable Design</span>
-    <a href="mailto:hello@metastable.design">hello@metastable.design</a>
+    <span>Metastable Design — where industry teaches.</span>
+    <div class="footer-links">
+      <a href="webinars.html">Webinars</a>
+      <a href="https://discord.gg/4RN7esTd3G">Discord</a>
+      <a href="mailto:metastable01@gmail.com">metastable01@gmail.com</a>
+    </div>
   </div>
 </footer>
 
-<script async src="https://js.stripe.com/v3/buy-button.js"></script>
-<script src="js/main.js"></script>
 </body>
 </html>
