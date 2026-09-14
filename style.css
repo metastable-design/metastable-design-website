@@ -444,10 +444,6 @@ details.product-card:hover{
   justify-content: center;
   gap: 8px;
   margin-bottom: 14px;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-  background-size: 14px 14px;
 }
 .thumb-icon{
   width: 34px;
