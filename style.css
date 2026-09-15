@@ -581,8 +581,8 @@ details.product-card:hover{
 
 /* real per-card icon, drawn by the SVG already in the markup */
 .thumb-icon{
-  width: 36px;
-  height: 36px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
 }
 
