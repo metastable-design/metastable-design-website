@@ -725,6 +725,33 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
   transform: none;
 }
 
+/* ---------- checkout notice toast ---------- */
+
+.md-notice{
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  max-width: 90vw;
+  width: 420px;
+  background: var(--text);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(10,10,10,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 120;
+}
+.md-notice.visible{
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 1180px){
