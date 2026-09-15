@@ -17,11 +17,14 @@
   --text-mute: #2f2f2f;
   --accent: #0056d2;
   --accent-dim: rgba(0,86,210,0.08);
+  --accent-pastel: #dbe7fb;
   --accent-deep: #003fa3;
   --accent2: #6c4ee3;
   --accent2-dim: rgba(108,78,227,0.10);
+  --accent2-pastel: #e6e0fb;
   --green: #0f9d58;
   --green-dim: rgba(15,157,88,0.08);
+  --green-pastel: #dcf2e6;
   --orange: #f0a202;
   --orange-dim: rgba(240,162,2,0.10);
   --line: #edf1f5;
@@ -583,9 +586,9 @@ details.product-card:hover{
   letter-spacing: 0.02em;
   color: inherit;
 }
-.thumb-available{ background-color: var(--accent-dim); color: var(--accent); }
-.thumb-scripting{ background-color: var(--accent2-dim); color: var(--accent2); }
-.thumb-mock{ background-color: var(--green-dim); color: var(--green); }
+.thumb-available{ background-color: var(--accent-pastel); color: var(--accent); }
+.thumb-scripting{ background-color: var(--accent2-pastel); color: var(--accent2); }
+.thumb-mock{ background-color: var(--green-pastel); color: var(--green); }
 .thumb-phased{ background-color: var(--bg-raise); color: var(--text-mute); }
 
 .product-name{
@@ -644,12 +647,33 @@ details.product-card:hover{
 }
 
 .product-more{
-  padding: 0 16px;
+  margin: 4px 16px 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: var(--mono);
   font-size: 0.72rem;
-  color: var(--text-mute);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: color .12s ease;
 }
-.product-more .chevron{ display:inline-block; transition: transform .15s ease; }
+details.product-card:hover .product-more{ color: var(--accent-deep); }
+.product-more .chevron{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  font-size: 0.68rem;
+  transition: transform .15s ease, background .12s ease;
+}
+details.product-card:hover .product-more .chevron{ background: var(--accent-dim); }
 details[open] .product-more .chevron{ transform: rotate(90deg); }
 
 .product-card-dim{ opacity: 0.6; }
