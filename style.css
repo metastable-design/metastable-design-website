@@ -95,7 +95,7 @@ header.site{
   align-items:center;
 }
 .brand-logo{
-  height: 54px;
+  height: 72px;
   width: auto;
   display: block;
 }
@@ -581,8 +581,8 @@ details.product-card:hover{
 
 /* real per-card icon, drawn by the SVG already in the markup */
 .thumb-icon{
-  width: 26px;
-  height: 26px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
 }
 
