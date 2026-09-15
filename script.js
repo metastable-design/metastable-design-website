@@ -1,176 +1,220 @@
-/* ---------------------------------------------------------
-   Metastable Design — cart
-   Cart state lives in localStorage so it persists across
-   index.html <-> webinars.html and across page reloads.
-   Each webinar is a one-off purchase, so "adding to cart"
-   just toggles membership — there's no quantity picker.
---------------------------------------------------------- */
+// Metastable Design — cart + Razorpay checkout
+// Cart persists in localStorage so it survives navigation between pages.
 
 (function () {
-  var CART_KEY = "metastable-cart-v1";
+  const CART_KEY = 'md_cart_v1';
 
-  function getCart() {
+  function loadCart() {
     try {
-      var raw = localStorage.getItem(CART_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) {
+      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
       return [];
     }
   }
 
-  function setCart(items) {
-    localStorage.setItem(CART_KEY, JSON.stringify(items));
-    render();
+  function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }
 
-  function addItem(id, name, price) {
-    var cart = getCart();
-    if (!cart.some(function (i) { return i.id === id; })) {
-      cart.push({ id: id, name: name, price: price });
-      setCart(cart);
+  let cart = loadCart();
+
+  function formatPrice(n) {
+    return '$' + n.toFixed(0);
+  }
+
+  function updateCartUI() {
+    const countEl = document.querySelector('.cart-count');
+    const itemsEl = document.getElementById('cart-items');
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const checkoutBtn = document.getElementById('cart-checkout');
+
+    if (countEl) {
+      countEl.textContent = String(cart.length);
+      countEl.style.display = cart.length > 0 ? 'flex' : 'none';
     }
-  }
 
-  function removeItem(id) {
-    setCart(getCart().filter(function (i) { return i.id !== id; }));
-  }
-
-  function fmt(n) {
-    return "$" + n.toFixed(0);
-  }
-
-  function render() {
-    var cart = getCart();
-
-    // header badge(s)
-    document.querySelectorAll(".cart-count").forEach(function (el) {
-      el.textContent = cart.length;
-      el.style.display = cart.length ? "inline-flex" : "none";
-    });
-
-    // per-course button state
-    document.querySelectorAll(".add-cart-btn").forEach(function (btn) {
-      var inCart = cart.some(function (i) { return i.id === btn.dataset.id; });
-      btn.classList.toggle("in-cart", inCart);
-      btn.textContent = inCart ? "✓ In cart" : "Add to cart";
-    });
-
-    // drawer contents
-    var list = document.getElementById("cart-items");
-    if (list) {
-      list.innerHTML = "";
+    if (itemsEl) {
+      itemsEl.innerHTML = '';
       if (cart.length === 0) {
-        list.innerHTML = '<p class="cart-empty">Your cart is empty. Add a webinar to get started.</p>';
+        itemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
       } else {
-        cart.forEach(function (item) {
-          var row = document.createElement("div");
-          row.className = "cart-item";
+        cart.forEach((item) => {
+          const row = document.createElement('div');
+          row.className = 'cart-item';
           row.innerHTML =
-            '<span class="cart-item-name">' + item.name + '</span>' +
-            '<span class="cart-item-price">' + fmt(item.price) + '</span>' +
-            '<button class="cart-item-remove" data-id="' + item.id + '" aria-label="Remove ' + item.name + '">×</button>';
-          list.appendChild(row);
+            '<span class="cart-item-name"></span>' +
+            '<span class="cart-item-price"></span>' +
+            '<button class="cart-item-remove" aria-label="Remove">&times;</button>';
+          row.querySelector('.cart-item-name').textContent = item.name;
+          row.querySelector('.cart-item-price').textContent = formatPrice(item.price);
+          row.querySelector('.cart-item-remove').dataset.id = item.id;
+          itemsEl.appendChild(row);
         });
       }
     }
 
-    var subtotal = cart.reduce(function (s, i) { return s + i.price; }, 0);
-    var subtotalEl = document.getElementById("cart-subtotal");
-    if (subtotalEl) subtotalEl.textContent = fmt(subtotal);
-
-    var checkoutBtn = document.getElementById("cart-checkout");
+    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
     if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
+
+    document.querySelectorAll('.add-cart-btn').forEach((btn) => {
+      const id = btn.dataset.id;
+      const inCart = cart.some((item) => item.id === id);
+      btn.classList.toggle('in-cart', inCart);
+      btn.textContent = inCart ? 'Remove from cart' : 'Add to cart';
+    });
   }
 
-  function openDrawer() {
-    var drawer = document.getElementById("cart-drawer");
-    var overlay = document.getElementById("cart-overlay");
-    if (drawer) drawer.classList.add("open");
-    if (overlay) overlay.classList.add("open");
+  function addOrRemove(id, name, price) {
+    const idx = cart.findIndex((item) => item.id === id);
+    if (idx > -1) {
+      cart.splice(idx, 1);
+    } else {
+      cart.push({ id, name, price });
+    }
+    saveCart();
+    updateCartUI();
   }
 
-  function closeDrawer() {
-    var drawer = document.getElementById("cart-drawer");
-    var overlay = document.getElementById("cart-overlay");
-    if (drawer) drawer.classList.remove("open");
-    if (overlay) overlay.classList.remove("open");
+  function removeFromCart(id) {
+    cart = cart.filter((item) => item.id !== id);
+    saveCart();
+    updateCartUI();
   }
 
-  function checkout() {
-    var cart = getCart();
-    if (cart.length === 0) return;
-    var subtotal = cart.reduce(function (s, i) { return s + i.price; }, 0);
-
-    // ---------------------------------------------------------------
-    // RAZORPAY INTEGRATION POINT
-    // Swap this block for a real Checkout call. Typical flow:
-    //   1. POST `cart` to your backend to create a Razorpay Order
-    //      (amount is in the smallest currency unit, e.g. paise for INR).
-    //   2. Open Razorpay Checkout with the order_id it returns:
-    //
-    //   var options = {
-    //     key: "YOUR_RAZORPAY_KEY_ID",
-    //     amount: subtotal * 100,           // paise, if charging in INR
-    //     currency: "INR",
-    //     name: "Metastable Design",
-    //     description: cart.map(function(i){ return i.name; }).join(", "),
-    //     order_id: orderIdFromYourServer,
-    //     handler: function (response) {
-    //       // verify response.razorpay_payment_id on your backend, then:
-    //       localStorage.removeItem(CART_KEY);
-    //       render();
-    //     },
-    //     prefill: { email: "", contact: "" },
-    //     theme: { color: "#33448a" }
-    //   };
-    //   var rzp = new Razorpay(options);
-    //   rzp.open();
-    // ---------------------------------------------------------------
-    alert(
-      "Cart total: " + fmt(subtotal) + " for " + cart.length + " item(s).\n\n" +
-      "Wire this button up to Razorpay Checkout — see the comment above checkout() in script.js."
-    );
+  function openCart() {
+    document.getElementById('cart-drawer')?.classList.add('open');
+    document.getElementById('cart-overlay')?.classList.add('open');
   }
 
-  document.addEventListener("click", function (e) {
-    var addBtn = e.target.closest(".add-cart-btn");
+  function closeCart() {
+    document.getElementById('cart-drawer')?.classList.remove('open');
+    document.getElementById('cart-overlay')?.classList.remove('open');
+  }
+
+  function showNotice(message) {
+    let notice = document.getElementById('md-notice');
+    if (!notice) {
+      notice = document.createElement('div');
+      notice.id = 'md-notice';
+      notice.className = 'md-notice';
+      document.body.appendChild(notice);
+    }
+    notice.textContent = message;
+    notice.classList.add('visible');
+    clearTimeout(notice._timer);
+    notice._timer = setTimeout(() => notice.classList.remove('visible'), 6000);
+  }
+
+  document.addEventListener('click', function (e) {
+    const addBtn = e.target.closest('.add-cart-btn');
     if (addBtn) {
       e.preventDefault();
       e.stopPropagation();
-      var id = addBtn.dataset.id;
-      if (getCart().some(function (i) { return i.id === id; })) {
-        removeItem(id);
-      } else {
-        addItem(id, addBtn.dataset.name, parseFloat(addBtn.dataset.price));
-      }
+      addOrRemove(addBtn.dataset.id, addBtn.dataset.name, parseFloat(addBtn.dataset.price));
       return;
     }
 
-    var removeBtn = e.target.closest(".cart-item-remove");
+    const removeBtn = e.target.closest('.cart-item-remove');
     if (removeBtn) {
-      removeItem(removeBtn.dataset.id);
+      e.preventDefault();
+      removeFromCart(removeBtn.dataset.id);
       return;
     }
 
-    if (e.target.closest("#cart-toggle")) {
-      openDrawer();
+    if (e.target.closest('#cart-toggle')) {
+      openCart();
       return;
     }
 
-    if (e.target.closest("#cart-close") || e.target === document.getElementById("cart-overlay")) {
-      closeDrawer();
-      return;
-    }
-
-    if (e.target.closest("#cart-checkout")) {
-      checkout();
+    if (e.target.closest('#cart-close') || e.target.id === 'cart-overlay') {
+      closeCart();
       return;
     }
   });
 
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeDrawer();
-  });
+  async function startCheckout() {
+    const checkoutBtn = document.getElementById('cart-checkout');
+    if (!checkoutBtn || cart.length === 0) return;
 
-  document.addEventListener("DOMContentLoaded", render);
+    if (typeof Razorpay === 'undefined') {
+      showNotice('Payment library failed to load. Check your connection and try again.');
+      return;
+    }
+
+    checkoutBtn.disabled = true;
+    const originalLabel = checkoutBtn.textContent;
+    checkoutBtn.textContent = 'Preparing checkout…';
+
+    try {
+      const res = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart.map((i) => i.id) }),
+      });
+      const order = await res.json();
+      if (!res.ok) throw new Error(order.error || 'Could not start checkout');
+
+      const rzp = new Razorpay({
+        key: order.key_id,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.order_id,
+        name: 'Metastable Design',
+        description: cart.map((i) => i.name).join(', '),
+        handler: async function (response) {
+          try {
+            const verifyRes = await fetch('/api/verify-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(response),
+            });
+            const verify = await verifyRes.json();
+
+            if (verify.verified) {
+              cart = [];
+              saveCart();
+              updateCartUI();
+              closeCart();
+              showNotice('Payment successful! We\u2019ll share access over Discord or email within 24 hours.');
+            } else {
+              showNotice(
+                'Payment went through but could not be verified. Email metastable01@gmail.com with payment ID ' +
+                  response.razorpay_payment_id
+              );
+            }
+          } catch {
+            showNotice(
+              'Payment went through but verification failed. Email metastable01@gmail.com with payment ID ' +
+                response.razorpay_payment_id
+            );
+          }
+        },
+        modal: {
+          ondismiss: function () {
+            checkoutBtn.disabled = cart.length === 0;
+            checkoutBtn.textContent = originalLabel;
+          },
+        },
+        theme: { color: '#0056d2' },
+      });
+
+      rzp.on('payment.failed', function (response) {
+        showNotice('Payment failed: ' + (response.error?.description || 'please try again.'));
+      });
+
+      rzp.open();
+    } catch (err) {
+      showNotice(err.message || 'Something went wrong starting checkout.');
+    } finally {
+      checkoutBtn.disabled = cart.length === 0;
+      checkoutBtn.textContent = originalLabel;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    updateCartUI();
+    const checkoutBtn = document.getElementById('cart-checkout');
+    if (checkoutBtn) checkoutBtn.addEventListener('click', startCheckout);
+  });
 })();
