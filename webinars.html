@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +25,6 @@
       <nav class="navlinks">
       <a href="index.html">Home</a>
       <a href="webinars.html" class="active">Webinars</a>
-      <a href="testimonials.html">Testimonials</a>
       <a href="index.html#host">Host a webinar</a>
       <a href="index.html#contact">Contact</a>
     </nav>
@@ -36,7 +41,7 @@
   <div class="wrap catalog-header">
     <p class="catalog-meta">/ physical-design-webinars</p>
     <h1 style="margin-bottom:12px;">Deep-dive webinars on physical design, STA, power and synthesis</h1>
-    <p class="lede" style="margin-bottom:22px;">Every recording is taught by a practitioner and built for engineers who want to go past the basics. Tap a card to see what it covers.</p>
+    <p class="lede" style="margin-bottom:22px;">Every recording is taught by a practitioner and built for engineers who want to go past the basics. Tap a session to see what it covers.</p>
     <nav class="jump-nav">
       <a href="#available">Available recordings</a>
       <a href="#scripting">Scripting modules</a>
@@ -51,17 +56,18 @@
       <p class="group-title first">Available recordings</p>
       <div class="product-grid">
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="15" width="8" height="10" rx="1"/><rect x="16" y="15" width="8" height="10" rx="1"/><rect x="29" y="15" width="8" height="10" rx="1"/><path d="M11 20h5M24 20h5"/></svg><span class="thumb-mark">DFT</span></div>
-            <span class="product-name">Essential DFT Fundamentals</span>
-            <span class="product-note">Lacks annotations · 21 topics</span>
-            <span class="product-price">$25</span>
-            <button class="add-cart-btn" data-id="dft-fundamentals" data-name="Essential DFT Fundamentals" data-price="25">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Essential DFT Fundamentals" data-modal-byline="— lacks annotations">
+          <div class="product-thumb"><span>ES</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Essential DFT Fundamentals</h3>
+            <p class="product-by">— lacks annotations</p>
+            <div class="product-price-row"><span class="product-price">$25</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="dft-fundamentals" data-name="Essential DFT Fundamentals" data-price="25">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Why DFT?</li><li>Types of Defect</li><li>Fault Models</li><li>Stuck-At Faults + Quiz</li>
               <li>Scan Insertion & Scan Chains</li><li>Shift Mode and Capture Mode</li><li>Clock Staggering</li>
               <li>Transition Faults</li><li>At-Speed Capture</li><li>Scan Chains Crossing Clock Domains</li>
@@ -69,21 +75,21 @@
               <li>CODEC</li><li>Timing Constraints</li><li>Memory Testing</li><li>Single vs Split MBIST Controller</li>
               <li>MARCH Test for Memory</li><li>Bridging Faults and IDDQ Faults</li><li>Path Delay Fault</li>
               <li>Test Point Insertion</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24h6v-10h6v10h6v-10h6v10h6"/></svg><span class="thumb-mark">STA·1</span></div>
-            <span class="product-name">Static Timing Analysis — Part 1</span>
-            <span class="product-note">22 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="static-timing-analysis-part-1" data-name="Static Timing Analysis — Part 1" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Static Timing Analysis — Part 1">
+          <div class="product-thumb"><span>ST</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Static Timing Analysis — Part 1</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="static-timing-analysis-part-1" data-name="Static Timing Analysis — Part 1" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Inputs and Outputs of STA</li><li>Origin of Setup/Hold Time + Quiz</li><li>Timing Arcs</li>
               <li>NLDM Library: Combo Gates</li><li>Timing Arcs: Setup and Hold</li><li>NLDM: Interpolation & Extrapolation</li>
               <li>Clock Definitions + Quiz</li><li>Case Analysis + Quiz</li><li>Clock Gating Checks</li>
@@ -93,21 +99,21 @@
               <li>I/O Constraints</li><li>Timing Report: In2Reg, Reg2Out</li><li>DRVs</li>
               <li>report_timing: max_paths vs nworst</li><li>Validating Constraints, check_timing</li>
               <li>report_analysis_coverage</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24h6v-10h6v10h6v-10h6v10h6"/></svg><span class="thumb-mark">STA·2</span></div>
-            <span class="product-name">Static Timing Analysis — Part 2</span>
-            <span class="product-note">17 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="static-timing-analysis-part-2" data-name="Static Timing Analysis — Part 2" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Static Timing Analysis — Part 2">
+          <div class="product-thumb"><span>ST</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Static Timing Analysis — Part 2</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="static-timing-analysis-part-2" data-name="Static Timing Analysis — Part 2" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>GBA vs PBA + Quiz</li><li>PBA Mode: Path vs Exhaustive + Quiz</li><li>Miller Effect</li>
               <li>Long Tail Effect</li><li>CCS Libraries & Receiver Capacitance</li><li>set_driving_cell vs set_input_tran</li>
               <li>Common Path Pessimism Removal</li><li>Crosstalk on Common Clock Path</li><li>CPPR for Half Cycle Paths</li>
@@ -115,21 +121,21 @@
               <li>Negative Net Delays</li><li>OCV vs AOCV</li><li>AOCV Path Depth with GBA vs PBA</li>
               <li>POCV: LUT for sigma, Path Delay, Timing Report</li><li>Crosstalk: Noise and Crosstalk Delay</li>
               <li>Crosstalk Noise Immunity</li><li>Latch Based Timing + Quiz</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4 10 22h8l-2 14 14-18h-8z"/></svg><span class="thumb-mark">PWR OPT</span></div>
-            <span class="product-name">Power Optimization Techniques</span>
-            <span class="product-note">18 topics covered</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="power-optimization-techniques" data-name="Power Optimization Techniques" data-price="40">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Power Optimization Techniques">
+          <div class="product-thumb"><span>PO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Power Optimization Techniques</h3>
+            
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="power-optimization-techniques" data-name="Power Optimization Techniques" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>MV Design & DVFS</li><li>Power Gating & Clock Gating</li><li>Clock Gating: Timing vs Power</li>
               <li>Multi-level Clock Gating</li><li>ICG Cloning</li><li>Data Bus Inversion (DBI AC & DC)</li>
               <li>Datapath Restructuring & Gating</li><li>Architectural vs Inferred ICG</li><li>Multi VT Synthesis</li>
@@ -137,76 +143,76 @@
               <li>Power Optimization with SAIF Files</li><li>Self Gating (Data Driven Clock Gating)</li>
               <li>Mixed Cell-Height Implementation</li><li>Threshold Voltage</li><li>Body Biasing</li>
               <li>Stack Effect</li><li>Quiz × 2</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="22" r="10"/><path d="M20 10v10"/></svg><span class="thumb-mark">PG</span></div>
-            <span class="product-name">Power Gating</span>
-            <span class="product-note">13 topics covered</span>
-            <span class="product-price">$35</span>
-            <button class="add-cart-btn" data-id="power-gating" data-name="Power Gating" data-price="35">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Power Gating">
+          <div class="product-thumb"><span>PO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Power Gating</h3>
+            
+            <div class="product-price-row"><span class="product-price">$35</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="power-gating" data-name="Power Gating" data-price="35">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Power Switches: Headers and Footers</li><li>In-Rush Current</li><li>Headers or Footers?</li>
               <li>Power Switch Placement</li><li>In Rush Current vs Wake Up Time</li><li>Star-Daisy Switch Chaining</li>
               <li>Mother-Daughter Configuration</li><li>Hammer and Trickle Chains</li><li>Hammer End Logic</li>
               <li>Power Switch with In-built Buffer</li><li>Power Switch with Separate Well</li>
               <li>State Retention Power Gating (SRPG)</li><li>Isolation Cells: Source or Destination</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="8" height="8"/><rect x="16" y="4" width="8" height="8"/><rect x="28" y="4" width="8" height="8"/><rect x="4" y="16" width="8" height="8"/><rect x="16" y="16" width="8" height="8" fill="currentColor"/><rect x="28" y="16" width="8" height="8"/></svg><span class="thumb-mark">CELLS</span></div>
-            <span class="product-name">Special Physical Cells</span>
-            <span class="product-note">9 topics covered</span>
-            <span class="product-price">$25</span>
-            <button class="add-cart-btn" data-id="special-physical-cells" data-name="Special Physical Cells" data-price="25">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Special Physical Cells">
+          <div class="product-thumb"><span>SP</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Special Physical Cells</h3>
+            
+            <div class="product-price-row"><span class="product-price">$25</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="special-physical-cells" data-name="Special Physical Cells" data-price="25">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Decap Cells</li><li>Tie Cells</li><li>Filler Cells</li><li>Tap Cells</li>
               <li>Latch-up (Recap)</li><li>Endcaps / Boundary Cells</li><li>ESD Clamps</li>
               <li>Die Level Process Monitors (DLPM)</li><li>Quiz</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 34V14"/><path d="M20 14 12 6M20 14l8-8"/><circle cx="20" cy="10" r="2" fill="currentColor"/></svg><span class="thumb-mark">ANT</span></div>
-            <span class="product-name">Antenna Effect</span>
-            <span class="product-note">7 topics covered</span>
-            <span class="product-price">$20</span>
-            <button class="add-cart-btn" data-id="antenna-effect" data-name="Antenna Effect" data-price="20">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Antenna Effect">
+          <div class="product-thumb"><span>AN</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Antenna Effect</h3>
+            
+            <div class="product-price-row"><span class="product-price">$20</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="antenna-effect" data-name="Antenna Effect" data-price="20">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Antenna Effect</li><li>Causes of Antenna</li><li>Fixes for Antenna</li>
               <li>Cost of Antenna Fixing</li><li>Quiz</li><li>Reverse Antenna Effect</li><li>NWELL Antenna Effect</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h10v12h12v12h10"/><path d="M4 32h8v-8h8"/></svg><span class="thumb-mark">ROUTE</span></div>
-            <span class="product-name">Signal Routing</span>
-            <span class="product-note">16 topics covered</span>
-            <span class="product-price">$35</span>
-            <button class="add-cart-btn" data-id="signal-routing" data-name="Signal Routing" data-price="35">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Signal Routing">
+          <div class="product-thumb"><span>SI</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Signal Routing</h3>
+            
+            <div class="product-price-row"><span class="product-price">$35</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="signal-routing" data-name="Signal Routing" data-price="35">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Routing Sequence & Virtual Routing</li><li>Global Routing & GCELL</li>
               <li>Global Routing Congestion (GRC)</li><li>Timing & Crosstalk Driven Global Routing + Quiz</li>
               <li>RC Estimation Techniques</li><li>Detail Routing</li><li>Post Route Optimizations</li>
@@ -214,35 +220,35 @@
               <li>Debugging Route Results</li><li>Maze Router (Lee's Algorithm)</li>
               <li>Routing Guides & Corridors</li><li>Min/Max Layer Constraints</li><li>Via Ladder Insertion</li>
               <li>Fixing Route Detours</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="10,6 10,34 30,26 30,14"/><path d="M2 12H10M2 20H10M2 28H10M30 20H38"/></svg><span class="thumb-mark">MIS</span></div>
-            <span class="product-name">Multi-Input Switching (MIS)</span>
-            <span class="product-note">Available on request</span>
-            <span class="product-price">$35</span>
-            <button class="add-cart-btn" data-id="multi-input-switching-mis" data-name="Multi-Input Switching (MIS)" data-price="35">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Recording available on request. Reach out via Discord or email to gain access.</p>
+        <div class="product-card" data-modal-name="Multi-Input Switching (MIS)">
+          <div class="product-thumb"><span>MU</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Multi-Input Switching (MIS)</h3>
+            
+            <div class="product-price-row"><span class="product-price">$35</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="multi-input-switching-mis" data-name="Multi-Input Switching (MIS)" data-price="35">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
+          <div class="product-modal-content" hidden><p class="note">Recording available on request. Reach out via Discord or email to gain access.</p></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4v10M20 14 8 26M20 14l12 12M8 26v6M32 26v6"/></svg><span class="thumb-mark">CTS·1</span></div>
-            <span class="product-name">Clock Tree Synthesis — Part 1</span>
-            <span class="product-note">21 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="clock-tree-synthesis-part-1" data-name="Clock Tree Synthesis — Part 1" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Clock Tree Synthesis — Part 1">
+          <div class="product-thumb"><span>CL</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Clock Tree Synthesis — Part 1</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="clock-tree-synthesis-part-1" data-name="Clock Tree Synthesis — Part 1" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Objectives of CTS & CTS Flow</li><li>Design Initialization</li><li>Primary CTS Corner</li>
               <li>Max Cap and Max Trans</li><li>Clock Tree References</li><li>Inverter vs Buffer Based Clock Tree + Quiz</li>
               <li>Clock NDRs + Quiz</li><li>Clock Routing Layers</li><li>Target Skew and Latency</li>
@@ -252,35 +258,35 @@
               <li>Trial Clock Tree</li><li>Clock Tree Exceptions</li><li>Valid vs Invalid Clock Tree Network</li>
               <li>IO Latency postCTS</li><li>Zero Clock Skew</li><li>Clock Jitter Factors</li>
               <li>ICG Cloning and Merging</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4v10M20 14 8 26M20 14l12 12M8 26v6M32 26v6"/></svg><span class="thumb-mark">CTS·2</span></div>
-            <span class="product-name">Clock Tree Synthesis — Part 2</span>
-            <span class="product-note">Interview-focused companion to Part 1</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="clock-tree-synthesis-part-2" data-name="Clock Tree Synthesis — Part 2" data-price="40">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Covers common issues encountered while running CTS and the full solution space. Heavily interview-focused, with practical discussion — a companion to Part 1 that goes well beyond textbook coverage.</p>
+        <div class="product-card" data-modal-name="Clock Tree Synthesis — Part 2">
+          <div class="product-thumb"><span>CL</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Clock Tree Synthesis — Part 2</h3>
+            
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="clock-tree-synthesis-part-2" data-name="Clock Tree Synthesis — Part 2" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
+          <div class="product-modal-content" hidden><p class="note">Covers common issues encountered while running CTS and the full solution space. Heavily interview-focused, with practical discussion — a companion to Part 1 that goes well beyond textbook coverage.</p></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="36" height="36"/><rect x="6" y="6" width="10" height="8" fill="currentColor"/><rect x="22" y="10" width="12" height="6" fill="currentColor"/><rect x="8" y="22" width="8" height="10" fill="currentColor"/><rect x="24" y="20" width="10" height="12" fill="currentColor"/></svg><span class="thumb-mark">PLACE·1</span></div>
-            <span class="product-name">Placement — Part 1</span>
-            <span class="product-note">16 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="placement-part-1" data-name="Placement — Part 1" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Placement — Part 1">
+          <div class="product-thumb"><span>PL</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Placement — Part 1</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="placement-part-1" data-name="Placement — Part 1" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Goal of Placement & Placement Flow</li><li>Placement Density Controls</li>
               <li>place.coarse.max_density (detailed)</li><li>congestion_driven_max_util (detailed)</li>
               <li>Target Routing Density Control</li><li>Path Groups and Path Weights</li>
@@ -289,35 +295,35 @@
               <li>Register Banking</li><li>Mixed Cell Height Implementation</li><li>SAIF Based Placement</li>
               <li>Global Routing Controls & RC Estimation</li><li>IR Aware Placement</li>
               <li>Scan Chain Reordering</li><li>Relative Placement</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="36" height="36"/><rect x="6" y="6" width="10" height="8" fill="currentColor"/><rect x="22" y="10" width="12" height="6" fill="currentColor"/><rect x="8" y="22" width="8" height="10" fill="currentColor"/><rect x="24" y="20" width="10" height="12" fill="currentColor"/></svg><span class="thumb-mark">PLACE·2</span></div>
-            <span class="product-name">Placement — Part 2</span>
-            <span class="product-note">Real-world issues, 10+ yrs experience</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="placement-part-2" data-name="Placement — Part 2" data-price="45">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">Covers practical issues seen in real designs, compiled from 10+ years of experience. Rated above Part 1 by past attendees — covers solution spaces not readily available online. Ideal for interview prep and real-world debugging.</p>
+        <div class="product-card" data-modal-name="Placement — Part 2">
+          <div class="product-thumb"><span>PL</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Placement — Part 2</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="placement-part-2" data-name="Placement — Part 2" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
+          <div class="product-modal-content" hidden><p class="note">Covers practical issues seen in real designs, compiled from 10+ years of experience. Rated above Part 1 by past attendees — covers solution spaces not readily available online. Ideal for interview prep and real-world debugging.</p></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 14c4-8 8-8 12 0s8 8 12 0 8-8 12 0"/><path d="M2 26c4 8 8 8 12 0s8-8 12 0 8 8 12 0" stroke-opacity="0.5"/></svg><span class="thumb-mark">XTALK</span></div>
-            <span class="product-name">Crosstalk Analysis</span>
-            <span class="product-note">19 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="crosstalk-analysis" data-name="Crosstalk Analysis" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Crosstalk Analysis">
+          <div class="product-thumb"><span>CR</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Crosstalk Analysis</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="crosstalk-analysis" data-name="Crosstalk Analysis" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Why Signal Integrity Matters</li><li>Effects of Crosstalk</li><li>Types of Noise</li>
               <li>Driver Weakening Effect</li><li>Multi-Input Glitch</li><li>Timing Window Overlap</li>
               <li>Techniques to Reduce Pessimism</li><li>Crosstalk Delay Analysis Mode</li><li>Composite Aggressors</li>
@@ -325,21 +331,21 @@
               <li>Aggressor Exclusion</li><li>Noise Margins, Immunity, Slack</li><li>Crosstalk Computation</li>
               <li>Noise Reporting: Source vs Endpoint</li><li>Crosstalk on Common Clock Path</li>
               <li>Crosstalk Miscorrelation: Top vs Tile</li><li>Systematic & Pointed Fixes + Quiz × 2</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="34" height="34"/><rect x="9" y="9" width="22" height="22"/><rect x="15" y="15" width="10" height="10" fill="currentColor"/></svg><span class="thumb-mark">EM/IR</span></div>
-            <span class="product-name">EM / IR Drop Analysis</span>
-            <span class="product-note">26 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="em-ir-drop-analysis" data-name="EM / IR Drop Analysis" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="EM / IR Drop Analysis">
+          <div class="product-thumb"><span>EM</span></div>
+          <div class="product-body">
+            <h3 class="product-name">EM / IR Drop Analysis</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="em-ir-drop-analysis" data-name="EM / IR Drop Analysis" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Inputs for EM/IR Analysis</li><li>What is IR Drop? Effects</li><li>Static & Dynamic Drop</li>
               <li>Key Ingredients of IR Analysis</li><li>Power Grid Design Implications</li>
               <li>Effective & Shortest Path Resistance + Quiz</li><li>BQM, PeakTW, Combinations + Quiz</li>
@@ -351,21 +357,21 @@
               <li>Wire Width & Length Effects on EM</li><li>Types of EM Rules</li>
               <li>Frequency Dependence on EM</li><li>Power EM vs Signal EM</li><li>Fixing Power & Signal EM</li>
               <li>Physically Broken & Dropped Nets + Quiz × 2</li><li>Via Chopping Distance</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28a14 14 0 0 1 28 0"/><path d="M20 28 28 18"/><circle cx="20" cy="28" r="2" fill="currentColor"/></svg><span class="thumb-mark">PEST·1</span></div>
-            <span class="product-name">Power Estimation — Part 1</span>
-            <span class="product-note">by Gigawatt · 15 topics</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="power-estimation-part-1" data-name="Power Estimation — Part 1" data-price="40">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Power Estimation — Part 1" data-modal-byline="— by Gigawatt">
+          <div class="product-thumb"><span>PO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Power Estimation — Part 1</h3>
+            <p class="product-by">— by Gigawatt</p>
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="power-estimation-part-1" data-name="Power Estimation — Part 1" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Why Do Power Estimation?</li><li>Types of Power for a Circuit</li>
               <li>Energy Stored in a Capacitor</li><li>Why is Power Increasing? + Quiz × 2</li>
               <li>Inputs for Power Estimation + Quiz</li><li>Power Analysis Modes + Quiz</li>
@@ -374,21 +380,21 @@
               <li>Power Saving at Design Milestones</li><li>RTL Power + Quiz</li>
               <li>Gate/Netlist Power with RTL Activity + Quiz</li><li>Common Reports from Power Tool</li>
               <li>Activity File Generation</li><li>When to Use Different Tests</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28a14 14 0 0 1 28 0"/><path d="M20 28 28 18"/><circle cx="20" cy="28" r="2" fill="currentColor"/></svg><span class="thumb-mark">PEST·2</span></div>
-            <span class="product-name">Power Estimation — Part 2</span>
-            <span class="product-note">by Gigawatt · 14 topics</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="power-estimation-part-2" data-name="Power Estimation — Part 2" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Power Estimation — Part 2" data-modal-byline="— by Gigawatt">
+          <div class="product-thumb"><span>PO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Power Estimation — Part 2</h3>
+            <p class="product-by">— by Gigawatt</p>
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="power-estimation-part-2" data-name="Power Estimation — Part 2" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Energy-Delay Product Metric</li><li>Energy vs Delay Tradeoff + Quiz</li>
               <li>Physical Design POV on Energy/Delay</li><li>PVT Limitation on Power/Performance</li>
               <li>VF Curve + Quiz</li><li>State Dependent Leakage Power + Quiz</li>
@@ -397,21 +403,21 @@
               <li>RTL Power: Register Data Checker</li><li>RTL Power: Memory Power Checker</li>
               <li>RTL Power: MUX Power Checker</li><li>RTL Power: Observability Don't Care</li>
               <li>RTL Power: Operand Isolation + Quiz</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8v24h6a12 12 0 0 0 0-24z"/><path d="M2 14h6M2 26h6M26 20h10"/></svg><span class="thumb-mark">SYN·1</span></div>
-            <span class="product-name">Synthesis 2.0 — Part 1</span>
-            <span class="product-note">19 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="synthesis-2-0-part-1" data-name="Synthesis 2.0 — Part 1" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Synthesis 2.0 — Part 1">
+          <div class="product-thumb"><span>SY</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Synthesis 2.0 — Part 1</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="synthesis-2-0-part-1" data-name="Synthesis 2.0 — Part 1" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Inputs/Outputs of Logical Synthesis</li><li>Synthesis Flow, Elaboration, Uniquification</li>
               <li>Linting Issues</li><li>Liberty Files</li><li>WNS/TNS Optimization Passes</li>
               <li>Path Groups, Critical Range & Weights</li><li>Boundary Optimization</li>
@@ -421,21 +427,21 @@
               <li>Wire Load Models & Custom WLMs</li><li>TLU+ File</li>
               <li>Scan Insertion & Scan Stitching</li><li>Know Your Scan DEF</li>
               <li>DFT PREDRCs</li><li>Zero Wire Load Timing Model</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8v24h6a12 12 0 0 0 0-24z"/><path d="M2 14h6M2 26h6M26 20h10"/></svg><span class="thumb-mark">SYN·2</span></div>
-            <span class="product-name">Synthesis 2.0 — Part 2</span>
-            <span class="product-note">20 topics covered</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="synthesis-2-0-part-2" data-name="Synthesis 2.0 — Part 2" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Synthesis 2.0 — Part 2">
+          <div class="product-thumb"><span>SY</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Synthesis 2.0 — Part 2</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="synthesis-2-0-part-2" data-name="Synthesis 2.0 — Part 2" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Inputs/Outputs of Physical Synthesis</li><li>Physical Layout Estimation (PLE)</li>
               <li>Spatial Flow & iSpatial Flow (CRR)</li><li>Global Routing</li><li>Synthesis Timing Constraints</li>
               <li>Post-Synthesis Checks</li><li>Triple Modular Redundancy (TMR)</li>
@@ -446,21 +452,21 @@
               <li>Register Banking / MBCI</li><li>Redundant Bit Removal</li><li>Low Power Settings</li>
               <li>Feasibility Analysis & PPA Optimization</li><li>Shmoo Plots, Perf/Leakage/Area Curves</li>
               <li>Flop Profiling</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="28" height="7"/><rect x="6" y="17" width="28" height="7"/><rect x="6" y="28" width="28" height="7"/></svg><span class="thumb-mark">UPF</span></div>
-            <span class="product-name">Unified Power Format (UPF) — Part 1</span>
-            <span class="product-note">by Subhechcha Banerjee · 19 topics</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="unified-power-format-upf-part-1" data-name="Unified Power Format (UPF) — Part 1" data-price="45">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="Unified Power Format (UPF) — Part 1" data-modal-byline="— by Subhechcha Banerjee">
+          <div class="product-thumb"><span>UN</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Unified Power Format (UPF) — Part 1</h3>
+            <p class="product-by">— by Subhechcha Banerjee</p>
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="unified-power-format-upf-part-1" data-name="Unified Power Format (UPF) — Part 1" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Components of Power</li><li>LP Design Challenges</li><li>Need for Unified Power Intent</li>
               <li>UPF History & UPF vs CPF</li><li>Contents & Types of UPF</li>
               <li>Voltage Domain / Power Domain / Voltage Area</li><li>Power Domains: UPF View</li>
@@ -471,21 +477,21 @@
               <li>HighConn and LowConn Side of Ports</li><li>Upper vs Lower Boundary</li>
               <li>Tool in Out-of-Context Mode</li><li>Setting Context & Port Attributes</li>
               <li>MCQs × 2, Tips & Tricks</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="18" height="18"/><path d="M6 6h4M12 6h4M6 12h4M12 12h4" stroke-width="1.4"/><circle cx="27" cy="27" r="8"/><path d="M33 33 38 38"/></svg><span class="thumb-mark">DRC·1</span></div>
-            <span class="product-name">DRC — Part 1</span>
-            <span class="product-note">27 topics covered</span>
-            <span class="product-price">$50</span>
-            <button class="add-cart-btn" data-id="drc-part-1" data-name="DRC — Part 1" data-price="50">Add to cart</button>
-            <span class="product-more">Show topics <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <ul class="topics">
+        <div class="product-card" data-modal-name="DRC — Part 1">
+          <div class="product-thumb"><span>DR</span></div>
+          <div class="product-body">
+            <h3 class="product-name">DRC — Part 1</h3>
+            
+            <div class="product-price-row"><span class="product-price">$50</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="drc-part-1" data-name="DRC — Part 1" data-price="50">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><ul class="topics">
               <li>Physical Verification Design Sequence</li><li>FEOL/Base DRCs</li><li>What is the OD Layer?</li>
               <li>How Break OD Cells Work</li><li>The Problem: Continuous Poly in FinFET</li>
               <li>GP_BREAK: LVS Implications</li><li>Endcap Cells: Purpose & DRC Rules</li>
@@ -496,23 +502,22 @@
               <li>DRC vs ERC vs DFM</li><li>Metal Fill Types</li><li>Density DRCs — Why They Exist?</li>
               <li>Density DRCs: Rule Types</li><li>Voltage Aware DRCs</li><li>Antenna Effect</li>
               <li>Antenna Fixes</li><li>DFM</li><li>Pattern Matching</li><li>Via Redundancy (Via Fill)</li>
-            </ul>
-          </div>
-        </details>
+            </ul></div>
+        </div>
 
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-available"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="18" height="18"/><path d="M6 6h4M12 6h4M6 12h4M12 12h4" stroke-width="1.4"/><circle cx="27" cy="27" r="8"/><path d="M33 33 38 38"/></svg><span class="thumb-mark">DRC·2</span></div>
-            <span class="product-name">DRC — Part 2</span>
-            <span class="product-note">30 MCQ interview review</span>
-            <span class="product-price">$45</span>
-            <button class="add-cart-btn" data-id="drc-part-2" data-name="DRC — Part 2" data-price="45">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">30 MCQ-based questions and answers covering practical issues, use-cases and questions drawn from Part 1. Ideal for interview preparation and consolidating real-world DRC knowledge.</p>
+        <div class="product-card" data-modal-name="DRC — Part 2">
+          <div class="product-thumb"><span>DR</span></div>
+          <div class="product-body">
+            <h3 class="product-name">DRC — Part 2</h3>
+            
+            <div class="product-price-row"><span class="product-price">$45</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="drc-part-2" data-name="DRC — Part 2" data-price="45">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
+          <div class="product-modal-content" hidden><p class="note">30 MCQ-based questions and answers covering practical issues, use-cases and questions drawn from Part 1. Ideal for interview preparation and consolidating real-world DRC knowledge.</p></div>
+        </div>
 
       </div>
     </div>
@@ -523,24 +528,32 @@
     <div class="wrap">
       <p class="group-title">Phased out</p>
       <div class="product-grid">
-        <details class="product-card product-card-dim">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-phased"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="32" height="22"/><path d="M4 12 20 2l16 10"/><path d="M14 12v6M26 12v6"/></svg><span class="thumb-mark">SYN v1</span></div>
-            <span class="product-name">Synthesis (v1.0)</span>
-            <span class="product-note">No longer available</span>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Superseded by Synthesis 2.0, Parts 1 and 2.</p></div>
-        </details>
-        <details class="product-card product-card-dim">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-phased"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="32" height="22"/><path d="M4 12 20 2l16 10"/><path d="M14 12v6M26 12v6"/></svg><span class="thumb-mark">EMIR v1</span></div>
-            <span class="product-name">EMIR 1.0</span>
-            <span class="product-note">No longer available</span>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Superseded by EM / IR Drop Analysis.</p></div>
-        </details>
+        <div class="product-card" data-modal-name="Synthesis (v1.0)">
+          <div class="product-thumb"><span>SY</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Synthesis (v1.0)</h3>
+            
+            <div class="product-price-row"><span class="product-price na">no longer available</span></div>
+            <div class="product-actions">
+              
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">Superseded by Synthesis 2.0, Parts 1 and 2.</p></div>
+        </div>
+        <div class="product-card" data-modal-name="EMIR 1.0">
+          <div class="product-thumb"><span>EM</span></div>
+          <div class="product-body">
+            <h3 class="product-name">EMIR 1.0</h3>
+            
+            <div class="product-price-row"><span class="product-price na">no longer available</span></div>
+            <div class="product-actions">
+              
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">Superseded by EM / IR Drop Analysis.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -550,33 +563,33 @@
     <div class="wrap">
       <p class="group-title">Scripting modules — with solution keys</p>
       <div class="product-grid">
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-scripting"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 16 20 6 30M20 30h14"/></svg><span class="thumb-mark">TCL</span></div>
-            <span class="product-name">Physical Implementation Scripting (Tcl)</span>
-            <span class="product-note">Mid-senior to advanced</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="physical-implementation-scripting-tcl" data-name="Physical Implementation Scripting (Tcl)" data-price="40">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">10 physical implementation tool-based scripting problems covering data gathering, design analysis and efficient reporting. Each problem includes background and context. Solutions are based on the purple EDA vendor's tool, and are portable to others.</p>
-            <p class="note">Pre-requisite: tool access and a post-route design database.</p>
+        <div class="product-card" data-modal-name="Physical Implementation Scripting (Tcl)">
+          <div class="product-thumb"><span>PH</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Physical Implementation Scripting (Tcl)</h3>
+            
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="physical-implementation-scripting-tcl" data-name="Physical Implementation Scripting (Tcl)" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-scripting"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 16 20 6 30M20 30h14"/></svg><span class="thumb-mark">TCL/PY</span></div>
-            <span class="product-name">Tool Independent Scripting (Tcl + Python)</span>
-            <span class="product-note">10 file-parsing problems</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="tool-independent-scripting-tcl-python" data-name="Tool Independent Scripting (Tcl + Python)" data-price="40">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body">
-            <p class="note">10 practical file-parsing problems using Tcl or Python — DEF, Verilog, reports, CSV and .lib files. Drawn from real-world scenarios. Ideal for interview prep or scripting foundations. All input files and downloadable solutions included.</p>
+          <div class="product-modal-content" hidden><p class="note">10 physical implementation tool-based scripting problems covering data gathering, design analysis and efficient reporting. Each problem includes background and context. Solutions are based on the purple EDA vendor's tool, and are portable to others.</p>
+            <p class="note">Pre-requisite: tool access and a post-route design database · Level: mid-senior to advanced.</p></div>
+        </div>
+        <div class="product-card" data-modal-name="Tool Independent Scripting (Tcl + Python)">
+          <div class="product-thumb"><span>TO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Tool Independent Scripting (Tcl + Python)</h3>
+            
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="tool-independent-scripting-tcl-python" data-name="Tool Independent Scripting (Tcl + Python)" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
           </div>
-        </details>
+          <div class="product-modal-content" hidden><p class="note">10 practical file-parsing problems using Tcl or Python — DEF, Verilog, reports, CSV and .lib files. Drawn from real-world scenarios. Ideal for interview prep or scripting foundations. All input files and downloadable solutions included.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -586,50 +599,58 @@
     <div class="wrap">
       <p class="group-title">Mock interviews — some with solutions</p>
       <div class="product-grid">
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-mock"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h32v18H16l-8 8v-8H4z"/><path d="M16 16c0-3 2-4 4-4s4 1 4 4-4 4-4 6"/></svg><span class="thumb-mark">PNR</span></div>
-            <span class="product-name">PNR Mock</span>
-            <span class="product-note">15 questions · with solutions</span>
-            <span class="product-price">$40</span>
-            <button class="add-cart-btn" data-id="pnr-mock" data-name="PNR Mock" data-price="40">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">15 analytical questions on circuits, synthesis, placement, CTS and routing.</p></div>
-        </details>
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-mock"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h32v18H16l-8 8v-8H4z"/><path d="M16 16c0-3 2-4 4-4s4 1 4 4-4 4-4 6"/></svg><span class="thumb-mark">RCG</span></div>
-            <span class="product-name">RCG Comp. Arch & PD Mock</span>
-            <span class="product-note">With solutions</span>
-            <span class="product-price">$35</span>
-            <button class="add-cart-btn" data-id="rcg-comp-arch-pd-mock" data-name="RCG Comp. Arch & PD Mock" data-price="35">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Computer architecture and physical design questions in a mock-interview format, with worked solutions.</p></div>
-        </details>
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-mock"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h32v18H16l-8 8v-8H4z"/><path d="M16 16c0-3 2-4 4-4s4 1 4 4-4 4-4 6"/></svg><span class="thumb-mark">PWR</span></div>
-            <span class="product-name">Power Analysis Mock</span>
-            <span class="product-note">Interview format</span>
-            <span class="product-price">$35</span>
-            <button class="add-cart-btn" data-id="power-analysis-mock" data-name="Power Analysis Mock" data-price="35">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">A mock interview focused on power analysis fundamentals and estimation.</p></div>
-        </details>
-        <details class="product-card">
-          <summary class="product-summary">
-            <div class="product-thumb thumb-mock"><svg class="thumb-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h32v18H16l-8 8v-8H4z"/><path d="M16 16c0-3 2-4 4-4s4 1 4 4-4 4-4 6"/></svg><span class="thumb-mark">CMOS</span></div>
-            <span class="product-name">Analytical CMOS Mock</span>
-            <span class="product-note">With solutions</span>
-            <span class="product-price">$30</span>
-            <button class="add-cart-btn" data-id="analytical-cmos-mock" data-name="Analytical CMOS Mock" data-price="30">Add to cart</button>
-            <span class="product-more">Show details <span class="chevron">›</span></span>
-          </summary>
-          <div class="course-body"><p class="note">Analytical CMOS circuit questions in a mock-interview format, with worked solutions.</p></div>
-        </details>
+        <div class="product-card" data-modal-name="PNR Mock" data-modal-byline="— with solutions">
+          <div class="product-thumb"><span>PN</span></div>
+          <div class="product-body">
+            <h3 class="product-name">PNR Mock</h3>
+            <p class="product-by">— with solutions</p>
+            <div class="product-price-row"><span class="product-price">$40</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="pnr-mock" data-name="PNR Mock" data-price="40">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">15 analytical questions on circuits, synthesis, placement, CTS and routing.</p></div>
+        </div>
+        <div class="product-card" data-modal-name="RCG Comp. Arch & PD Mock" data-modal-byline="— with solutions">
+          <div class="product-thumb"><span>RC</span></div>
+          <div class="product-body">
+            <h3 class="product-name">RCG Comp. Arch & PD Mock</h3>
+            <p class="product-by">— with solutions</p>
+            <div class="product-price-row"><span class="product-price">$35</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="rcg-comp-arch-pd-mock" data-name="RCG Comp. Arch & PD Mock" data-price="35">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">Computer architecture and physical design questions in a mock-interview format, with worked solutions.</p></div>
+        </div>
+        <div class="product-card" data-modal-name="Power Analysis Mock">
+          <div class="product-thumb"><span>PO</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Power Analysis Mock</h3>
+            
+            <div class="product-price-row"><span class="product-price">$35</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="power-analysis-mock" data-name="Power Analysis Mock" data-price="35">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">A mock interview focused on power analysis fundamentals and estimation.</p></div>
+        </div>
+        <div class="product-card" data-modal-name="Analytical CMOS Mock" data-modal-byline="— with solutions">
+          <div class="product-thumb"><span>AN</span></div>
+          <div class="product-body">
+            <h3 class="product-name">Analytical CMOS Mock</h3>
+            <p class="product-by">— with solutions</p>
+            <div class="product-price-row"><span class="product-price">$30</span></div>
+            <div class="product-actions">
+              <button class="add-cart-btn" data-id="analytical-cmos-mock" data-name="Analytical CMOS Mock" data-price="30">Add to cart</button>
+              <button class="view-details-btn" type="button">View details</button>
+            </div>
+          </div>
+          <div class="product-modal-content" hidden><p class="note">Analytical CMOS circuit questions in a mock-interview format, with worked solutions.</p></div>
+        </div>
       </div>
       <p class="note" style="margin-top:18px; color:var(--text-dim);">Tailor-made mock interviews are also available for physical design, implementation, STA, EM/IR and power optimization profiles. Reach out to discuss.</p>
     </div>
@@ -666,6 +687,18 @@
 
 </main>
 
+<div id="product-modal-overlay" class="product-modal-overlay"></div>
+<div id="product-modal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+  <button id="product-modal-close" class="product-modal-close" aria-label="Close">×</button>
+  <p id="product-modal-byline" class="product-modal-byline"></p>
+  <h3 id="product-modal-title"></h3>
+  <div id="product-modal-body" class="product-modal-body"></div>
+  <div class="product-modal-footer">
+    <span id="product-modal-price" class="product-modal-price"></span>
+    <button id="product-modal-add" class="btn btn-primary add-cart-btn" type="button">Add to cart</button>
+  </div>
+</div>
+
 <div id="cart-overlay" class="cart-overlay"></div>
 <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
   <div class="cart-drawer-head">
@@ -693,7 +726,6 @@
   </div>
 </footer>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
