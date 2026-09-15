@@ -95,7 +95,7 @@ header.site{
   align-items:center;
 }
 .brand-logo{
-  height: 72px;
+  height: 54px;
   width: auto;
   display: block;
 }
@@ -581,8 +581,8 @@ details.product-card:hover{
 
 /* real per-card icon, drawn by the SVG already in the markup */
 .thumb-icon{
-  width: 64px;
-  height: 64px;
+  width: 26px;
+  height: 26px;
   flex-shrink: 0;
 }
 
@@ -851,5 +851,27 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
 }
 
 @media (max-width: 460px){
-  .product-grid{ grid-template-columns: 1fr; }
+  .product-grid{ grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  .product-thumb{ gap: 5px; margin-bottom: 10px; }
+  .thumb-icon{ width: 22px; height: 22px; }
+  .thumb-mark{ font-size: 0.58rem; }
+
+  .product-name{
+    padding: 0 10px;
+    font-size: 0.8rem;
+    min-height: 2.2em;
+    margin-bottom: 3px;
+  }
+  .product-note{ padding: 0 10px; font-size: 0.7rem; margin-bottom: 6px; }
+  .product-price{ padding: 0 10px; font-size: 0.92rem; margin-bottom: 8px; }
+
+  .product-summary{ padding-bottom: 10px; }
+  .product-summary .add-cart-btn{
+    margin: 0 10px 8px;
+    width: calc(100% - 20px);
+    padding: 6px 8px;
+    font-size: 0.74rem;
+  }
+  .product-more{ padding: 0 10px; font-size: 0.64rem; }
 }
