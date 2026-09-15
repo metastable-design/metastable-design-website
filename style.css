@@ -848,6 +848,17 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
 @media (max-width: 700px){
   .product-grid{ grid-template-columns: repeat(2, 1fr); }
   .testimonial-grid{ column-count: 1; }
+
+  .testimonial-card{
+    padding: 18px 18px;
+    margin-bottom: 14px;
+  }
+  .testimonial-card blockquote{
+    font-size: 0.94rem;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .testimonial-card figcaption{ font-size: 0.76rem; }
 }
 
 @media (max-width: 460px){
@@ -874,4 +885,16 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
     font-size: 0.74rem;
   }
   .product-more{ padding: 0 10px; font-size: 0.64rem; }
+
+  .testimonial-card{
+    padding: 15px 14px;
+    margin-bottom: 12px;
+    border-top-width: 3px;
+  }
+  .testimonial-card blockquote{
+    font-size: 0.88rem;
+    line-height: 1.48;
+    margin-bottom: 8px;
+  }
+  .testimonial-card figcaption{ font-size: 0.72rem; }
 }
