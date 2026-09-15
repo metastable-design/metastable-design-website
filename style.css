@@ -531,6 +531,40 @@ details[open] .chevron{ transform: rotate(90deg); }
 .access-note h3{ margin: 0 0 8px; font-size: 1.05rem; }
 .access-note p{ color: var(--text-dim); font-size: 0.94rem; margin: 0 0 6px; }
 
+/* ---------- testimonials page ---------- */
+
+.testimonial-grid{
+  column-count: 3;
+  column-gap: 20px;
+}
+
+.testimonial-card{
+  break-inside: avoid;
+  margin: 0 0 20px;
+  padding: 24px 22px;
+  border: 1px solid var(--panel-border);
+  border-top: 3px solid var(--accent);
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(10,10,10,0.05), 0 2px 8px rgba(10,10,10,0.04);
+}
+.testimonial-card:nth-child(3n+2){ border-top-color: var(--accent2); }
+.testimonial-card:nth-child(3n){ border-top-color: var(--green); }
+
+.testimonial-card blockquote{
+  margin: 0 0 14px;
+  font-family: var(--display);
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+}
+
+.testimonial-card figcaption{
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
 /* ---------- cart drawer ---------- */
 
 .cart-overlay{
@@ -630,7 +664,38 @@ details[open] .chevron{ transform: rotate(90deg); }
   transform: none;
 }
 
+/* ---------- checkout notice toast ---------- */
+
+.md-notice{
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 20px);
+  max-width: 90vw;
+  width: 420px;
+  background: var(--text);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  box-shadow: 0 8px 24px rgba(10,10,10,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 120;
+}
+.md-notice.visible{
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
 /* ---------- responsive ---------- */
+
+@media (max-width: 980px){
+  .testimonial-grid{ column-count: 2; }
+}
 
 @media (max-width: 860px){
   .hero{ grid-template-columns: 1fr; padding-top: 32px; }
@@ -646,4 +711,8 @@ details[open] .chevron{ transform: rotate(90deg); }
   .course-name{ font-size: 0.94rem; }
   details.course summary{ flex-wrap: wrap; }
   .add-cart-btn{ font-size: 0.78rem; padding: 6px 11px; }
+}
+
+@media (max-width: 700px){
+  .testimonial-grid{ column-count: 1; }
 }
