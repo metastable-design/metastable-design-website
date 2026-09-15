@@ -854,7 +854,7 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
   .product-grid{ grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
   .product-thumb{ gap: 5px; margin-bottom: 10px; }
-  .thumb-icon{ width: 22px; height: 22px; }
+  .thumb-icon{ width: 64px; height: 64px; }
   .thumb-mark{ font-size: 0.58rem; }
 
   .product-name{
