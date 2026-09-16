@@ -1,8 +1,44 @@
 // Metastable Design — cart + Razorpay checkout
-// Cart persists in localStorage so it survives navigation between pages.
+// Cart and currency choice persist in localStorage so they survive
+// navigation between pages.
 
 (function () {
   const CART_KEY = 'md_cart_v1';
+  const CURRENCY_KEY = 'md_currency_v1';
+
+  // Client-side mirror of the server's price table, for display only.
+  // The actual charge is always computed server-side in create-order.js —
+  // this table just decides what gets *shown* before checkout.
+  const PRICES = {
+    'dft-fundamentals': { usd: 25, inr: 2400 },
+    'static-timing-analysis-part-1': { usd: 45, inr: 4300 },
+    'static-timing-analysis-part-2': { usd: 45, inr: 4300 },
+    'power-optimization-techniques': { usd: 40, inr: 3800 },
+    'power-gating': { usd: 35, inr: 3350 },
+    'special-physical-cells': { usd: 25, inr: 2400 },
+    'antenna-effect': { usd: 20, inr: 1900 },
+    'signal-routing': { usd: 35, inr: 3350 },
+    'multi-input-switching-mis': { usd: 35, inr: 3350 },
+    'clock-tree-synthesis-part-1': { usd: 45, inr: 4300 },
+    'clock-tree-synthesis-part-2': { usd: 40, inr: 3800 },
+    'placement-part-1': { usd: 45, inr: 4300 },
+    'placement-part-2': { usd: 45, inr: 4300 },
+    'crosstalk-analysis': { usd: 45, inr: 4300 },
+    'em-ir-drop-analysis': { usd: 45, inr: 4300 },
+    'power-estimation-part-1': { usd: 40, inr: 3800 },
+    'power-estimation-part-2': { usd: 45, inr: 4300 },
+    'synthesis-2-0-part-1': { usd: 45, inr: 4300 },
+    'synthesis-2-0-part-2': { usd: 45, inr: 4300 },
+    'unified-power-format-upf-part-1': { usd: 45, inr: 4300 },
+    'drc-part-1': { usd: 50, inr: 4750 },
+    'drc-part-2': { usd: 45, inr: 4300 },
+    'physical-implementation-scripting-tcl': { usd: 40, inr: 3800 },
+    'tool-independent-scripting-tcl-python': { usd: 40, inr: 3800 },
+    'pnr-mock': { usd: 40, inr: 3800 },
+    'rcg-comp-arch-pd-mock': { usd: 35, inr: 3350 },
+    'power-analysis-mock': { usd: 35, inr: 3350 },
+    'analytical-cmos-mock': { usd: 30, inr: 2850 },
+  };
 
   function loadCart() {
     try {
@@ -16,10 +52,52 @@
     localStorage.setItem(CART_KEY, JSON.stringify(cart));
   }
 
-  let cart = loadCart();
+  function loadCurrency() {
+    const saved = localStorage.getItem(CURRENCY_KEY);
+    return saved === 'INR' ? 'INR' : 'USD';
+  }
+
+  function saveCurrency() {
+    localStorage.setItem(CURRENCY_KEY, currency);
+  }
+
+  let cart = loadCart(); // [{ id, name }] — price is looked up live, never stored
+  let currency = loadCurrency(); // 'USD' | 'INR'
+
+  function priceFor(id) {
+    const entry = PRICES[id];
+    if (!entry) return null;
+    return currency === 'INR' ? entry.inr : entry.usd;
+  }
 
   function formatPrice(n) {
+    if (currency === 'INR') {
+      return '₹' + n.toLocaleString('en-IN');
+    }
     return '$' + n.toFixed(0);
+  }
+
+  function updateCurrencyToggleUI() {
+    document.querySelectorAll('.currency-toggle').forEach((toggle) => {
+      toggle.querySelectorAll('button').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.currency === currency);
+      });
+    });
+  }
+
+  // Rewrites every product card's displayed price and the matching
+  // add-to-cart button's data-price, based on the current currency.
+  function renderProductPrices() {
+    document.querySelectorAll('.product-summary').forEach((summary) => {
+      const btn = summary.querySelector('.add-cart-btn');
+      const priceEl = summary.querySelector('.product-price');
+      if (!btn || !priceEl) return;
+      const id = btn.dataset.id;
+      const amount = priceFor(id);
+      if (amount === null) return;
+      priceEl.textContent = formatPrice(amount);
+      btn.dataset.price = amount;
+    });
   }
 
   function updateCartUI() {
@@ -39,6 +117,7 @@
         itemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
       } else {
         cart.forEach((item) => {
+          const amount = priceFor(item.id);
           const row = document.createElement('div');
           row.className = 'cart-item';
           row.innerHTML =
@@ -46,14 +125,17 @@
             '<span class="cart-item-price"></span>' +
             '<button class="cart-item-remove" aria-label="Remove">&times;</button>';
           row.querySelector('.cart-item-name').textContent = item.name;
-          row.querySelector('.cart-item-price').textContent = formatPrice(item.price);
+          row.querySelector('.cart-item-price').textContent = amount === null ? '—' : formatPrice(amount);
           row.querySelector('.cart-item-remove').dataset.id = item.id;
           itemsEl.appendChild(row);
         });
       }
     }
 
-    const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+    const subtotal = cart.reduce((sum, item) => {
+      const amount = priceFor(item.id);
+      return sum + (amount === null ? 0 : amount);
+    }, 0);
     if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
     if (checkoutBtn) checkoutBtn.disabled = cart.length === 0;
 
@@ -65,12 +147,18 @@
     });
   }
 
-  function addOrRemove(id, name, price) {
+  function renderAll() {
+    renderProductPrices();
+    updateCartUI();
+    updateCurrencyToggleUI();
+  }
+
+  function addOrRemove(id, name) {
     const idx = cart.findIndex((item) => item.id === id);
     if (idx > -1) {
       cart.splice(idx, 1);
     } else {
-      cart.push({ id, name, price });
+      cart.push({ id, name });
     }
     saveCart();
     updateCartUI();
@@ -80,6 +168,14 @@
     cart = cart.filter((item) => item.id !== id);
     saveCart();
     updateCartUI();
+  }
+
+  function setCurrency(next) {
+    if (next !== 'USD' && next !== 'INR') return;
+    if (next === currency) return;
+    currency = next;
+    saveCurrency();
+    renderAll();
   }
 
   function openCart() {
@@ -111,7 +207,7 @@
     if (addBtn) {
       e.preventDefault();
       e.stopPropagation();
-      addOrRemove(addBtn.dataset.id, addBtn.dataset.name, parseFloat(addBtn.dataset.price));
+      addOrRemove(addBtn.dataset.id, addBtn.dataset.name);
       return;
     }
 
@@ -119,6 +215,13 @@
     if (removeBtn) {
       e.preventDefault();
       removeFromCart(removeBtn.dataset.id);
+      return;
+    }
+
+    const currencyBtn = e.target.closest('.currency-toggle button');
+    if (currencyBtn) {
+      e.preventDefault();
+      setCurrency(currencyBtn.dataset.currency);
       return;
     }
 
@@ -150,7 +253,7 @@
       const res = await fetch('/api/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: cart.map((i) => i.id) }),
+        body: JSON.stringify({ items: cart.map((i) => i.id), currency }),
       });
       const order = await res.json();
       if (!res.ok) throw new Error(order.error || 'Could not start checkout');
@@ -213,7 +316,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    updateCartUI();
+    renderAll();
     const checkoutBtn = document.getElementById('cart-checkout');
     if (checkoutBtn) checkoutBtn.addEventListener('click', startCheckout);
   });
