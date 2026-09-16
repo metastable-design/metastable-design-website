@@ -39,6 +39,16 @@
     margin-bottom: 10px;
   }
 
+  /* default (unselected) outline color per tone — colored from the start,
+     not just on hover, so the filter row reads lively at a glance */
+  .jump-nav a[data-tone="accent"]{ border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+  .jump-nav a[data-tone="accent2"]{ border-color: var(--accent2); color: var(--accent2); background: var(--accent2-dim); }
+  .jump-nav a[data-tone="green"]{ border-color: var(--green); color: var(--green); background: var(--green-dim); }
+  .jump-nav a[data-tone="orange"]{ border-color: var(--orange); color: var(--orange); background: var(--orange-dim); }
+  .jump-nav a[data-tone="neutral"]{ border-color: var(--panel-border); color: var(--text-dim); }
+
+  .jump-nav a[data-tone]:not(.selected):hover{ filter: brightness(0.94); }
+
   /* toggle state for jump-nav-style pills used as filters, not anchors */
   .jump-nav a.selected{ color: #fff; }
   .jump-nav a[data-tone="accent"].selected{ background: var(--accent); border-color: var(--accent); }
@@ -77,17 +87,19 @@
   .group-title::before{ background: var(--dot-color, var(--text-mute)); }
   .group-count{ font-family: var(--mono); font-size: 0.76rem; color: var(--text-mute); }
 
-  .job-list{ display:flex; flex-direction: column; margin-bottom: 8px; }
+  .job-list{ display:flex; flex-direction: column; margin-bottom: 8px; --role-color: var(--text-mute); }
   .job-row{
     display:flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 16px;
-    padding: 16px 4px;
+    padding: 16px 12px 16px 16px;
     border-bottom: 1px solid var(--line);
-    transition: background .12s ease;
+    border-left: 3px solid color-mix(in srgb, var(--role-color) 55%, transparent);
+    margin-left: -3px;
+    transition: background .12s ease, border-left-color .12s ease;
   }
-  .job-row:hover{ background: var(--bg-raise); }
+  .job-row:hover{ background: var(--bg-raise); border-left-color: var(--role-color); }
   .job-row:first-child{ border-top: 1px solid var(--line); }
 
   .job-title{ font-family: var(--serif); font-weight: 600; font-size: 0.98rem; margin: 0 0 4px; color: var(--text); }
@@ -100,8 +112,16 @@
     padding: 4px 10px; border-radius: 20px; white-space: nowrap;
   }
 
-  .job-go{ font-family: var(--mono); font-size: 0.74rem; color: var(--text-mute); white-space: nowrap; padding-top: 3px; }
-  .job-row:hover .job-go{ color: var(--accent); }
+  .job-go{
+    font-family: var(--mono); font-size: 0.72rem; font-weight: 500; white-space: nowrap;
+    color: var(--role-color);
+    border: 1px solid var(--role-color);
+    background: color-mix(in srgb, var(--role-color) 10%, transparent);
+    padding: 5px 13px;
+    border-radius: 20px;
+    transition: background .12s ease, color .12s ease;
+  }
+  .job-row:hover .job-go{ background: var(--role-color); color: #fff; }
 
   .empty-state{
     padding: 40px 4px; text-align: center; color: var(--text-mute); font-size: 0.9rem;
@@ -207,6 +227,8 @@ const ROLE_META = {
   "power design engineer":  { label: "Power",                tone: "orange",  var: "--orange" }
 };
 
+const LOC_TONES = ["accent", "accent2", "green", "orange"];
+
 let activeRoles = new Set();
 let activeLocs = new Set();
 let searchTerm = "";
@@ -236,10 +258,10 @@ function renderRoleChips() {
 function renderLocChips() {
   const container = document.getElementById("locChips");
   container.innerHTML = "";
-  allLocs.forEach(l => {
+  allLocs.forEach((l, i) => {
     const a = document.createElement("a");
     a.href = "#";
-    a.dataset.tone = "neutral";
+    a.dataset.tone = LOC_TONES[i % LOC_TONES.length];
     if (activeLocs.has(l)) a.classList.add("selected");
     a.textContent = l;
     a.onclick = (e) => {
@@ -322,6 +344,7 @@ function render() {
 
     const list = document.createElement("div");
     list.className = "job-list";
+    list.style.setProperty("--role-color", `var(${meta.var})`);
     jobsForRole.forEach(job => list.appendChild(renderJobRow(job, meta.var)));
     wrap.appendChild(list);
   });
