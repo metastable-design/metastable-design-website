@@ -898,3 +898,23 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
   }
   .testimonial-card figcaption{ font-size: 0.72rem; }
 }
+
+.currency-toggle{
+  display:flex;
+  border:1px solid var(--panel-border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.currency-toggle button{
+  padding:7px 12px;
+  border:none;
+  background:var(--panel);
+  color:var(--text-dim);
+  font-family:var(--mono);
+  font-size:0.85rem;
+  cursor:pointer;
+}
+.currency-toggle button.active{
+  background:var(--accent);
+  color:#fff;
+}
