@@ -223,7 +223,7 @@ h1{
 /* ---------- sections ---------- */
 
 section{ padding: 64px 0; border-top: 1px solid var(--line); }
-section.no-rule{ border-top: none; }
+section.no-rule{ border-top: none; padding-top: 0; }
 
 h2{
   font-family: var(--display);
