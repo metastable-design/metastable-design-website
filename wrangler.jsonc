@@ -4,7 +4,7 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-09-16",
   "vars": {
-    "RAZORPAY_KEY_ID": "rzp_live_Tcazhi10tM749S"
+    "RAZORPAY_KEY_ID": "rzp_live_Tcfk79F6SA1jE9"
   },
   "assets": {
     "directory": "./",
