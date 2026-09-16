@@ -317,7 +317,7 @@ function renderJobRow(job, roleVar) {
   return row;
 }
 
-function render() {
+  function render() {
   renderRoleChips();
   renderLocChips();
 
@@ -325,7 +325,7 @@ function render() {
   wrap.innerHTML = "";
 
   const rolesToShow = activeRoles.size ? allRoles.filter(r => activeRoles.has(r)) : allRoles;
-  let totalShown = 0;
+  const shownIds = new Set();   // track unique jobs across all groups
   let anyGroupRendered = false;
 
   rolesToShow.forEach((role, idx) => {
@@ -334,7 +334,7 @@ function render() {
     if (!jobsForRole.length) return;
 
     anyGroupRendered = true;
-    totalShown += jobsForRole.length;
+    jobsForRole.forEach(j => shownIds.add(j.id));
 
     const title = document.createElement("div");
     title.className = "group-title" + (idx === 0 ? " first" : "");
@@ -358,7 +358,7 @@ function render() {
 
   const roleCounts = allRoles.map(r => `${ROLE_META[r].label}: ${JOBS.filter(j => j.role_tags.includes(r)).length}`).join(" · ");
   document.getElementById("jobsMeta").innerHTML =
-    `<strong>${totalShown}</strong> of <strong>${JOBS.length}</strong> roles shown &nbsp;·&nbsp; ${roleCounts}`;
+    `<strong>${shownIds.size}</strong> of <strong>${JOBS.length}</strong> roles shown &nbsp;·&nbsp; ${roleCounts}`;
 }
 
 document.getElementById("searchInput").addEventListener("input", e => {
