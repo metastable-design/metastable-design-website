@@ -1,0 +1,260 @@
+/* auth.css — login modal + header account UI
+   Reuses the site's existing CSS variables (--text, --accent, --panel-border,
+   etc.) defined in style.css, so it inherits the site's look automatically. */
+
+#auth-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 10, 10, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+#auth-modal .auth-card {
+  background: #fff;
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  padding: 32px 30px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  font-family: var(--serif);
+  color: var(--text);
+}
+
+#auth-modal .auth-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-mute);
+  line-height: 1;
+}
+
+#auth-modal .auth-tabs {
+  display: flex;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--panel-border);
+}
+
+#auth-modal .auth-tab {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  color: var(--text-mute);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+}
+
+#auth-modal .auth-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+#auth-modal label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 6px;
+}
+
+#auth-modal input {
+  width: 100%;
+  border: 1px solid var(--panel-border);
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-family: var(--serif);
+  background: #fff;
+  color: var(--text);
+  outline: none;
+  margin-bottom: 14px;
+}
+
+#auth-modal input:focus {
+  border-color: var(--accent);
+}
+
+#auth-modal .auth-error {
+  display: none;
+  background: #fff3f2;
+  border: 1px solid #f3c6c2;
+  color: #b3261e;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  margin-bottom: 14px;
+}
+
+#auth-modal .auth-error.success {
+  background: #eefaf1;
+  border-color: #bfe6cb;
+  color: #1e7a3d;
+}
+
+#auth-modal .auth-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#auth-modal .auth-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#auth-modal .auth-switch {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: var(--text-mute);
+}
+
+#auth-modal .auth-switch button {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.84rem;
+  text-decoration: underline;
+}
+
+#auth-modal .auth-forgot {
+  text-align: right;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+
+#auth-modal .auth-forgot button {
+  background: none;
+  border: none;
+  font-size: 0.78rem;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Header account button/menu */
+#auth-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#auth-header-btn .auth-signin-btn {
+  background: none;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+#auth-header-btn .auth-signin-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+#auth-header-btn .auth-user-menu {
+  position: relative;
+}
+
+#auth-header-btn .auth-user-btn {
+  background: none;
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+#auth-header-btn .auth-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  min-width: 160px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  z-index: 100;
+}
+
+#auth-header-btn .auth-dropdown.open {
+  display: block;
+}
+
+#auth-header-btn .auth-dropdown a,
+#auth-header-btn .auth-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#auth-header-btn .auth-dropdown a:hover,
+#auth-header-btn .auth-dropdown button:hover {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.auth-verify-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 12px 20px;
+  font-family: var(--serif);
+  font-size: 0.88rem;
+}
+
+.auth-verify-banner button {
+  margin-left: 14px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+}

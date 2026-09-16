@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Purchases — Metastable Design</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+<style>
+  .purchases-wrap { max-width: 760px; margin: 0 auto; padding: 56px 20px 80px; }
+  .purchases-wrap h1 { font-family: var(--display); font-size: 1.8rem; color: #0a0a0a; margin-bottom: 6px; }
+  .purchases-wrap p.lede { color: var(--text-dim); margin-bottom: 32px; }
+  .purchase-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--panel-border);
+  }
+  .purchase-row:last-child { border-bottom: none; }
+  .purchase-items { font-family: var(--serif); color: var(--text); font-size: 0.95rem; line-height: 1.5; }
+  .purchase-meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-mute); margin-top: 4px; }
+  .purchase-amount { font-family: var(--mono); font-size: 0.95rem; color: var(--text); white-space: nowrap; }
+  .purchases-empty, .purchases-signedout, .purchases-loading {
+    text-align: center; color: var(--text-dim); padding: 60px 20px; font-family: var(--serif);
+  }
+  .purchases-signedout button {
+    margin-top: 16px; padding: 10px 22px; background: var(--accent); color: #fff; border: none;
+    border-radius: 6px; font-family: var(--mono); font-size: 0.8rem; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><img src="metastable-logo.svg" alt="Metastable Design" class="brand-logo"></a>
+    <div class="nav-right">
+      <nav class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="webinars.html">Webinars</a>
+        <a href="testimonials.html">Testimonials</a>
+        <a href="jobs.html">VLSI Job Openings</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <div id="auth-header-btn"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="purchases-wrap">
+    <h1>My Purchases</h1>
+    <p class="lede">Everything you've bought from Metastable Design, in one place.</p>
+    <div id="purchases-content">
+      <div class="purchases-loading">Loading…</div>
+    </div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="wrap footer-row">
+    <span>Metastable Design — where industry teaches.</span>
+    <div class="footer-links">
+      <a href="webinars.html">Webinars</a>
+      <a href="https://discord.gg/4RN7esTd3G">Discord</a>
+      <a href="mailto:metastable01@gmail.com">metastable01@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="auth.js"></script>
+<script type="module" src="purchases.js"></script>
+</body>
+</html>
