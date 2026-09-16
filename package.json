@@ -1,0 +1,10 @@
+{
+  "name": "metastable-design-website",
+  "private": true,
+  "devDependencies": {
+    "wrangler": "^4"
+  },
+  "scripts": {
+    "deploy": "wrangler deploy"
+  }
+}
