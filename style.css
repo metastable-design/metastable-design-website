@@ -847,7 +847,7 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
 
 @media (max-width: 700px){
   .product-grid{ grid-template-columns: repeat(2, 1fr); }
-  .testimonial-grid{ column-count: 1; }
+  .testimonial-grid{ column-count:  2; column-gap: 12px; }
 
   .testimonial-card{
     padding: 18px 18px;
