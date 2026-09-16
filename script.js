@@ -245,14 +245,27 @@
       return;
     }
 
+    // Purchases are tied to an account so people can see them later under
+    // "My Purchases" — auth.js exposes these globals once it's loaded.
+    const user = typeof window.getCurrentUser === 'function' ? window.getCurrentUser() : null;
+    if (!user) {
+      showNotice('Please sign in first so we can save this purchase to your account.');
+      if (typeof window.openAuthModal === 'function') window.openAuthModal('signin');
+      return;
+    }
+
     checkoutBtn.disabled = true;
     const originalLabel = checkoutBtn.textContent;
     checkoutBtn.textContent = 'Preparing checkout…';
 
     try {
+      const idToken = await window.getIdToken();
       const res = await fetch('/api/create-order', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
         body: JSON.stringify({ items: cart.map((i) => i.id), currency }),
       });
       const order = await res.json();
