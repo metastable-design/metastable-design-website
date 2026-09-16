@@ -1,0 +1,20 @@
+rules_version = '2';
+
+// Deploy with: firebase deploy --only firestore:rules
+// (or paste into Firebase Console → Firestore Database → Rules)
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /purchases/{orderId} {
+      // A signed-in user can read only their own purchase records.
+      allow read: if request.auth != null && request.auth.uid == resource.data.uid;
+
+      // No client writes, ever. The Worker writes these using a
+      // service-account access token, which authenticates via Google IAM
+      // and bypasses these rules entirely — so this "false" only blocks
+      // writes attempted directly from the browser (e.g. someone trying to
+      // fabricate a "paid" record for themselves in devtools).
+      allow write: if false;
+    }
+  }
+}
