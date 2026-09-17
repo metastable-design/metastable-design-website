@@ -16,5 +16,15 @@ service cloud.firestore {
       // fabricate a "paid" record for themselves in devtools).
       allow write: if false;
     }
+
+    match /mail/{docId} {
+      // The "Trigger Email from Firestore" extension reads/writes these
+      // itself via its own service account (also bypasses rules). Nobody
+      // should read or write this collection from the browser — reading
+      // it would expose other customers' email addresses and order
+      // details, and writing to it would let anyone send email "from"
+      // your store.
+      allow read, write: if false;
+    }
   }
 }
