@@ -127,6 +127,7 @@ window.handleSignIn = async function () {
     await signInWithEmailAndPassword(auth, email, password);
     closeAuthModal();
   } catch (e) {
+    console.error("Firebase sign-in error code:", e.code, e.message);
     showAuthError(friendlyError(e.code));
   } finally {
     setLoading("signin-btn", false, "Sign In");
@@ -145,12 +146,14 @@ window.handleSignUp = async function () {
   setLoading("signup-btn", true);
   clearAuthError();
   try {
-    const cred = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(cred.user, { displayName: name });
-    await sendEmailVerification(cred.user);
+    await createUserWithEmailAndPassword(auth, email, password).then(async (cred) => {
+      await updateProfile(cred.user, { displayName: name });
+      await sendEmailVerification(cred.user);
+    });
     closeAuthModal();
     showVerificationBanner();
   } catch (e) {
+    console.error("Firebase sign-up error code:", e.code, e.message);
     showAuthError(friendlyError(e.code));
   } finally {
     setLoading("signup-btn", false, "Create Account");
