@@ -4,7 +4,8 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-09-16",
   "vars": {
-    "RAZORPAY_KEY_ID": "rzp_live_Tcfk79F6SA1jE9"
+    "RAZORPAY_KEY_ID": "PUT_YOUR_NEW_ROTATED_KEY_ID_HERE",
+    "STORE_NOTIFICATION_EMAIL": "metastable01@gmail.com"
   },
   "assets": {
     "directory": "./",
