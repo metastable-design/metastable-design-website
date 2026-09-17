@@ -3,6 +3,9 @@
 // signature server-side. Never trust the "success" callback in the browser
 // alone; it can be faked in devtools.
 
+import { markPurchasePaid, getPurchaseDoc, queueMail } from './firestore.js';
+import { orderSummaryHtml } from './email.js';
+
 export async function handleVerifyPayment(request, env) {
   let body;
   try {
@@ -24,11 +27,50 @@ export async function handleVerifyPayment(request, env) {
   const expected = await hmacSha256Hex(keySecret, `${razorpay_order_id}|${razorpay_payment_id}`);
   const verified = timingSafeEqual(expected, razorpay_signature);
 
-  // `verified` confirms the payment is real. This endpoint doesn't yet do
-  // anything with that fact beyond reporting it back — actual delivery
-  // (sharing recordings) is still the manual Discord/email step described
-  // on the site. Automating that later (e.g. writing to KV/D1, or emailing
-  // yourself) would go here.
+  if (verified) {
+    // This is the only place a purchase gets marked "paid" — it only runs
+    // once the HMAC (computed with the secret key) checks out, so this
+    // can't be forged from the browser.
+    try {
+      await markPurchasePaid(env, razorpay_order_id, {
+        status: 'paid',
+        paymentId: razorpay_payment_id,
+        paidAt: new Date(),
+      });
+    } catch (err) {
+      console.error('Failed to mark purchase paid:', err.message);
+    }
+
+    // Email the customer and the store owner. Pulled back from Firestore
+    // (not the request body) so the summary reflects what was actually
+    // recorded when the order was created, not whatever the browser sends.
+    try {
+      const order = await getPurchaseDoc(env, razorpay_order_id);
+      const summaryArgs = {
+        items: order.items || [],
+        amount: order.amount,
+        currency: order.currency,
+        orderId: razorpay_order_id,
+        paymentId: razorpay_payment_id,
+      };
+
+      if (order.email) {
+        await queueMail(env, {
+          to: order.email,
+          subject: 'Your Metastable Design order',
+          html: orderSummaryHtml({ ...summaryArgs, forOwner: false }),
+        });
+      }
+
+      await queueMail(env, {
+        to: env.STORE_NOTIFICATION_EMAIL,
+        subject: `New order — ${(order.items || []).length} item(s)`,
+        html: orderSummaryHtml({ ...summaryArgs, forOwner: true }),
+      });
+    } catch (err) {
+      console.error('Failed to queue order emails:', err.message);
+    }
+  }
 
   return json({ verified });
 }
