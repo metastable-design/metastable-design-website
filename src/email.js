@@ -83,12 +83,16 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: ${BRAND.card}; border-radius: 12px; overflow: hidden; border: 1px solid ${BRAND.border};">
 
           <!-- Header band -->
+          <!-- Header band -->
           <tr>
-            <td style="background-color: ${BRAND.dark}; padding: 28px 32px;">
-              <p style="margin: 0; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; opacity: 0.7;">
-                Metastable Design
-              </p>
-              <h1 style="margin: 6px 0 0; font-size: 20px; color: #ffffff; font-weight: 600;">
+            <td style="background-color: ${BRAND.dark}; padding: 24px 32px;">
+              <img
+                src="https://metastable-design.org/metastable-logo.svg"
+                alt="Metastable Design"
+                width="140"
+                style="display: block; height: auto; max-width: 140px; margin-bottom: 14px;"
+              >
+              <h1 style="margin: 0; font-size: 20px; color: #ffffff; font-weight: 600;">
                 ${escapeHtml(heading)}
               </h1>
             </td>
