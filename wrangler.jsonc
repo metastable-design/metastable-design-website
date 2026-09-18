@@ -5,7 +5,7 @@
   "compatibility_date": "2026-09-16",
   "vars": {
     "RAZORPAY_KEY_ID": "PUT_YOUR_NEW_ROTATED_KEY_ID_HERE",
-    "STORE_NOTIFICATION_EMAIL": "metastable01@gmail.com"
+    "STORE_NOTIFICATION_EMAIL": "metastable@metastable-design.org"
   },
   "assets": {
     "directory": "./",
