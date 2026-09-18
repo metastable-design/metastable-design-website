@@ -1,8 +1,34 @@
 // src/email.js
-// Just builds the HTML for order confirmation emails. Actual sending is
-// handled by Firebase's "Trigger Email from Firestore" extension — see
-// firestore.js's queueMail(), which writes to the collection that
-// extension watches.
+// Sends order confirmation emails via Resend (https://resend.com) — a
+// plain HTTPS API, so it works from a Worker with just fetch(). No SMTP,
+// no Firebase billing/extension required.
+
+export async function sendEmail(env, { to, subject, html }) {
+  if (!env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY not set — skipping email:', subject);
+    return;
+  }
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: env.ORDER_EMAIL_FROM, // e.g. "Metastable Design <orders@yourdomain.com>"
+      to,
+      subject,
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    // Don't throw — a failed email shouldn't undo a verified payment. Just
+    // make sure it's visible in `wrangler tail` so it can be noticed.
+    console.error('Resend API error:', await res.text());
+  }
+}
 
 export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, forOwner }) {
   const symbol = currency === 'INR' ? '₹' : '$';
