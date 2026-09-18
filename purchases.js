@@ -57,7 +57,7 @@ async function render() {
     });
   } catch (err) {
     console.error(err);
-    content.innerHTML = `<div class="purchases-empty">Couldn't load your purchases right now. Please refresh, or email metastable01@gmail.com if this keeps happening.</div>`;
+    content.innerHTML = `<div class="purchases-empty">Couldn't load your purchases right now. Please refresh, or email metastable@metastable-design.org if this keeps happening.</div>`;
   }
 }
 
