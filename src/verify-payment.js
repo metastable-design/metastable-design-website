@@ -57,6 +57,7 @@ export async function handleVerifyPayment(request, env) {
       if (order.email) {
         await sendEmail(env, {
           to: order.email,
+          bcc: env.STORE_NOTIFICATION_EMAIL,
           subject: 'Your Metastable Design order',
           html: orderSummaryHtml({ ...summaryArgs, forOwner: false }),
         });
