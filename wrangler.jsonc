@@ -11,5 +11,12 @@
     "directory": "./",
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"]
-  }
+  },
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "persist": true
+    }
+  },
 }
