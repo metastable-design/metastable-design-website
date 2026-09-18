@@ -6,39 +6,18 @@
   const CART_KEY = 'md_cart_v1';
   const CURRENCY_KEY = 'md_currency_v1';
 
-  // Client-side mirror of the server's price table, for display only.
-  // The actual charge is always computed server-side in create-order.js —
-  // this table just decides what gets *shown* before checkout.
-  const PRICES = {
-    'dft-fundamentals': { usd: 25, inr: 2400 },
-    'static-timing-analysis-part-1': { usd: 45, inr: 4300 },
-    'static-timing-analysis-part-2': { usd: 45, inr: 4300 },
-    'power-optimization-techniques': { usd: 40, inr: 3800 },
-    'power-gating': { usd: 35, inr: 3350 },
-    'special-physical-cells': { usd: 25, inr: 2400 },
-    'antenna-effect': { usd: 20, inr: 1900 },
-    'signal-routing': { usd: 35, inr: 3350 },
-    'multi-input-switching-mis': { usd: 35, inr: 3350 },
-    'clock-tree-synthesis-part-1': { usd: 45, inr: 4300 },
-    'clock-tree-synthesis-part-2': { usd: 40, inr: 3800 },
-    'placement-part-1': { usd: 45, inr: 4300 },
-    'placement-part-2': { usd: 45, inr: 4300 },
-    'crosstalk-analysis': { usd: 45, inr: 4300 },
-    'em-ir-drop-analysis': { usd: 45, inr: 4300 },
-    'power-estimation-part-1': { usd: 40, inr: 3800 },
-    'power-estimation-part-2': { usd: 45, inr: 4300 },
-    'synthesis-2-0-part-1': { usd: 45, inr: 4300 },
-    'synthesis-2-0-part-2': { usd: 45, inr: 4300 },
-    'unified-power-format-upf-part-1': { usd: 45, inr: 4300 },
-    'drc-part-1': { usd: 50, inr: 4750 },
-    'drc-part-2': { usd: 45, inr: 4300 },
-    'physical-implementation-scripting-tcl': { usd: 40, inr: 3800 },
-    'tool-independent-scripting-tcl-python': { usd: 40, inr: 3800 },
-    'pnr-mock': { usd: 40, inr: 3800 },
-    'rcg-comp-arch-pd-mock': { usd: 35, inr: 3350 },
-    'power-analysis-mock': { usd: 35, inr: 3350 },
-    'analytical-cmos-mock': { usd: 30, inr: 2850 },
-  };
+  // Prices come from prices.js (repo root) — the same file create-order.js
+  // imports server-side — via a dynamic import, since this file is loaded
+  // as a classic <script>, not a module. This is what's actually displayed
+  // AND what decides the subtotal shown before checkout; the real charge
+  // is still always computed server-side in create-order.js independently,
+  // but both sides now read the same numbers, so they can't drift apart.
+  let PRICES = {};
+  let usdToInr = (usd) => usd;
+  const pricesReady = import('./prices.js').then((mod) => {
+    PRICES = mod.PRICES;
+    usdToInr = mod.usdToInr;
+  });
 
   function loadCart() {
     try {
@@ -65,9 +44,9 @@
   let currency = loadCurrency(); // 'USD' | 'INR'
 
   function priceFor(id) {
-    const entry = PRICES[id];
-    if (!entry) return null;
-    return currency === 'INR' ? entry.inr : entry.usd;
+    const usd = PRICES[id];
+    if (usd === undefined) return null;
+    return currency === 'INR' ? usdToInr(usd) : usd;
   }
 
   function formatPrice(n) {
@@ -295,13 +274,13 @@
               showNotice('Payment successful! We\u2019ll share access over Discord or email within 24 hours.');
             } else {
               showNotice(
-                'Payment went through but could not be verified. Email metastable@metastable-design.org with payment ID ' +
+                'Payment went through but could not be verified. Email metastable01@gmail.com with payment ID ' +
                   response.razorpay_payment_id
               );
             }
           } catch {
             showNotice(
-              'Payment went through but verification failed. Email metastable@metastable-design.org with payment ID ' +
+              'Payment went through but verification failed. Email metastable01@gmail.com with payment ID ' +
                 response.razorpay_payment_id
             );
           }
@@ -328,7 +307,8 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', async function () {
+    await pricesReady;
     renderAll();
     const checkoutBtn = document.getElementById('cart-checkout');
     if (checkoutBtn) checkoutBtn.addEventListener('click', startCheckout);
