@@ -16,7 +16,7 @@ function usdToInr(usd) {
 
 const PRICES = {
   // id: usd (whole dollars) — INR is derived, see usdToInr()
-  'dft-fundamentals': 25,
+  'dft-fundamentals': 0.01,
   'static-timing-analysis-part-1': 45,
   'static-timing-analysis-part-2': 45,
   'power-optimization-techniques': 40,
