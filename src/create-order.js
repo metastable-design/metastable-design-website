@@ -7,7 +7,7 @@
 
 // USD is now the single source of truth. INR is derived via a multiplier
 // and rounded to a clean denomination, matching how you've been pricing manually.
-const INR_MULTIPLIER = 95;   // rupees per dollar, for pricing purposes (not a live FX rate)
+const INR_MULTIPLIER = 96;   // rupees per dollar, for pricing purposes (not a live FX rate)
 const INR_ROUND_TO = 50;     // round INR prices to the nearest 50
 
 function usdToInr(usd) {
