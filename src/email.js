@@ -16,7 +16,7 @@ export async function sendEmail(env, { to, bcc, subject, html }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: env.ORDER_EMAIL_FROM,
+      from: env.ORDER_EMAIL_FROM, // e.g. "Metastable Design <orders@yourdomain.com>"
       to,
       ...(bcc ? { bcc } : {}),
       subject,
@@ -25,6 +25,8 @@ export async function sendEmail(env, { to, bcc, subject, html }) {
   });
 
   if (!res.ok) {
+    // Don't throw — a failed email shouldn't undo a verified payment. Just
+    // make sure it's visible in `wrangler tail` so it can be noticed.
     console.error('Resend API error:', await res.text());
   }
 }
@@ -54,10 +56,10 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
     )
     .join('');
 
-  const heading = forOwner ? 'New order received' : 'Thanks for your purchase!';
+  const heading = forOwner ? 'New order received' : 'Thank you for your purchase!';
   const subheading = forOwner
     ? 'A new order just came in.'
-    : "Here's a summary of your order from Metastable Design.";
+    : "We're glad to have you with us — here's a quick summary of what you bought.";
 
   const ownerCustomerRow = forOwner && customerEmail
     ? `
@@ -66,6 +68,20 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
             Customer: <span style="color: ${BRAND.dark};">${escapeHtml(customerEmail)}</span>
           </td>
         </tr>`
+    : '';
+
+  // Extra warm closing note, customer emails only.
+  const closingNote = !forOwner
+    ? `
+              <p style="margin: 24px 0 0; font-size: 14px; color: ${BRAND.muted}; line-height: 1.6;">
+                You'll find access details for your webinar(s) here shortly, or you can check your
+                <a href="https://metastable-design.org/purchases.html" style="color: ${BRAND.accent}; text-decoration: none;">purchase history</a> anytime.
+                If anything looks off, just reply to this email — we're happy to help.
+              </p>
+              <p style="margin: 20px 0 0; font-size: 14px; color: ${BRAND.dark};">
+                Thanks again for learning with us,<br>
+                <strong>Team Metastable Design</strong>
+              </p>`
     : '';
 
   return `
@@ -83,16 +99,12 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 480px; background-color: ${BRAND.card}; border-radius: 12px; overflow: hidden; border: 1px solid ${BRAND.border};">
 
           <!-- Header band -->
-          <!-- Header band -->
           <tr>
-            <td style="background-color: ${BRAND.dark}; padding: 24px 32px;">
-              <img
-                src="https://metastable-design.org/metastable-logo.svg"
-                alt="Metastable Design"
-                width="140"
-                style="display: block; height: auto; max-width: 140px; margin-bottom: 14px;"
-              >
-              <h1 style="margin: 0; font-size: 20px; color: #ffffff; font-weight: 600;">
+            <td style="background-color: ${BRAND.dark}; padding: 28px 32px;">
+              <p style="margin: 0; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #ffffff; opacity: 0.7;">
+                Metastable Design
+              </p>
+              <h1 style="margin: 6px 0 0; font-size: 20px; color: #ffffff; font-weight: 600;">
                 ${escapeHtml(heading)}
               </h1>
             </td>
@@ -133,6 +145,8 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
                 </tr>
                 ${ownerCustomerRow}
               </table>
+
+              ${closingNote}
             </td>
           </tr>
 
@@ -140,7 +154,7 @@ export function orderSummaryHtml({ items, amount, currency, orderId, paymentId, 
           <tr>
             <td style="padding: 20px 32px; border-top: 1px solid ${BRAND.border};">
               <p style="margin: 0; font-size: 12px; color: ${BRAND.muted}; text-align: center;">
-                ${forOwner ? 'Metastable Design — order notifications' : 'Metastable Design · Questions? Just reply to this email.'}
+                ${forOwner ? 'Metastable Design — order notifications' : 'Metastable Design · metastable@metastable-design.org'}
               </p>
             </td>
           </tr>
