@@ -17,7 +17,7 @@ export function usdToInr(usd) {
 
 export const PRICES = {
   // id: usd (whole dollars unless noted)
-  'dft-fundamentals': 0.01,
+  'dft-fundamentals': 0.1,
   'static-timing-analysis-part-1': 45,
   'static-timing-analysis-part-2': 45,
   'power-optimization-techniques': 40,
