@@ -3,8 +3,8 @@
 // signature server-side. Never trust the "success" callback in the browser
 // alone; it can be faked in devtools.
 
-import { markPurchasePaid, getPurchaseDoc, queueMail } from './firestore.js';
-import { orderSummaryHtml } from './email.js';
+import { markPurchasePaid, getPurchaseDoc } from './firestore.js';
+import { sendEmail, orderSummaryHtml } from './email.js';
 
 export async function handleVerifyPayment(request, env) {
   let body;
@@ -55,20 +55,20 @@ export async function handleVerifyPayment(request, env) {
       };
 
       if (order.email) {
-        await queueMail(env, {
+        await sendEmail(env, {
           to: order.email,
           subject: 'Your Metastable Design order',
           html: orderSummaryHtml({ ...summaryArgs, forOwner: false }),
         });
       }
 
-      await queueMail(env, {
+      await sendEmail(env, {
         to: env.STORE_NOTIFICATION_EMAIL,
         subject: `New order — ${(order.items || []).length} item(s)`,
         html: orderSummaryHtml({ ...summaryArgs, forOwner: true }),
       });
     } catch (err) {
-      console.error('Failed to queue order emails:', err.message);
+      console.error('Failed to send order emails:', err.message);
     }
   }
 
