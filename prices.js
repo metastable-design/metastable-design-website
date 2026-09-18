@@ -9,7 +9,7 @@
 // both sides use — see usdToInr() below.
 
 export const INR_MULTIPLIER = 96; // rupees per dollar, for pricing purposes (not a live FX rate)
-export const INR_ROUND_TO = 2;   // round INR prices to the nearest 50
+export const INR_ROUND_TO = 1;   // round INR prices to the nearest 50
 
 export function usdToInr(usd) {
   return Math.round((usd * INR_MULTIPLIER) / INR_ROUND_TO) * INR_ROUND_TO;
