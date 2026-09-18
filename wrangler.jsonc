@@ -5,7 +5,8 @@
   "compatibility_date": "2026-09-16",
   "vars": {
     "RAZORPAY_KEY_ID": "rzp_live_Tcfk79F6SA1jE9",
-    "STORE_NOTIFICATION_EMAIL": "metastable@metastable-design.org"
+    "STORE_NOTIFICATION_EMAIL": "metastable@metastable-design.org",
+    "ORDER_EMAIL_FROM": "Metastable Design <metastable@metastable-design.org>"
   },
   "assets": {
     "directory": "./",
