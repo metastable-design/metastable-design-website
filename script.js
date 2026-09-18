@@ -295,13 +295,13 @@
               showNotice('Payment successful! We\u2019ll share access over Discord or email within 24 hours.');
             } else {
               showNotice(
-                'Payment went through but could not be verified. Email metastable01@gmail.com with payment ID ' +
+                'Payment went through but could not be verified. Email metastable@metastable-design.org with payment ID ' +
                   response.razorpay_payment_id
               );
             }
           } catch {
             showNotice(
-              'Payment went through but verification failed. Email metastable01@gmail.com with payment ID ' +
+              'Payment went through but verification failed. Email metastable@metastable-design.org with payment ID ' +
                 response.razorpay_payment_id
             );
           }
