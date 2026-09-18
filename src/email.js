@@ -3,7 +3,7 @@
 // plain HTTPS API, so it works from a Worker with just fetch(). No SMTP,
 // no Firebase billing/extension required.
 
-export async function sendEmail(env, { to, subject, html }) {
+export async function sendEmail(env, { to, bcc, subject, html }) {
   if (!env.RESEND_API_KEY) {
     console.error('RESEND_API_KEY not set — skipping email:', subject);
     return;
@@ -16,16 +16,15 @@ export async function sendEmail(env, { to, subject, html }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: env.ORDER_EMAIL_FROM, // e.g. "Metastable Design <orders@yourdomain.com>"
+      from: env.ORDER_EMAIL_FROM,
       to,
+      ...(bcc ? { bcc } : {}),
       subject,
       html,
     }),
   });
 
   if (!res.ok) {
-    // Don't throw — a failed email shouldn't undo a verified payment. Just
-    // make sure it's visible in `wrangler tail` so it can be noticed.
     console.error('Resend API error:', await res.text());
   }
 }
