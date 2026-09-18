@@ -65,7 +65,7 @@ export async function handleVerifyPayment(request, env) {
       await sendEmail(env, {
         to: env.STORE_NOTIFICATION_EMAIL,
         subject: `New order — ${(order.items || []).length} item(s)`,
-        html: orderSummaryHtml({ ...summaryArgs, forOwner: true }),
+        html: orderSummaryHtml({ ...summaryArgs, forOwner: true, customerEmail: order.email }),
       });
     } catch (err) {
       console.error('Failed to send order emails:', err.message);
@@ -103,25 +103,3 @@ function json(data, status = 200) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
-
-      const summaryArgs = {
-        items: order.items || [],
-        amount: order.amount,
-        currency: order.currency,
-        orderId: razorpay_order_id,
-        paymentId: razorpay_payment_id,
-      };
-
-      if (order.email) {
-        await sendEmail(env, {
-          to: order.email,
-          subject: 'Your Metastable Design order',
-          html: orderSummaryHtml({ ...summaryArgs, forOwner: false }),
-        });
-      }
-
-      await sendEmail(env, {
-        to: env.STORE_NOTIFICATION_EMAIL,
-        subject: `New order — ${(order.items || []).length} item(s)`,
-        html: orderSummaryHtml({ ...summaryArgs, forOwner: true, customerEmail: order.email }),
-      });
