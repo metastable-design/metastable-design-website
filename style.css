@@ -971,3 +971,23 @@ details.product-card[open] .course-body{
     border-top: 1px solid var(--line);
   }
 }
+
+/* Close button inside an opened card */
+.close-topics{
+  display: block;
+  margin: 0 0 10px auto;
+  padding: 5px 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  background: var(--panel);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: border-color .12s ease, color .12s ease, background .12s ease;
+}
+.close-topics:hover{
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+}
