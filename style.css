@@ -924,3 +924,22 @@ details[open] .product-more .chevron{ transform: rotate(90deg); }
   background:var(--accent);
   color:#fff;
 }
+
+/* Let grid/flex children shrink instead of overflowing the card */
+.product-card,
+.course-body { min-width: 0; }
+
+.course-body { overflow-wrap: anywhere; }
+
+/* Cards never force the grid wider than the screen */
+.product-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+/* Topics: one column on phones, two when there is room */
+.topics { display: block; columns: 1; }
+.topics li { break-inside: avoid; }
+
+@media (min-width: 720px) {
+  .topics { columns: 2; column-gap: 32px; }
+}
