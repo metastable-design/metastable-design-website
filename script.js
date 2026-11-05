@@ -314,3 +314,24 @@
     if (checkoutBtn) checkoutBtn.addEventListener('click', startCheckout);
   });
 })();
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('details.product-card').forEach(function (card) {
+    var body = card.querySelector('.course-body');
+    if (!body || body.querySelector('.close-topics')) return;
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'close-topics';
+    btn.setAttribute('aria-label', 'Close details');
+    btn.textContent = 'Close ✕';
+
+    btn.addEventListener('click', function () {
+      card.open = false;
+      // keep the card in view after the layout shifts
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    body.insertBefore(btn, body.firstChild);
+  });
+});
