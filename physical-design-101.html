@@ -1,142 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#FFFFFF">
-<meta name="description" content="Physical Design 101: interactive lessons on floorplanning, placement, routing, timing and signoff, from Metastable Design.">
 <title>Physical Design 101 — Metastable Design</title>
+<meta name="description" content="Physical Design 101: interactive lessons on floorplanning, placement, routing, timing and signoff, from Metastable Design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
 <style>
-/* THEME: swap these values to match the rest of metastable-design.org */
-:root{
-  --bg:#ffffff;      /* page background */
-  --panel:#f8fafc;   /* soft panels, canvases */
-  --fg:#0f172a;      /* main text */
-  --mut:#64748b;     /* secondary text */
-  --card:#ffffff;    /* cards */
-  --line:#e2e8f0;    /* borders */
-  --a:#2563eb;       /* primary accent */
-  --b:#0d9488;       /* secondary accent */
-  --w:#dc2626;       /* warning / violation */
-  --ok:#16a34a;      /* pass */
-  --cell:#e8edf4;    /* neutral fills */
-  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-  --sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-.site{max-width:1100px;margin:0 auto;padding:0 20px}
-/* header */
-.top{border-bottom:1px solid var(--line);background:var(--bg)}
-.top .site{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
-.top img{height:30px;display:block}
-.top nav.links{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:14px}
-.top nav.links a{text-decoration:none;color:var(--mut)}
-.top nav.links a:hover{color:var(--fg)}
-/* hero */
-.hero{padding:56px 0 32px}
-.eyebrow{font:500 13px var(--mono);color:var(--a);letter-spacing:.02em}
-.hero h1{margin:10px 0 12px;font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-.03em}
-.hero p{max-width:620px;color:var(--mut);font-size:18px;margin:0 0 22px}
-.cta{display:flex;flex-wrap:wrap;gap:10px}
-.cta a,.btn,.pg button{display:inline-block;background:var(--fg);color:#fff;border:1px solid var(--fg);border-radius:999px;padding:9px 20px;font:500 14px var(--sans);text-decoration:none;cursor:pointer}
-.cta a.alt,.btn.alt,.pg button.alt{background:var(--bg);color:var(--fg);border-color:var(--line)}
-.cta a:hover,.btn:hover,.pg button:hover{border-color:var(--a)}
-/* course */
-.wrap{padding:24px 0 40px}
-@media(min-width:800px){.wrap{display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}}
-nav#nav{max-height:240px;overflow:auto;margin-bottom:16px}
-@media(min-width:800px){nav#nav{max-height:none;margin:0;position:sticky;top:16px}}
-nav#nav h3{margin:16px 0 4px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-nav#nav h3:first-child{margin-top:0}
-nav#nav button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 10px;border-radius:8px;font:inherit;font-size:14px;cursor:pointer}
-nav#nav button:hover{background:var(--panel)}
-nav#nav button.on{background:var(--fg);color:#fff}
-nav#nav button .t{float:right;font:11px var(--mono);color:var(--a)}
-nav#nav button.on .t{color:#fff;opacity:.8}
-main{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;min-width:0}
-main h2{margin:4px 0 10px;font-size:26px;line-height:1.2;letter-spacing:-.02em}
-.k{font:500 12px var(--mono);color:var(--a);letter-spacing:.04em;text-transform:uppercase}
-main p{margin:0 0 12px}
-canvas{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:block;margin:12px 0}
-.m{font-size:14px;color:var(--mut);margin:4px 0 12px}.m b{color:var(--fg)}
-.sl{display:grid;grid-template-columns:120px 1fr 80px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
-.sl input{width:100%;accent-color:var(--a)}
-.row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-.pg{display:flex;justify-content:space-between;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
-.flow{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
-.flow span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px}
-.flow span:not(:last-child)::after{content:" \2192";color:var(--a)}
-.prog{font:12px var(--mono);color:var(--mut)}
-/* closing band + footer */
-.band{border-top:1px solid var(--line);padding:40px 0;text-align:left}
-.band h2{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
-.band p{max-width:560px;color:var(--mut);margin:0 0 18px}
-footer{border-top:1px solid var(--line);padding:22px 0;font-size:14px;color:var(--mut)}
-footer .site{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
-footer a{text-decoration:none;margin-left:16px}
-footer a:first-child{margin-left:0}
-footer a:hover{color:var(--fg)}
+/* Everything below is scoped to .pd so it cannot affect the shared site styles */
+.pd{--bg:#fff;--panel:#f6f8fa;--fg:#0f1720;--mut:#5b6776;--card:#fff;--line:#e1e6ec;--a:#0056d2;--b:#0d9488;--w:#dc2626;--ok:#0f9d58;--cell:#e6ebf1;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;--sans:"IBM Plex Sans",system-ui,sans-serif;color:var(--fg)}
+.pd *{box-sizing:border-box}
+.pd p{margin:0 0 12px;line-height:1.6}
+.pd .pd-prog{font:12px var(--mono);color:var(--mut);margin-bottom:10px}
+.pd .pd-grid{display:block}
+@media(min-width:800px){.pd .pd-grid{display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}}
+.pd #pd-nav{max-height:240px;overflow:auto;margin-bottom:16px}
+@media(min-width:800px){.pd #pd-nav{max-height:none;margin:0;position:sticky;top:90px}}
+.pd #pd-nav h3{margin:16px 0 4px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.pd #pd-nav h3:first-child{margin-top:0}
+.pd #pd-nav button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 10px;border-radius:8px;font:400 14px/1.4 var(--sans);cursor:pointer}
+.pd #pd-nav button:hover{background:var(--panel)}
+.pd #pd-nav button.on{background:var(--a);color:#fff}
+.pd #pd-nav button .t{float:right;font:11px var(--mono);color:var(--a)}
+.pd #pd-nav button.on .t{color:#fff;opacity:.85}
+.pd #pd-main{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0}
+.pd #pd-main h2{margin:4px 0 10px;font-size:26px;line-height:1.2}
+.pd .pdk{font:500 12px var(--mono);color:var(--a);letter-spacing:.04em;text-transform:uppercase}
+.pd canvas{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:block;margin:12px 0}
+.pd .pdm{font-size:14px;color:var(--mut);margin:4px 0 12px}
+.pd .pdm b{color:var(--fg)}
+.pd .pdsl{display:grid;grid-template-columns:120px 1fr 80px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.pd .pdsl input{width:100%;accent-color:var(--a)}
+.pd .pdrow{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pd .pdb,.pd .pdpg button{background:var(--a);color:#fff;border:1px solid var(--a);border-radius:8px;padding:8px 16px;font:500 14px var(--sans);cursor:pointer}
+.pd .pdb.alt,.pd .pdpg button.alt{background:#fff;color:var(--fg);border-color:var(--line)}
+.pd .pdb:hover,.pd .pdpg button:hover{filter:brightness(.95)}
+.pd .pdpg{display:flex;justify-content:space-between;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+.pd .pdflow{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.pd .pdflow span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px}
+.pd .pdflow span:not(:last-child)::after{content:" \2192";color:var(--a)}
 </style>
 </head>
 <body>
-<header class="top"><div class="site">
-  <a href="index.html"><img src="metastable-logo.svg" alt="Metastable Design"></a>
-  <nav class="links">
-    <a href="index.html">Home</a>
-    <a href="webinars.html">Webinars</a>
-    <a href="physical-design-101.html">Physical Design 101</a>
-    <a href="testimonials.html">Testimonials</a>
-    <a href="jobs.html">VLSI Job Openings</a>
-    <a href="index.html#contact">Contact</a>
-  </nav>
-</div></header>
 
-<section class="site hero">
-  <div class="eyebrow">// interactive course &middot; physical design</div>
-  <h1>Physical Design 101</h1>
-  <p>From netlist to silicon. Play with floorplanning, placement, routing, timing and signoff, and see for yourself what each knob does to the design.</p>
-  <div class="cta">
-    <a href="#course">Start learning</a>
-    <a class="alt" href="webinars.html">Browse webinars</a>
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><img src="metastable-logo.svg" alt="Metastable Design" class="brand-logo"></a>
+    <div class="nav-right">
+      <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="webinars.html">Webinars</a>
+      <a href="physical-design-101.html" class="active">Physical Design 101</a>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="jobs.html">VLSI Job Openings</a>
+      <a href="#contact">Contact</a>
+    </nav>
+          <div id="auth-header-btn"></div>
+      <button id="cart-toggle" class="cart-btn" aria-label="View cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-count">0</span>
+    </button>
+    </div>
   </div>
-</section>
+</header>
 
-<section class="site" id="course">
-  <div class="prog" id="prog"></div>
-  <div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
-</section>
+<main>
 
-<section class="band"><div class="site">
-  <h2>Want to see it done on a real chip?</h2>
-  <p>These lessons use simplified models. In our webinars, working engineers walk through the same ideas on real designs and real design reviews.</p>
-  <div class="cta">
-    <a href="webinars.html">See the full catalog &rarr;</a>
-    <a class="alt" href="https://discord.gg/4RN7esTd3G">Join the Discord</a>
+  <section class="no-rule">
+    <div class="wrap">
+      <p class="eyebrow">// interactive course · physical design</p>
+      <h1>Physical Design 101</h1>
+      <p class="lede">From netlist to silicon. Play with floorplanning, placement, routing, timing and signoff, and see for yourself what each knob does to the design.</p>
+      <div class="cta-row">
+        <a href="#pd-course" class="btn btn-primary">Start learning</a>
+        <a href="webinars.html" class="btn btn-ghost">Browse webinars</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pd-course">
+    <div class="wrap">
+      <div class="pd" id="pd-root">
+        <div class="pd-prog" id="pd-prog"></div>
+        <div class="pd-grid"><div id="pd-nav"></div><div id="pd-main"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Want to see it done on a real chip?</h2>
+      <p class="section-lede" style="margin-bottom:20px;">These lessons use simplified models. In our webinars, working engineers walk through the same ideas on real designs and real design reviews.</p>
+      <div class="cta-row">
+        <a href="webinars.html" class="btn btn-primary">See the full catalog →</a>
+        <a href="https://discord.gg/4RN7esTd3G" class="btn btn-ghost">Join the Discord</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer-head">
+    <h3>Your cart</h3>
+    <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
   </div>
-</div></section>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-drawer-foot">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">$0</span>
+    </div>
+    <button id="cart-checkout" class="btn btn-primary cart-checkout-btn" disabled>Checkout with Razorpay</button>
+  </div>
+</aside>
 
-<footer><div class="site">
-  <span>Metastable Design &mdash; where industry teaches.</span>
-  <span><a href="webinars.html">Webinars</a><a href="https://discord.gg/4RN7esTd3G">Discord</a><a href="mailto:metastable@metastable-design.org">metastable@metastable-design.org</a></span>
-</div></footer>
+<footer id="contact">
+  <div class="wrap footer-row">
+    <span>Metastable Design — where industry teaches.</span>
+    <div class="footer-links">
+      <a href="webinars.html">Webinars</a>
+      <a href="https://discord.gg/4RN7esTd3G">Discord</a>
+      <a href="mailto:metastable@metastable-design.org">metastable@metastable-design.org</a>
+    </div>
+  </div>
+</footer>
 
+<script src="script.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module" src="auth.js"></script>
 <script>
+(function(){
+
 
 const $=h=>{const d=document.createElement('div');d.innerHTML=h;return d.firstElementChild};
-const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const css=n=>getComputedStyle(document.getElementById('pd-root')).getPropertyValue(n).trim();
 const rng=s=>()=>(s=(s*1664525+1013904223)>>>0)/4294967296;
 const shuf=(a,r)=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function cv(w,h){const c=document.createElement('canvas'),d=devicePixelRatio||1;c.width=w*d;c.height=h*d;c.style.maxWidth=w+'px';c.x=c.getContext('2d');c.x.scale(d,d);return c}
-function sl(lab,min,max,step,v,cb,fmt=v=>v){const d=$(`<label class="sl"><span>${lab}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}"><b></b></label>`),i=d.querySelector('input'),o=d.querySelector('b');const f=()=>{o.textContent=fmt(+i.value);cb(+i.value)};i.oninput=f;f();return d}
-function btn(t,fn,alt){const b=$(`<button class="btn${alt?' alt':''}">${t}</button>`);b.onclick=fn;return b}
-const rowOf=(...e)=>{const r=$('<div class="row"></div>');e.forEach(x=>r.append(x));return r};
+function sl(lab,min,max,step,v,cb,fmt=v=>v){const d=$(`<label class="pdsl"><span>${lab}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}"><b></b></label>`),i=d.querySelector('input'),o=d.querySelector('b');const f=()=>{o.textContent=fmt(+i.value);cb(+i.value)};i.oninput=f;f();return d}
+function btn(t,fn,alt){const b=$(`<button class="pdb${alt?' alt':''}">${t}</button>`);b.onclick=fn;return b}
+const rowOf=(...e)=>{const r=$('<div class="pdrow"></div>');e.forEach(x=>r.append(x));return r};
 
 /* Lesson A: utilization */
 function lA(b){
-  const c=cv(320,320),m=$('<div class="m"></div>');
+  const c=cv(320,320),m=$('<div class="pdm"></div>');
   function draw(u){const x=c.x,T=15,s=Math.ceil(Math.sqrt(120/u)),n=s*s;
     x.clearRect(0,0,320,320);
     const f=new Set(shuf([...Array(n).keys()],rng(7)).slice(0,120));
@@ -145,12 +164,12 @@ function lA(b){
     const real=120/n,cg=real<.7?['Low',css('--ok')]:real<.85?['Moderate',css('--a')]:['High — routing will struggle',css('--w')];
     m.innerHTML=`Die: <b>${s}×${s} = ${n} tiles</b> · empty space: <b>${Math.round((1-real)*100)}%</b> · congestion: <b style="color:${cg[1]}">${cg[0]}</b>`}
   b.append(c,m,sl('Utilization',.3,.95,.01,.6,draw,v=>Math.round(v*100)+'%'));
-  b.append($('<p class="m">The same 120 cells every time. A bigger die is easier to route but costs more and makes wires longer; a tight one saves area but jams the wiring.</p>'));
+  b.append($('<p class="pdm">The same 120 cells every time. A bigger die is easier to route but costs more and makes wires longer; a tight one saves area but jams the wiring.</p>'));
 }
 
 /* Lesson B: placement / HPWL */
 function lB(b){
-  const W=8,H=6,N=20,r=rng(3),c=cv(320,240),m=$('<div class="m"></div>');
+  const W=8,H=6,N=20,r=rng(3),c=cv(320,240),m=$('<div class="pdm"></div>');
   const nets=Array.from({length:14},()=>shuf([...Array(N).keys()],r).slice(0,2+Math.floor(r()*3)));
   let pos,start;
   const xy=i=>[pos[i]%W,Math.floor(pos[i]/W)];
@@ -165,13 +184,13 @@ function lB(b){
     for(let i=0;i<N;i++){const[p,q]=xy(i);x.fillStyle=css('--fg');x.fillRect(p*40+8,q*40+8,24,24);x.fillStyle=css('--bg');x.font='11px system-ui';x.textAlign='center';x.fillText(i,p*40+20,q*40+24)}
     const h=hp();m.innerHTML=`Total wirelength (HPWL): <b>${h}</b> · started at <b>${start}</b> · improvement: <b style="color:${css('--ok')}">${Math.round((1-h/start)*100)}%</b>`}
   b.append(c,m,rowOf(btn('Shuffle',reset,1),btn('+1 swap',()=>{step();draw()}),btn('Run 300 swaps',()=>{for(let i=0;i<300;i++)step();draw()})));
-  b.append($('<p class="m">Each box is one net’s bounding box; its half-perimeter is its wirelength. This greedy search keeps only swaps that help, so it can get stuck. Real tools use smarter global placement. Shuffle and try again to see different results.</p>'));
+  b.append($('<p class="pdm">Each box is one net’s bounding box; its half-perimeter is its wirelength. This greedy search keeps only swaps that help, so it can get stuck. Real tools use smarter global placement. Shuffle and try again to see different results.</p>'));
   reset();
 }
 
 /* Lesson C: maze routing */
 function lC(b){
-  const C=16,R=9,T=20,c=cv(C*T,R*T),m=$('<div class="m"></div>'),S=[0,4],G=[15,4],D=[[1,0],[-1,0],[0,1],[0,-1]],k=(x,y)=>x+','+y;
+  const C=16,R=9,T=20,c=cv(C*T,R*T),m=$('<div class="pdm"></div>'),S=[0,4],G=[15,4],D=[[1,0],[-1,0],[0,1],[0,-1]],k=(x,y)=>x+','+y;
   let wall=new Set(),lv=-1,levels=[],path=[],tm;
   for(let y=0;y<7;y++)wall.add(k(8,y));
   function solve(){const dist=new Map([[k(...S),0]]);levels=[[S]];let q=[S];
@@ -194,7 +213,7 @@ function lC(b){
 
 /* Lesson D: setup slack */
 function lD(b){
-  const c=cv(320,150),m=$('<div class="m"></div>'),v={T:2,q:.3,d:1.2,s:.1,k:0};
+  const c=cv(320,150),m=$('<div class="pdm"></div>'),v={T:2,q:.3,d:1.2,s:.1,k:0};
   function draw(){const x=c.x,P=48,o=10,tot=v.q+v.d+v.s,sk=v.T+v.k-tot;x.clearRect(0,0,320,150);
     [[v.q,'--b','clk→Q'],[v.d,'--a','logic'],[v.s,'--mut','setup']].reduce((p,[w,col,l])=>{x.fillStyle=css(col);x.fillRect(o+p*P,40,w*P,34);x.fillStyle=css('--fg');x.font='11px system-ui';x.textAlign='left';x.fillText(l,o+p*P,92+(l==='setup'?14:0));return p+w},0);
     const lx=o+(v.T+v.k)*P;x.strokeStyle=css(sk<0?'--w':'--ok');x.lineWidth=2;x.setLineDash([5,4]);x.beginPath();x.moveTo(lx,22);x.lineTo(lx,112);x.stroke();x.setLineDash([]);x.lineWidth=1;
@@ -204,12 +223,12 @@ function lD(b){
     m.innerHTML=`Slack = period + skew − (clk→Q + logic + setup) = <b style="color:${css(sk<0?'--w':'--ok')}">${sk.toFixed(2)} ns ${sk<0?'· VIOLATED':'· met'}</b><br>Fastest clock this path allows: <b>${fm} MHz</b>`}
   const f=k=>val=>{v[k]=val;draw()},ns=x=>x.toFixed(2)+' ns';
   b.append(c,m,sl('Clock period',.5,6,.1,2,f('T'),ns),sl('Clk→Q delay',.1,.8,.05,.3,f('q'),ns),sl('Logic delay',.2,4,.1,1.2,f('d'),ns),sl('Setup time',.05,.4,.05,.1,f('s'),ns),sl('Clock skew',-.5,.5,.05,0,f('k'),ns));
-  b.append($('<p class="m">Positive skew means the capturing flop’s clock arrives later, which gives the data extra time. Negative skew steals time.</p>'));
+  b.append($('<p class="pdm">Positive skew means the capturing flop’s clock arrives later, which gives the data extra time. Negative skew steals time.</p>'));
 }
 
 /* Lesson F: flow stepper */
 function lF(b){
- const N=['Netlist','Floorplan','Placement','Clock tree','Routing','Timing signoff','DRC / LVS'],X=['A netlist is only a graph: gates and connections, with no positions yet.','Pick the die size, place the macro and lay out the power grid (red stripes).','Every standard cell gets a row and a slot, chosen to keep wires short.','A balanced buffer tree (orange) delivers the clock to every flip-flop.','Metal wires (teal) connect all the pins without short circuits.','Every path is checked for setup and hold timing.','Design rules and layout-versus-schematic checks pass: ready for GDSII.'],c=cv(320,200),m=$('<div class="m"></div>'),r=rng(5),cs=Array.from({length:24},(_,i)=>[30+(i%6)*44+(r()*8|0),72+Math.floor(i/6)*28]);
+ const N=['Netlist','Floorplan','Placement','Clock tree','Routing','Timing signoff','DRC / LVS'],X=['A netlist is only a graph: gates and connections, with no positions yet.','Pick the die size, place the macro and lay out the power grid (red stripes).','Every standard cell gets a row and a slot, chosen to keep wires short.','A balanced buffer tree (blue) delivers the clock to every flip-flop.','Metal wires (teal) connect all the pins without short circuits.','Every path is checked for setup and hold timing.','Design rules and layout-versus-schematic checks pass: ready for GDSII.'],c=cv(320,200),m=$('<div class="pdm"></div>'),r=rng(5),cs=Array.from({length:24},(_,i)=>[30+(i%6)*44+(r()*8|0),72+Math.floor(i/6)*28]);
  function draw(s){const x=c.x,ct=q=>[q[0]+10,q[1]+7];x.clearRect(0,0,320,200);x.lineWidth=1.5;
   if(s===0){const p=cs.map((_,i)=>[160+Math.cos(i/24*6.283)*80,100+Math.sin(i/24*6.283)*80]);x.strokeStyle=css('--mut');p.forEach((q,i)=>{const o=p[(i*5+3)%24];x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(o[0],o[1]);x.stroke()});x.fillStyle=css('--fg');p.forEach(q=>{x.beginPath();x.arc(q[0],q[1],5,0,6.3);x.fill()})}
   else{x.strokeStyle=css('--fg');x.strokeRect(5,5,310,190);x.fillStyle=css('--cell');x.fillRect(15,15,90,45);x.fillStyle=css('--mut');x.font='10px system-ui';x.fillText('macro',20,50);
@@ -224,7 +243,7 @@ function lF(b){
 
 /* Lesson R: rows and rails */
 function lR(b){
- const c=cv(320,190),m=$('<div class="m"></div>');let fl=true;
+ const c=cv(320,190),m=$('<div class="pdm"></div>');let fl=true;
  function draw(){const x=c.x,r=rng(9),g=fl?0:8,rh=34;let y=14,n=0;x.clearRect(0,0,320,190);
   for(let i=0;i<4;i++){const f=fl&&i%2,top=f?'--b':'--w',bot=f?'--w':'--b';
    for(let cx=10;cx<290;){const w=(2+Math.floor(r()*3))*14,e=Math.min(w,290-cx);x.fillStyle=css('--cell');x.fillRect(cx,y+4,e-2,rh-8);cx+=w}
@@ -236,7 +255,7 @@ function lR(b){
 
 /* Lesson M: IR drop */
 function lM(b){
- const c=cv(320,320),m=$('<div class="m"></div>');let I=60,S=1,P=0;
+ const c=cv(320,320),m=$('<div class="pdm"></div>');let I=60,S=1,P=0;
  function draw(){const x=c.x,n=16,T=20,pads=P?[[0,0],[15,0],[0,15],[15,15]]:[[0,0]];let mx=0;x.clearRect(0,0,320,320);
   for(let i=0;i<n;i++)for(let j=0;j<n;j++){const d=Math.min(...pads.map(p=>Math.abs(p[0]-i)+Math.abs(p[1]-j))),v=I*d*.05/S;mx=Math.max(mx,v);
    x.globalAlpha=1;x.fillStyle=css('--ok');x.fillRect(i*T,j*T,T-1,T-1);x.globalAlpha=Math.min(1,v/80);x.fillStyle=css('--w');x.fillRect(i*T,j*T,T-1,T-1)}
@@ -247,7 +266,7 @@ function lM(b){
 
 /* Lesson T: clock skew */
 function lT(b){
- const c=cv(320,260),m=$('<div class="m"></div>');let u=15;
+ const c=cv(320,260),m=$('<div class="pdm"></div>');let u=15;
  function draw(){const x=c.x,xs=[50,123,196,269],ys=[45,102,159,216];x.clearRect(0,0,320,260);x.strokeStyle=css('--mut');x.lineWidth=2;
   const L=(a,b2,c2,d)=>{x.beginPath();x.moveTo(a,b2);x.lineTo(c2,d);x.stroke()};
   [[86,73],[232,73],[86,187],[232,187]].forEach(q=>{L(160,130,q[0],q[1]);xs.forEach((sx,i)=>ys.forEach((sy,j)=>{if(Math.abs(sx-q[0])<80&&Math.abs(sy-q[1])<40)L(q[0],q[1],sx,sy)}))});
@@ -260,7 +279,7 @@ function lT(b){
 
 /* Lesson V: layer choice */
 function lV(b){
- const c=cv(320,200),m=$('<div class="m"></div>'),R=[8,5,3,1.5,.8,.4,.2,.1];let len=500,sel=3;
+ const c=cv(320,200),m=$('<div class="pdm"></div>'),R=[8,5,3,1.5,.8,.4,.2,.1];let len=500,sel=3;
  const dl=(k,L)=>.38*R[k]*L*L*.2*1e-3+2*k*5*L*.2*1e-3;
  function draw(){const x=c.x,d=R.map((_,k)=>dl(k,len)),mx=Math.max(...d),best=d.indexOf(Math.min(...d));x.clearRect(0,0,320,200);
   d.forEach((v,k)=>{const h=Math.max(2,v/mx*130),bx=20+k*36;x.fillStyle=css(k===sel?'--a':'--b');x.fillRect(bx,160-h,28,h);if(k===best){x.strokeStyle=css('--ok');x.lineWidth=3;x.strokeRect(bx-1,160-h-1,30,h+2)}
@@ -271,17 +290,17 @@ function lV(b){
 
 /* Lesson H: hold */
 function lH(b){
- const m=$('<div class="m"></div>'),v={T:2,k:.5,buf:0},q=.3,th=.05,dmin=.15,dmax=1.2,ts=.1;
+ const m=$('<div class="pdm"></div>'),v={T:2,k:.5,buf:0},q=.3,th=.05,dmin=.15,dmax=1.2,ts=.1;
  function draw(){const h=q+dmin+v.buf-th-v.k,s=v.T+v.k-(q+dmax+ts);
   const f=(n,l)=>`<p style="font-size:18px;margin:6px 0;color:${css(n<0?'--w':'--ok')}"><b>${l}: ${n.toFixed(2)} ns ${n<0?'✗ violated':'✓ met'}</b></p>`;
   m.innerHTML=f(s,'Setup slack')+f(h,'Hold slack')+`Short path: ${(dmin+v.buf).toFixed(2)} ns · long path: ${dmax} ns`}
  b.append(m,sl('Clock period',.5,6,.1,2,x=>{v.T=x;draw()},x=>x.toFixed(1)+' ns'),sl('Clock skew',0,.6,.05,.5,x=>{v.k=x;draw()},x=>x.toFixed(2)+' ns'),rowOf(btn('Add delay buffer (+0.1 ns)',()=>{v.buf+=.1;draw()}),btn('Reset buffers',()=>{v.buf=0;draw()},1)));
- b.append($('<p class="m">Change the period: setup slack moves, hold slack does not. Only the short-path delay and the skew affect hold.</p>'));
+ b.append($('<p class="pdm">Change the period: setup slack moves, hold slack does not. Only the short-path delay and the skew affect hold.</p>'));
 }
 
 /* Lesson S: DRC / LVS */
 function lS(b){
- const c=cv(320,200),m=$('<div class="m"></div>'),v={w:.2,s:.2,ok:true},K=150,MIN=.1;
+ const c=cv(320,200),m=$('<div class="pdm"></div>'),v={w:.2,s:.2,ok:true},K=150,MIN=.1;
  function draw(){const x=c.x,w=v.w*K,s=v.s*K,y2=20+w+s,bw=v.w<MIN,bs=v.s<MIN;x.clearRect(0,0,320,200);
   x.fillStyle=css(bw?'--w':'--b');x.fillRect(20,20,230,w);x.fillRect(20,y2,230,w);
   if(bs){x.strokeStyle=css('--w');x.lineWidth=2;x.setLineDash([4,3]);x.strokeRect(20,20+w,230,s);x.setLineDash([])}
@@ -294,7 +313,7 @@ function lS(b){
 
 /* Lesson N: simulated annealing */
 function lN(b){
- const W=8,H=6,N=20,r=rng(3),c=cv(320,240),g=cv(320,110),m=$('<div class="m"></div>'),res={};
+ const W=8,H=6,N=20,r=rng(3),c=cv(320,240),g=cv(320,110),m=$('<div class="pdm"></div>'),res={};
  const nets=Array.from({length:14},()=>shuf([...Array(N).keys()],r).slice(0,2+Math.floor(r()*3)));
  let seed=11,pos,T,hist=[],tm,up=0,mode='',T0=6,cool=.96,mt=160;
  const xy=i=>[pos[i]%W,Math.floor(pos[i]/W)];
@@ -315,12 +334,12 @@ function lN(b){
  function init(){clearInterval(tm);pos=fresh();T=T0;hist=[[hp(),T]];up=0;draw()}
  b.append(c,g,m,sl('Start temperature',1,15,1,6,v=>{T0=v;if(!tm||!hist.length||hist.length<2)init()},v=>v),sl('Cooling rate',.9,.99,.01,.96,v=>{cool=v},v=>v.toFixed(2)),
   rowOf(btn('Anneal',()=>start('anneal')),btn('Greedy only',()=>start('greedy'),1),btn('New start',()=>{seed=Math.floor(Math.random()*999)+1;res.anneal=res.greedy=undefined;init()},1)));
- b.append($('<p class="m">Every run begins from the same starting layout, so annealing and greedy are directly comparable. Try a low start temperature, or a fast cooling rate, and compare results.</p>'));
+ b.append($('<p class="pdm">Every run begins from the same starting layout, so annealing and greedy are directly comparable. Try a low start temperature, or a fast cooling rate, and compare results.</p>'));
 }
 
 /* Lesson E: STA with corners */
 function lE(b){
- const m=$('<div class="m"></div>'),F={slow:1.3,typ:1,fast:.75},tcq=.3,ts=.1,th=.05,nm=['A','B','C','D','E','F'],D0=[.9,1.3,1.6,1.1,1.8,.7],M0=[.2,.25,.3,.15,.4,.12];
+ const m=$('<div class="pdm"></div>'),F={slow:1.3,typ:1,fast:.75},tcq=.3,ts=.1,th=.05,nm=['A','B','C','D','E','F'],D0=[.9,1.3,1.6,1.1,1.8,.7],M0=[.2,.25,.3,.15,.4,.12];
  let T=2.2,sk=.3,cr='all',d=[...D0],dm=[...M0],su=[],sw=[.1,.15,.22,.12,.28,.08],ld=1;
  const NM={all:'Signoff: slow corner for setup, fast corner for hold',slow:'Slow corner (delays ×1.3)',typ:'Typical corner',fast:'Fast corner (delays ×0.75)'};
  function draw(){const fs=cr==='all'?F.slow:F[cr],fh=cr==='all'?F.fast:F[cr];
@@ -331,12 +350,12 @@ function lE(b){
  b.append(m,sl('Clock period',1.5,4,.1,2.2,v=>{T=v;draw()},v=>v.toFixed(1)+' ns'),sl('Clock skew',0,.6,.05,.3,v=>{sk=v;draw()},v=>v.toFixed(2)+' ns'),sl('Wire load',.5,2,.1,1,v=>{ld=v;draw()},v=>v.toFixed(1)+'×'),
   rowOf(btn('Signoff corners',cb('all')),btn('Slow',cb('slow'),1),btn('Typical',cb('typ'),1),btn('Fast',cb('fast'),1)),
   rowOf(btn('Upsize worst setup path (−10% delay)',()=>{const i=su.indexOf(Math.min(...su));d[i]*=.9;sw[i]*=.8;draw()}),btn('Buffer worst hold path (+0.1 ns)',()=>{const h=m._ho,i=h.indexOf(Math.min(...h));dm[i]+=.1;draw()}),btn('Reset',()=>{d=[...D0];dm=[...M0];sw=[.1,.15,.22,.12,.28,.08];draw()},1)));
- b.append($('<p class="m">Switch corners and watch the failures move: slow silicon breaks setup, fast silicon breaks hold. Transition (slew) is how slowly a signal edge ramps: a heavier load gives a slower edge, which slows the next gate and can break the 0.30 ns limit. Upsizing a driver sharpens its edge too. Fix the worst path with the buttons until every slack and transition is green.</p>'));
+ b.append($('<p class="pdm">Switch corners and watch the failures move: slow silicon breaks setup, fast silicon breaks hold. Transition (slew) is how slowly a signal edge ramps: a heavier load gives a slower edge, which slows the next gate and can break the 0.30 ns limit. Upsizing a driver sharpens its edge too. Fix the worst path with the buttons until every slack and transition is green.</p>'));
 }
 
 /* Lesson G: EM / IR on a rail */
 function lG(b){
- const c=cv(320,230),m=$('<div class="m"></div>'),N=8,dl=v=>v/Math.pow(v-.3,1.3),dp=v=>dl(.8-v/1000)/dl(.8);let w=.4,i=.1,tp=105;
+ const c=cv(320,230),m=$('<div class="pdm"></div>'),N=8,dl=v=>v/Math.pow(v-.3,1.3),dp=v=>dl(.8-v/1000)/dl(.8);let w=.4,i=.1,tp=105;
  function draw(){const x=c.x,R=6/w,lim=1.5*Math.pow(2,-(tp-100)/25),J=[],V=[0];x.clearRect(0,0,320,230);
   for(let k=0;k<N;k++){const I=(N-k)*i;J.push(I/w);V.push(V[k]+R*I)}
   const ym=Math.max(2.5,...J)*1.05,vm=Math.max(60,V[N]*1.05),bx=k=>20+k*37;
@@ -349,12 +368,12 @@ function lG(b){
   x.font='10px system-ui';x.fillStyle=css('--mut');x.textAlign='center';V.slice(1).forEach((v,k)=>x.fillText('+'+Math.round(dp(v)*100-100)+'%',bx(k)+14,224));const tg=ok=>`<b style="color:${css(ok?'--ok':'--w')}">${ok?'PASS':'FAIL'}</b>`;
   m.innerHTML=`EM: worst segment <b>${J[0].toFixed(2)} mA/µm</b> vs limit <b>${lim.toFixed(2)}</b> — ${tg(J[0]<=lim)}<br>IR: worst drop <b>${V[N].toFixed(0)} mV</b> vs limit 40 mV (5% of 0.8 V) — ${tg(V[N]<=40)}<br>Timing impact: cells at the far end see <b>${(.8-V[N]/1000).toFixed(3)} V</b> and run <b>${Math.round(dp(V[N])*100-100)}% slower</b>, which STA must account for`}
  b.append(c,m,sl('Rail width',.2,1,.05,.4,v=>{w=v;draw()},v=>v.toFixed(2)+' µm'),sl('Current per cell',.05,.2,.01,.1,v=>{i=v;draw()},v=>v.toFixed(2)+' mA'),sl('Temperature',60,125,5,105,v=>{tp=v;draw()},v=>v+' °C'));
- b.append($('<p class="m">Widen the rail to fix both checks, then raise the temperature to see the EM limit fall. Real signoff trades this against routing space.</p>'));
+ b.append($('<p class="pdm">Widen the rail to fix both checks, then raise the temperature to see the EM limit fall. Real signoff trades this against routing space.</p>'));
 }
 
 /* Lesson P: IR drop hotspot and cell padding */
 function lP(b){
- const c=cv(320,320),m=$('<div class="m"></div>'),n=16,T=20,R=2,bg=.1,LIM=50,pads=[[3,3],[3,12],[12,3],[12,12]],dl=v=>v/Math.pow(v-.3,1.3),dp=v=>dl(.8-v/1000)/dl(.8);
+ const c=cv(320,320),m=$('<div class="pdm"></div>'),n=16,T=20,R=2,bg=.1,LIM=50,pads=[[3,3],[3,12],[12,3],[12,12]],dl=v=>v/Math.pow(v-.3,1.3),dp=v=>dl(.8-v/1000)/dl(.8);
  let I=2.6,pd=0,ds=0,st=0;
  function solve(p,dz=ds,sz=st){const sg=Math.sqrt(1+p),Rg=R/(1+.1*sz),cur=[],D=[];let sw=0;
   for(let i=0;i<n;i++){cur.push([]);D.push(Array(n).fill(0));for(let j=0;j<n;j++){const w=Math.exp(-((i+.5-8)**2+(j+.5-8)**2)/(2*sg*sg));cur[i].push(w);sw+=w}}
@@ -370,11 +389,11 @@ function lP(b){
  b.append(c,m,sl('Hotspot current',1.5,3,.1,2.6,v=>{I=v;draw()},v=>v.toFixed(1)+' mA'),sl('Cell downsizing',0,40,5,0,v=>{ds=v/100;draw()},v=>v+'%'),sl('Extra PG straps',0,6,1,0,v=>{st=v;draw()},v=>v));
  const sp=sl('Cell padding',0,200,10,0,v=>{pd=v/100;draw()},v=>v+'%');
  b.append(sp,rowOf(btn('Add padding until it passes',()=>{let p=pd;while(p<2&&solve(p).mx>LIM)p+=.1;const i=sp.querySelector('input');i.value=Math.round(p*10)*10;i.oninput()}),btn('Remove padding',()=>{const i=sp.querySelector('input');i.value=0;i.oninput()},1)));
- b.append($('<p class="m">Three levers fix IR drop here. Padding spreads the cells so the same current is drawn from a wider patch of the grid (it costs area). Downsizing swaps hot cells for weaker, smaller drivers that draw less current (it costs speed). Extra PG straps lower the grid’s resistance (they cost routing tracks). Each fix alone needs an extreme setting, so try combining moderate amounts of all three.</p>'));
+ b.append($('<p class="pdm">Three levers fix IR drop here. Padding spreads the cells so the same current is drawn from a wider patch of the grid (it costs area). Downsizing swaps hot cells for weaker, smaller drivers that draw less current (it costs speed). Extra PG straps lower the grid’s resistance (they cost routing tracks). Each fix alone needs an extreme setting, so try combining moderate amounts of all three.</p>'));
 }
 
 const L=[
- {ch:'Foundations',t:'What is physical design?',fn:lF,tx:'<p>Physical design turns a <b>netlist</b> — a list of logic gates and how they connect — into a <b>layout</b>: the exact shapes on silicon that a factory can print. It is the bridge between logic design and a real chip.</p><div class="flow"><span>Floorplan</span><span>Placement</span><span>Clock tree</span><span>Routing</span><span>Timing signoff</span><span>DRC / LVS</span><span>GDSII</span></div><p>Every step trades off three things: <b>performance</b> (speed), <b>power</b> and <b>area</b> — often called PPA.</p>'},
+ {ch:'Foundations',t:'What is physical design?',fn:lF,tx:'<p>Physical design turns a <b>netlist</b> — a list of logic gates and how they connect — into a <b>layout</b>: the exact shapes on silicon that a factory can print. It is the bridge between logic design and a real chip.</p><div class="pdflow"><span>Floorplan</span><span>Placement</span><span>Clock tree</span><span>Routing</span><span>Timing signoff</span><span>DRC / LVS</span><span>GDSII</span></div><p>Every step trades off three things: <b>performance</b> (speed), <b>power</b> and <b>area</b> — often called PPA.</p>'},
  {ch:'Foundations',t:'Standard cells & rows',fn:lR,tx:'<p>Gates come as pre-drawn <b>standard cells</b>, all the same height, so they snap into <b>rows</b> like books on a shelf. Power rails run along the top and bottom of each row, and alternate rows are flipped so neighbours share a rail.</p><p>Placement then only has to choose which row and which horizontal slot each cell takes.</p>'},
  {ch:'Floorplanning',t:'Die size & utilization',fn:lA,tx:'<p><b>Utilization</b> is the share of the die covered by cells. Drag it to see how die size, free space and routing congestion change.</p>'},
  {ch:'Floorplanning',t:'Macros & power grid',fn:lM,tx:'<p>Big blocks like memories (<b>macros</b>) are placed first, usually along the edges, leaving open space for logic. Then a <b>power grid</b> of wide metal stripes delivers VDD and VSS across the die.</p><p>Current flowing through that grid causes <b>IR drop</b>: the farther from a power pad, the lower the voltage, and the slower the gates.</p>'},
@@ -390,15 +409,17 @@ const L=[
  {ch:'Signoff',t:'IR drop & cell padding',fn:lP,tx:'<p><b>IR drop</b> is the voltage lost between a power pad and a cell: current through the grid’s resistance (V = I × R). <b>Static</b> IR drop uses average currents; <b>dynamic</b> IR drop looks at the surge when many cells switch at once. A cell with a low supply runs slower, so IR drop turns into timing failures.</p><p>The worst spots are <b>hotspots</b>: many busy cells packed far from a power pad. Fixes include more pads, decoupling capacitor cells, <b>extra PG straps</b> (lower grid resistance), <b>cell downsizing</b> (weaker cells draw less current but switch slower) and <b>cell padding</b>. Padding reserves blank space around cells in the hot region, so the placer spreads them out and the same current flows through more of the grid.</p>'},
  {ch:'Signoff',t:'DRC, LVS & tapeout',fn:lS,tx:'<p>Before the design goes to the factory, <b>DRC</b> checks every shape against the foundry’s width and spacing rules, and <b>LVS</b> confirms the layout really implements the netlist. Antenna, electromigration and IR-drop checks follow.</p><p>When everything is clean, the layout is written as a <b>GDSII</b> file: the tapeout.</p>'}
 ];
-let cur=0;const seen=new Set([0]),main=document.getElementById('main'),nav=document.getElementById('nav');
+let cur=0;const seen=new Set([0]),main=document.getElementById('pd-main'),nav=document.getElementById('pd-nav');
 function drawNav(){nav.innerHTML='';let last='';L.forEach((l,i)=>{if(l.ch!==last){nav.append($(`<h3>${l.ch}</h3>`));last=l.ch}
   const b=$(`<button class="${i===cur?'on':''}">${seen.has(i)&&i!==cur?'✓ ':''}${i+1}. ${l.t}${l.fn?'<span class="t">interactive</span>':''}</button>`);b.onclick=()=>show(i);nav.append(b)});
-  document.getElementById('prog').textContent=seen.size+' / '+L.length+' visited'}
-function show(i){cur=i;seen.add(i);drawNav();const l=L[i];main.innerHTML=`<div class="k">${l.ch} · Lesson ${i+1}</div><h2>${l.t}</h2>${l.tx}`;
+  document.getElementById('pd-prog').textContent=seen.size+' / '+L.length+' visited'}
+function show(i){cur=i;seen.add(i);drawNav();const l=L[i];main.innerHTML=`<div class="pdk">${l.ch} · Lesson ${i+1}</div><h2>${l.t}</h2>${l.tx}`;
   if(l.fn){const box=document.createElement('div');main.append(box);l.fn(box)}
-  const p=$('<div class="pg"></div>'),pr=$('<button class="alt">← Back</button>'),nx=$('<button>Next →</button>');
-  pr.onclick=()=>show(i-1);nx.onclick=()=>show(i+1);p.append(i?pr:document.createElement('span'),i<L.length-1?nx:document.createElement('span'));main.append(p);if(show.go)document.getElementById('course').scrollIntoView();show.go=1}
+  const p=$('<div class="pdpg"></div>'),pr=$('<button class="alt">← Back</button>'),nx=$('<button>Next →</button>');
+  pr.onclick=()=>show(i-1);nx.onclick=()=>show(i+1);p.append(i?pr:document.createElement('span'),i<L.length-1?nx:document.createElement('span'));main.append(p);if(show.go)document.getElementById('pd-course').scrollIntoView();show.go=1}
 show(0);
+
+})();
 </script>
 </body>
 </html>
