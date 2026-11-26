@@ -392,14 +392,97 @@ function lP(b){
  b.append($('<p class="pdm">Three levers fix IR drop here. Padding spreads the cells so the same current is drawn from a wider patch of the grid (it costs area). Downsizing swaps hot cells for weaker, smaller drivers that draw less current (it costs speed). Extra PG straps lower the grid’s resistance (they cost routing tracks). Each fix alone needs an extreme setting, so try combining moderate amounts of all three.</p>'));
 }
 
+/* Lesson Y: what synthesis does */
+function lY(b){
+ const c=cv(320,170),m=$('<div class="pdm"></div>'),N=['RTL','Elaborate','Optimize logic','Technology map','Netlist'],
+ X=['The designer describes behaviour: y = (a & b) | (a & c).','The code becomes generic gates, exactly as written.','Factoring a & (b | c) removes one gate before any library is chosen.','The logic is matched to a real library cell: one OA21 does the whole job.','The result is a gate-level netlist, ready for floorplanning.'],
+ ST=[null,[3,3,2],[2,2,2],[1,1.3,1],[1,1.3,1]];
+ function draw(s){const x=c.x,ln=(a,e,f,g)=>{x.beginPath();x.moveTo(a,e);x.lineTo(f,g);x.stroke()},bx=(a,e,w,h,l)=>{x.fillStyle=css('--cell');x.fillRect(a,e,w,h);x.strokeRect(a,e,w,h);x.fillStyle=css('--fg');x.textAlign='center';x.fillText(l,a+w/2,e+h/2+4)},tx=(t,a,e)=>{x.fillStyle=css('--fg');x.textAlign='left';x.fillText(t,a,e)};
+  x.clearRect(0,0,320,170);x.strokeStyle=css('--mut');x.lineWidth=1.5;x.font='13px system-ui';
+  if(s===0){x.font='14px ui-monospace,monospace';tx('assign y = (a & b)',40,70);tx('            | (a & c);',40,92)}
+  if(s===1){bx(110,20,50,34,'AND');bx(110,110,50,34,'AND');bx(220,65,50,34,'OR');tx('a',30,32);tx('b',30,48);tx('a',30,122);tx('c',30,138);ln(42,28,110,28);ln(42,44,110,44);ln(42,118,110,118);ln(42,134,110,134);ln(160,37,220,75);ln(160,127,220,89);ln(270,82,296,82);tx('y',300,86)}
+  if(s===2){bx(110,40,50,34,'OR');bx(220,65,50,34,'AND');tx('b',30,52);tx('c',30,68);tx('a',30,118);ln(42,48,110,48);ln(42,64,110,64);ln(42,114,200,114);ln(200,114,200,90);ln(200,90,220,90);ln(160,57,220,75);ln(270,82,296,82);tx('y',300,86)}
+  if(s===3){bx(120,50,90,50,'OA21_X1');tx('a',30,66);tx('b',30,82);tx('c',30,98);ln(42,62,120,62);ln(42,78,120,78);ln(42,94,120,94);ln(210,75,296,75);tx('y',300,79)}
+  if(s===4){x.font='13px ui-monospace,monospace';tx('OA21_X1 u1 (',30,64);tx('   .A1(b), .A2(c),',30,84);tx('   .B(a), .ZN(y) );',30,104)}
+  const t=ST[s];m.innerHTML='<b>'+N[s]+'.</b> '+X[s]+'<br>'+(t?`Cells: <b>${t[0]}</b> · area: <b>${t[1]}</b> · logic depth: <b>${t[2]}</b>`:'Nothing is mapped to gates yet.')}
+ b.append(c,m,sl('Step',0,4,1,0,draw,v=>(v+1)+' / 5'));
+}
+
+/* Lesson Z: sizing and Vt swapping */
+function lZ(b){
+ const c=cv(320,170),m=$('<div class="pdm"></div>'),P=.08,LD=[.25,.3,.2,.35,.25,.3],SZ=[1,2,4],VT=['HVT','SVT','LVT'],VF=[1.3,1,.75],LK=[1,4,16],VC=['--b','--mut','--w'];
+ let T=1.8,g=LD.map(()=>[0,1]);
+ const dl=(s,i)=>(P+LD[i]/SZ[s[0]])*VF[s[1]],tot=a=>a.reduce((x,s,i)=>x+dl(s,i),0),ar=a=>a.reduce((x,s)=>x+SZ[s[0]],0),lk=a=>a.reduce((x,s)=>x+SZ[s[0]]*LK[s[1]],0),co=a=>ar(a)+lk(a)*.05;
+ const cand=(a,up)=>{const o=[];a.forEach((s,i)=>{[0,1].forEach(k=>{const v=s[k]+(up?1:-1);if(v<0||v>2)return;const n=a.map(q=>[...q]);n[i][k]=v;o.push(n)})});return o};
+ function fix(){while(tot(g)>T){const c0=co(g),t0=tot(g);let best=null,bs=0;cand(g,1).forEach(n=>{const s=(t0-tot(n))/Math.max(.01,co(n)-c0);if(s>bs){bs=s;best=n}});if(!best)break;g=best}}
+ function recover(){for(;;){const c0=co(g);let best=null,bs=0;cand(g,0).forEach(n=>{if(tot(n)<=T){const s=c0-co(n);if(s>bs){bs=s;best=n}}});if(!best)break;g=best}}
+ function draw(){const x=c.x,t=tot(g),sk=T-t;x.clearRect(0,0,320,170);x.textAlign='center';
+  g.forEach((s,i)=>{const bx=10+i*52;x.strokeStyle=css('--mut');x.lineWidth=1.5;x.fillStyle=css('--cell');x.fillRect(bx,30,44,90);x.strokeRect(bx,30,44,90);x.beginPath();x.moveTo(bx,75);x.lineTo(bx+44,75);x.stroke();
+   x.font='13px system-ui';x.fillStyle=css('--fg');x.fillText('X'+SZ[s[0]],bx+22,58);x.fillStyle=css(VC[s[1]]);x.fillText(VT[s[1]],bx+22,102);
+   x.font='11px system-ui';x.fillStyle=css('--mut');x.fillText(dl(s,i).toFixed(2)+' ns',bx+22,138);x.fillText('G'+(i+1),bx+22,20)});
+  x.fillText('click a gate: top half = size, bottom half = Vt',160,162);
+  m.innerHTML=`Path delay <b>${t.toFixed(2)} ns</b> vs period <b>${T.toFixed(2)} ns</b> → slack <b style="color:${css(sk<0?'--w':'--ok')}">${sk.toFixed(2)} ns ${sk<0?'· VIOLATED':'· met'}</b><br>Area: <b>${ar(g)}</b> · leakage: <b>${lk(g)}</b> (relative units)`}
+ c.onclick=e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)*320/r.width,py=(e.clientY-r.top)*170/r.height,i=Math.floor((px-10)/52);if(i<0||i>5||px-10-i*52>44||py<30||py>120)return;const k=py<75?0:1;g[i][k]=(g[i][k]+1)%3;draw()};
+ b.append(c,m,sl('Clock period',.8,2.6,.05,1.8,v=>{T=v;draw()},v=>v.toFixed(2)+' ns'),rowOf(btn('Fix timing',()=>{fix();draw()}),btn('Recover area & leakage',()=>{recover();draw()},1),btn('Reset',()=>{g=LD.map(()=>[0,1]);draw()},1)));
+ b.append($('<p class="pdm">Fix timing upgrades whichever gate buys the most speed per unit of cost. Recover then downgrades whatever it can while still meeting the period. Tighten the clock and watch leakage climb as low-Vt cells appear.</p>'));
+}
+
+/* Lesson Q: retiming and pipelining */
+function lQ(b){
+ const c=cv(320,150),m=$('<div class="pdm"></div>'),D=[.5,.9,.4,.8,.6,.7],ov=.4,S=40,X0=40,bnd=[0];
+ D.forEach(d=>bnd.push(bnd[bnd.length-1]+d));
+ let reg=[0,0,0,0,0];
+ const stages=()=>{const cuts=[0,...reg.map((r,i)=>r?i+1:-1).filter(v=>v>0),6],st=[];for(let i=0;i<cuts.length-1;i++)st.push([cuts[i],cuts[i+1],bnd[cuts[i+1]]-bnd[cuts[i]]]);return st};
+ function draw(){const x=c.x,st=stages(),w=Math.max(...st.map(s=>s[2])),T=w+ov;x.clearRect(0,0,320,150);x.textAlign='center';x.font='11px system-ui';
+  D.forEach((d,i)=>{x.fillStyle=css('--cell');x.fillRect(X0+bnd[i]*S,30,d*S-2,40);x.fillStyle=css('--fg');x.fillText(d.toFixed(1),X0+bnd[i]*S+(d*S-2)/2,54)});
+  for(let j=1;j<6;j++){const xb=X0+bnd[j]*S-1;x.strokeStyle=css(reg[j-1]?'--a':'--line');x.lineWidth=reg[j-1]?4:1;x.setLineDash(reg[j-1]?[]:[3,3]);x.beginPath();x.moveTo(xb,22);x.lineTo(xb,78);x.stroke()}
+  x.setLineDash([]);[0,6].forEach(j=>{x.fillStyle=css('--fg');x.fillRect(X0+bnd[j]*S-3,22,4,56)});
+  st.forEach(s=>{const a=X0+bnd[s[0]]*S+2,e=X0+bnd[s[1]]*S-4;x.fillStyle=css(s[2]===w?'--w':'--b');x.fillRect(a,92,e-a,8);x.fillStyle=css('--fg');x.fillText(s[2].toFixed(1)+' ns',(a+e)/2,118)});
+  x.fillStyle=css('--mut');x.fillText('click between blocks to add or remove a register',160,142);
+  m.innerHTML=`Stages: <b>${st.length}</b> · slowest stage <b>${w.toFixed(1)} ns</b> + 0.4 ns flop overhead → shortest period <b>${T.toFixed(1)} ns</b> (<b>${Math.round(1000/T)} MHz</b>)<br>Registers: <b>${2+reg.filter(Boolean).length}</b> · latency: <b>${st.length} cycles</b>`}
+ c.onclick=e=>{const r=c.getBoundingClientRect(),px=(e.clientX-r.left)*320/r.width;for(let j=1;j<6;j++)if(Math.abs(px-(X0+bnd[j]*S))<12){reg[j-1]=1-reg[j-1];draw();return}};
+ b.append(c,m,sl('Auto-balance',0,5,1,0,v=>{let best=null,bw=1e9;for(let k=0;k<32;k++){if(k.toString(2).replace(/0/g,'').length!==v)continue;reg=[0,1,2,3,4].map(i=>(k>>i)&1);const w=Math.max(...stages().map(s=>s[2]));if(w<bw-1e-9){bw=w;best=reg}}reg=best;draw()},v=>v+' reg'));
+ b.append($('<p class="pdm">The fixed bars at each end are the input and output registers. More registers shorten the slowest stage and raise the clock speed, but add flops, power and cycles of latency, and returns shrink once the stages are balanced.</p>'));
+}
+
+/* Lesson U: global routing */
+function lU(b){
+ const W=10,H=7,S=34,NN=40,c=cv(W*S,H*S),m=$('<div class="pdm"></div>');
+ let cap=3,pen=0,seed=5,nets=[],use={},paths=[];
+ const key=(a,e)=>a<e?a+'-'+e:e+'-'+a,add=(p,d)=>p.forEach(k=>{use[k]=(use[k]||0)+d});
+ function route(n,pp=pen){const s=n[0][0]+n[0][1]*W,t=n[1][0]+n[1][1]*W,d=Array(W*H).fill(1e9),p=Array(W*H).fill(-1),dn=[];d[s]=0;
+  for(;;){let u=-1;for(let i=0;i<W*H;i++)if(!dn[i]&&(u<0||d[i]<d[u]))u=i;if(u<0||u===t)break;dn[u]=1;const x=u%W,y=Math.floor(u/W);
+   for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){const X=x+dx,Y=y+dy;if(X<0||Y<0||X>=W||Y>=H)continue;const v=X+Y*W,us=use[key(u,v)]||0,cost=1+pp*((us/cap)**2+(us>=cap?2:0));if(d[u]+cost<d[v]){d[v]=d[u]+cost;p[v]=u}}}
+  const out=[];for(let v=t;v!==s&&p[v]>=0;v=p[v])out.push(key(v,p[v]));return out}
+ function all(){use={};paths=[];nets.forEach((n,i)=>{paths[i]=route(n);add(paths[i],1)})}
+ function rip(){nets.forEach((n,i)=>{if(paths[i].some(k=>use[k]>cap)){add(paths[i],-1);paths[i]=route(n,Math.max(pen,3));add(paths[i],1)}})}
+ function mk(){const r=rng(seed);nets=Array.from({length:NN},()=>{let a,e;do{a=[Math.floor(r()*W),Math.floor(r()*H)];e=[Math.floor(r()*W),Math.floor(r()*H)]}while(Math.abs(a[0]-e[0])+Math.abs(a[1]-e[1])<3);return[a,e]});all()}
+ function draw(){const x=c.x;x.clearRect(0,0,W*S,H*S);
+  for(let i=0;i<W;i++)for(let j=0;j<H;j++){x.fillStyle=css('--cell');x.globalAlpha=.4;x.fillRect(i*S+2,j*S+2,S-4,S-4)}
+  x.globalAlpha=1;let ov=0,wl=0,mx=0,bad=0;
+  Object.entries(use).forEach(([k,u])=>{if(u<=0)return;const[a,e]=k.split('-').map(Number),ax=a%W*S+S/2,ay=Math.floor(a/W)*S+S/2,ex=e%W*S+S/2,ey=Math.floor(e/W)*S+S/2;
+   x.strokeStyle=css(u>cap?'--w':u>=cap*.6?'--a':'--ok');x.lineWidth=Math.min(12,1+u*1.6);x.lineCap='round';x.beginPath();x.moveTo(ax,ay);x.lineTo(ex,ey);x.stroke();
+   wl+=u;mx=Math.max(mx,u);if(u>cap){ov+=u-cap;bad++}});
+  x.lineCap='butt';x.fillStyle=css('--fg');nets.forEach(n=>n.forEach(q=>{x.beginPath();x.arc(q[0]*S+S/2,q[1]*S+S/2,2.5,0,6.3);x.fill()}));
+  m.innerHTML=`Overflowing edges: <b style="color:${css(bad?'--w':'--ok')}">${bad}</b> (total overflow ${ov}) · busiest edge: <b>${mx} / ${cap}</b> tracks · total wirelength: <b>${wl}</b> GCell edges`}
+ mk();
+ b.append(c,m,sl('Edge capacity',1,6,1,3,v=>{cap=v;draw()},v=>v+' tracks'),sl('Congestion penalty',0,6,1,0,v=>{pen=v;all();draw()},v=>v),
+  rowOf(btn('Rip-up & reroute',()=>{rip();draw()}),btn('Route all again',()=>{all();draw()},1),btn('New nets',()=>{seed=Math.floor(Math.random()*999)+1;mk();draw()},1)));
+ b.append($('<p class="pdm">Each square is a GCell and each line is the border between two of them. Green is comfortable, blue is nearly full and red is over capacity. Start at penalty 0: every net takes its shortest path and the middle jams. Raise the penalty to detour around full edges (wirelength rises), or press Rip-up &amp; reroute to redo only the nets on overflowing edges.</p>'));
+}
+
 const L=[
- {ch:'Foundations',t:'What is physical design?',fn:lF,tx:'<p>Physical design turns a <b>netlist</b> — a list of logic gates and how they connect — into a <b>layout</b>: the exact shapes on silicon that a factory can print. It is the bridge between logic design and a real chip.</p><div class="pdflow"><span>Floorplan</span><span>Placement</span><span>Clock tree</span><span>Routing</span><span>Timing signoff</span><span>DRC / LVS</span><span>GDSII</span></div><p>Every step trades off three things: <b>performance</b> (speed), <b>power</b> and <b>area</b> — often called PPA.</p>'},
+ {ch:'Foundations',t:'What is physical design?',fn:lF,tx:'<p>Physical design turns a <b>netlist</b> — a list of logic gates and how they connect — into a <b>layout</b>: the exact shapes on silicon that a factory can print. It is the bridge between logic design and a real chip.</p><div class="pdflow"><span>Synthesis</span><span>Floorplan</span><span>Placement</span><span>Clock tree</span><span>Routing</span><span>Timing signoff</span><span>DRC / LVS</span><span>GDSII</span></div><p>Every step trades off three things: <b>performance</b> (speed), <b>power</b> and <b>area</b> — often called PPA.</p>'},
  {ch:'Foundations',t:'Standard cells & rows',fn:lR,tx:'<p>Gates come as pre-drawn <b>standard cells</b>, all the same height, so they snap into <b>rows</b> like books on a shelf. Power rails run along the top and bottom of each row, and alternate rows are flipped so neighbours share a rail.</p><p>Placement then only has to choose which row and which horizontal slot each cell takes.</p>'},
+ {ch:'Synthesis',t:'What synthesis does',fn:lY,tx:'<p><b>Logic synthesis</b> turns RTL (a description of what the design should do) into a gate-level netlist built from cells in the technology library. It elaborates the code into generic gates, optimises the logic, then <b>maps</b> it onto real library cells while meeting timing, area and power targets.</p><p>Step through a tiny example and notice how restructuring the logic before mapping removes gates.</p>'},
+ {ch:'Synthesis',t:'Sizing & Vt swapping',fn:lZ,tx:'<p>The same gate comes in several drive strengths (X1, X2, X4) and threshold voltages. <b>Bigger</b> cells drive loads faster but take more area. <b>Low-Vt</b> cells switch faster but leak far more. Synthesis looks for the cheapest mix that still meets the clock period.</p><p>Click a gate to change its size or Vt, or let the tool do it for you.</p>'},
+ {ch:'Synthesis',t:'Retiming & pipelining',fn:lQ,tx:'<p>If one stage of logic is too slow, you can add registers (<b>pipelining</b>) or move them across the logic (<b>retiming</b>) so every stage has a similar delay. The clock can then run faster, at the cost of extra flops, power and latency.</p><p>Click between blocks to add or remove registers, or use the slider and let the optimiser balance them.</p>'},
  {ch:'Floorplanning',t:'Die size & utilization',fn:lA,tx:'<p><b>Utilization</b> is the share of the die covered by cells. Drag it to see how die size, free space and routing congestion change.</p>'},
  {ch:'Floorplanning',t:'Macros & power grid',fn:lM,tx:'<p>Big blocks like memories (<b>macros</b>) are placed first, usually along the edges, leaving open space for logic. Then a <b>power grid</b> of wide metal stripes delivers VDD and VSS across the die.</p><p>Current flowing through that grid causes <b>IR drop</b>: the farther from a power pad, the lower the voltage, and the slower the gates.</p>'},
  {ch:'Placement',t:'Wirelength',fn:lB,tx:'<p>Placement picks a spot for every cell. Shorter wires are faster and use less power, so tools minimise <b>half-perimeter wirelength (HPWL)</b>: for each net, the half-perimeter of the box around its pins, summed over all nets.</p>'},
  {ch:'Placement',t:'Simulated annealing',fn:lN,tx:'<p>The greedy search in the last lesson keeps only swaps that help, so it gets stuck in a <b>local minimum</b>: a layout where no single swap improves things, but a better one exists.</p><p><b>Simulated annealing</b> borrows an idea from cooling metal. A worse swap is accepted with probability e<sup>−Δ/T</sup>, where Δ is how much longer the wires get and T is the temperature. While T is high the placer wanders freely; as T falls it becomes pickier and settles into a good arrangement.</p>'},
  {ch:'Clock tree',t:'Why skew matters',fn:lT,tx:'<p>The clock must reach every flip-flop at nearly the same moment. <b>Clock tree synthesis</b> builds a balanced network of buffers, often H-shaped, so every branch has equal delay.</p><p>The difference in arrival time between two flops is <b>skew</b>. Try the skew slider in the setup slack lesson to see how it helps or hurts timing.</p>'},
+ {ch:'Routing',t:'Global routing',fn:lU,tx:'<p>Before any wire is drawn exactly, <b>global routing</b> divides the die into a grid of <b>GCells</b> and decides which GCells each net passes through. Every border between two GCells has a <b>capacity</b>: how many routing tracks fit across it. When more nets cross than fit, that edge <b>overflows</b>, and detail routing will struggle there with shorts and detours.</p><p>The router prices each edge higher as it fills up, so later nets steer around the crowd. <b>Rip-up and reroute</b> then removes the nets sitting on overflowing edges and routes them again.</p>'},
  {ch:'Routing',t:'Maze routing',fn:lC,tx:'<p>Lee’s algorithm floods outward from the source one step at a time, like ripples in a pond, until it touches the target. Tracing back gives a shortest path. Block the way and watch it detour.</p>'},
  {ch:'Routing',t:'Layers & vias',fn:lV,tx:'<p>Chips stack ten or more metal layers. Lower layers are thin and dense; upper ones are thick and fast, used for power and clocks. Neighbouring layers run in opposite directions (horizontal, then vertical) and connect through <b>vias</b>, which add resistance. Fewer vias usually means a faster wire.</p>'},
  {ch:'Timing',t:'Setup slack',fn:lD,tx:'<p>Data leaves one flip-flop, travels through logic, and must arrive at the next one <b>before</b> the next clock edge, with a little time to spare (setup). The leftover margin is <b>slack</b>. Negative slack means the chip fails at this speed.</p>'},
