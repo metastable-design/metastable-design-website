@@ -19,6 +19,11 @@
 <style>
 /* Everything below is scoped to .pd so it cannot affect the shared site styles */
 .pd{--bg:#fff;--panel:#f6f8fa;--fg:#0f1720;--mut:#5b6776;--card:#fff;--line:#e1e6ec;--a:#0056d2;--b:#0d9488;--w:#dc2626;--ok:#0f9d58;--cell:#e6ebf1;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;--sans:"IBM Plex Sans",system-ui,sans-serif;color:var(--fg)}
+/* Tighten the space between the hero buttons and the course (adjust the two values below) */
+main section.pd-hero{padding-bottom:8px}
+main section.pd-hero .cta-row{margin-bottom:0}
+main section#pd-course{padding-top:8px}
+.pd .pd-prog{margin-top:0}
 .pd *{box-sizing:border-box}
 .pd p{margin:0 0 12px;line-height:1.6}
 .pd .pd-prog{font:12px var(--mono);color:var(--mut);margin-bottom:10px}
@@ -76,7 +81,7 @@
 
 <main>
 
-  <section class="no-rule">
+  <section class="no-rule pd-hero">
     <div class="wrap">
       <p class="eyebrow">// interactive course · physical design</p>
       <h1>Physical Design 101</h1>
@@ -88,7 +93,7 @@
     </div>
   </section>
 
-  <section id="pd-course">
+  <section id="pd-course" class="no-rule">
     <div class="wrap">
       <div class="pd" id="pd-root">
         <div class="pd-prog" id="pd-prog"></div>
