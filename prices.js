@@ -45,4 +45,5 @@ export const PRICES = {
   'rcg-comp-arch-pd-mock': 35,
   'power-analysis-mock': 35,
   'analytical-cmos-mock': 30,
+  'all-about-derates': 50,
 };
