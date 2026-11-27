@@ -991,3 +991,13 @@ details.product-card[open] .course-body{
   color: var(--accent);
   background: var(--accent-dim);
 }
+
+<style>
+/* VLSI 101 drop-down in the main menu */
+.nav-dd{position:relative;display:inline-block}
+.nav-dd-caret{font-size:.7em;margin-left:3px}
+.nav-dd-menu{display:none;position:absolute;top:100%;left:0;min-width:210px;background:#fff;border:1px solid #e1e6ec;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,32,.08);padding:6px;z-index:60}
+.nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu,.nav-dd.open .nav-dd-menu{display:block}
+.nav-dd-menu a{display:block;padding:8px 12px;border-radius:6px;white-space:nowrap;margin:0}
+.nav-dd-menu a:hover{background:#f6f8fa}
+</style>
