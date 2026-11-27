@@ -54,6 +54,13 @@ main section#pd-course{padding-top:8px}
 .pd .pdflow{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
 .pd .pdflow span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px}
 .pd .pdflow span:not(:last-child)::after{content:" \2192";color:var(--a)}
+/* VLSI 101 drop-down in the main menu */
+.nav-dd{position:relative;display:inline-block}
+.nav-dd-caret{font-size:.7em;margin-left:3px}
+.nav-dd-menu{display:none;position:absolute;top:100%;left:0;min-width:210px;background:#fff;border:1px solid #e1e6ec;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,32,.08);padding:6px;z-index:60}
+.nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu,.nav-dd.open .nav-dd-menu{display:block}
+.nav-dd-menu a{display:block;padding:8px 12px;border-radius:6px;white-space:nowrap;margin:0}
+.nav-dd-menu a:hover{background:#f6f8fa}
 </style>
 </head>
 <body>
@@ -65,7 +72,14 @@ main section#pd-course{padding-top:8px}
       <nav class="navlinks">
       <a href="index.html">Home</a>
       <a href="webinars.html">Webinars</a>
-      <a href="physical-design-101.html" class="active">Physical Design 101</a>
+      <div class="nav-dd">
+        <a href="vlsi-101.html" class="nav-dd-toggle active" aria-haspopup="true" aria-expanded="false">VLSI 101 <span class="nav-dd-caret">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="vlsi-101.html">Overview</a>
+          <a href="physical-design-101.html" class="active">Physical Design 101</a>
+          <a href="dft-101.html">DFT 101</a>
+        </div>
+      </div>
       <a href="testimonials.html">Testimonials</a>
       <a href="jobs.html">VLSI Job Openings</a>
       <a href="#contact">Contact</a>
@@ -508,6 +522,11 @@ function show(i){cur=i;seen.add(i);drawNav();const l=L[i];main.innerHTML=`<div c
 show(0);
 
 })();
+</script>
+<script>
+(function(){var d=document.querySelector('.nav-dd');if(!d)return;var t=d.querySelector('.nav-dd-toggle');
+t.addEventListener('click',function(e){if(matchMedia('(hover: none)').matches&&!d.classList.contains('open')){e.preventDefault();d.classList.add('open');t.setAttribute('aria-expanded','true')}});
+document.addEventListener('click',function(e){if(!d.contains(e.target)){d.classList.remove('open');t.setAttribute('aria-expanded','false')}});})();
 </script>
 </body>
 </html>
