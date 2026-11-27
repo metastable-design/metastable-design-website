@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DFT 101 — Metastable Design</title>
+<meta name="description" content="DFT 101: interactive lessons on faults, scan, ATPG, compression, at-speed test and MBIST, from Metastable Design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="icon" href="favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="auth.css">
+<style>
+/* Everything below is scoped to .pd so it cannot affect the shared site styles */
+.pd{--bg:#fff;--panel:#f6f8fa;--fg:#0f1720;--mut:#5b6776;--card:#fff;--line:#e1e6ec;--a:#0056d2;--b:#0d9488;--w:#dc2626;--ok:#0f9d58;--cell:#e6ebf1;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;--sans:"IBM Plex Sans",system-ui,sans-serif;color:var(--fg)}
+/* Tighten the space between the hero buttons and the course (adjust the two values below) */
+main section.pd-hero{padding-bottom:8px}
+main section.pd-hero .cta-row{margin-bottom:0}
+main section#pd-course{padding-top:8px}
+.pd .pd-prog{margin-top:0}
+.pd *{box-sizing:border-box}
+.pd p{margin:0 0 12px;line-height:1.6}
+.pd .pd-prog{font:12px var(--mono);color:var(--mut);margin-bottom:10px}
+.pd .pd-grid{display:block}
+@media(min-width:800px){.pd .pd-grid{display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}}
+.pd #pd-nav{max-height:240px;overflow:auto;margin-bottom:16px}
+@media(min-width:800px){.pd #pd-nav{max-height:none;margin:0;position:sticky;top:90px}}
+.pd #pd-nav h3{margin:16px 0 4px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.pd #pd-nav h3:first-child{margin-top:0}
+.pd #pd-nav button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--fg);padding:6px 10px;border-radius:8px;font:400 14px/1.4 var(--sans);cursor:pointer}
+.pd #pd-nav button:hover{background:var(--panel)}
+.pd #pd-nav button.on{background:var(--a);color:#fff}
+.pd #pd-nav button .t{float:right;font:11px var(--mono);color:var(--a)}
+.pd #pd-nav button.on .t{color:#fff;opacity:.85}
+.pd #pd-main{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;min-width:0}
+.pd #pd-main h2{margin:4px 0 10px;font-size:26px;line-height:1.2}
+.pd .pdk{font:500 12px var(--mono);color:var(--a);letter-spacing:.04em;text-transform:uppercase}
+.pd canvas{width:100%;height:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;display:block;margin:12px 0}
+.pd .pdm{font-size:14px;color:var(--mut);margin:4px 0 12px}
+.pd .pdm b{color:var(--fg)}
+.pd .pdsl{display:grid;grid-template-columns:120px 1fr 80px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.pd .pdsl input{width:100%;accent-color:var(--a)}
+.pd .pdrow{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pd .pdb,.pd .pdpg button{background:var(--a);color:#fff;border:1px solid var(--a);border-radius:8px;padding:8px 16px;font:500 14px var(--sans);cursor:pointer}
+.pd .pdb.alt,.pd .pdpg button.alt{background:#fff;color:var(--fg);border-color:var(--line)}
+.pd .pdb:hover,.pd .pdpg button:hover{filter:brightness(.95)}
+.pd .pdpg{display:flex;justify-content:space-between;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+.pd .pdflow{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.pd .pdflow span{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px}
+.pd .pdflow span:not(:last-child)::after{content:" \2192";color:var(--a)}
+/* VLSI 101 drop-down in the main menu */
+.nav-dd{position:relative;display:inline-block}
+.nav-dd-caret{font-size:.7em;margin-left:3px}
+.nav-dd-menu{display:none;position:absolute;top:100%;left:0;min-width:210px;background:#fff;border:1px solid #e1e6ec;border-radius:10px;box-shadow:0 8px 24px rgba(15,23,32,.08);padding:6px;z-index:60}
+.nav-dd:hover .nav-dd-menu,.nav-dd:focus-within .nav-dd-menu,.nav-dd.open .nav-dd-menu{display:block}
+.nav-dd-menu a{display:block;padding:8px 12px;border-radius:6px;white-space:nowrap;margin:0}
+.nav-dd-menu a:hover{background:#f6f8fa}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><img src="metastable-logo.svg" alt="Metastable Design" class="brand-logo"></a>
+    <div class="nav-right">
+      <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="webinars.html">Webinars</a>
+      <div class="nav-dd">
+        <a href="vlsi-101.html" class="nav-dd-toggle active" aria-haspopup="true" aria-expanded="false">VLSI 101 <span class="nav-dd-caret">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="vlsi-101.html">Overview</a>
+          <a href="physical-design-101.html">Physical Design 101</a>
+          <a href="dft-101.html" class="active">DFT 101</a>
+        </div>
+      </div>
+      <a href="testimonials.html">Testimonials</a>
+      <a href="jobs.html">VLSI Job Openings</a>
+      <a href="#contact">Contact</a>
+    </nav>
+          <div id="auth-header-btn"></div>
+      <button id="cart-toggle" class="cart-btn" aria-label="View cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-count">0</span>
+    </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="no-rule pd-hero">
+    <div class="wrap">
+      <p class="eyebrow">// interactive course · design for test</p>
+      <h1>DFT 101</h1>
+      <p class="lede">From defects to test patterns. Shift a scan chain, hunt down stuck-at faults, run a MARCH test, and see for yourself how each choice changes coverage, test time and cost.</p>
+      <div class="cta-row">
+        <a href="#pd-course" class="btn btn-primary">Start learning</a>
+        <a href="webinars.html" class="btn btn-ghost">Browse webinars</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pd-course" class="no-rule">
+    <div class="wrap">
+      <div class="pd" id="pd-root">
+        <div class="pd-prog" id="pd-prog"></div>
+        <div class="pd-grid"><div id="pd-nav"></div><div id="pd-main"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Want the full DFT picture?</h2>
+      <p class="section-lede" style="margin-bottom:20px;">These lessons use simplified models. Our DFT webinars cover scan, ATPG, at-speed test and MBIST on real designs, taught by engineers who do this every day.</p>
+      <div class="cta-row">
+        <a href="webinars.html" class="btn btn-primary">See the full catalog →</a>
+        <a href="https://discord.gg/4RN7esTd3G" class="btn btn-ghost">Join the Discord</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping cart">
+  <div class="cart-drawer-head">
+    <h3>Your cart</h3>
+    <button id="cart-close" class="cart-close" aria-label="Close cart">×</button>
+  </div>
+  <div id="cart-items" class="cart-items"></div>
+  <div class="cart-drawer-foot">
+    <div class="cart-subtotal-row">
+      <span>Subtotal</span>
+      <span id="cart-subtotal">$0</span>
+    </div>
+    <button id="cart-checkout" class="btn btn-primary cart-checkout-btn" disabled>Checkout with Razorpay</button>
+  </div>
+</aside>
+
+<footer id="contact">
+  <div class="wrap footer-row">
+    <span>Metastable Design — where industry teaches.</span>
+    <div class="footer-links">
+      <a href="webinars.html">Webinars</a>
+      <a href="https://discord.gg/4RN7esTd3G">Discord</a>
+      <a href="mailto:metastable@metastable-design.org">metastable@metastable-design.org</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module" src="auth.js"></script>
+<script>
+(function(){
+
+
+const $=h=>{const d=document.createElement('div');d.innerHTML=h;return d.firstElementChild};
+const css=n=>getComputedStyle(document.getElementById('pd-root')).getPropertyValue(n).trim();
+const rng=s=>()=>(s=(s*1664525+1013904223)>>>0)/4294967296;
+const shuf=(a,r)=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function cv(w,h){const c=document.createElement('canvas'),d=devicePixelRatio||1;c.width=w*d;c.height=h*d;c.style.maxWidth=w+'px';c.x=c.getContext('2d');c.x.scale(d,d);return c}
+function sl(lab,min,max,step,v,cb,fmt=v=>v){const d=$(`<label class="pdsl"><span>${lab}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}"><b></b></label>`),i=d.querySelector('input'),o=d.querySelector('b');const f=()=>{o.textContent=fmt(+i.value);cb(+i.value)};i.oninput=f;f();return d}
+function btn(t,fn,alt){const b=$(`<button class="pdb${alt?' alt':''}">${t}</button>`);b.onclick=fn;return b}
+const rowOf=(...e)=>{const r=$('<div class="pdrow"></div>');e.forEach(x=>r.append(x));return r};
+
+/* 1 Why DFT: escapes vs coverage */
+function l1(b){const c=cv(320,150),m=$('<div class="pdm"></div>');let Y=.8,FC=.95;
+ const dl=(y,f)=>(1-Math.pow(y,1-f))*1e6;
+ function draw(){const x=c.x,top=dl(Y,.8)||1;x.clearRect(0,0,320,150);x.strokeStyle=css('--line');x.lineWidth=1;x.beginPath();x.moveTo(30,120);x.lineTo(300,120);x.moveTo(30,15);x.lineTo(30,120);x.stroke();
+  x.strokeStyle=css('--a');x.lineWidth=2;x.beginPath();for(let i=0;i<=40;i++){const f=.8+.2*i/40,px=30+270*i/40,py=120-dl(Y,f)/top*100;i?x.lineTo(px,py):x.moveTo(px,py)}x.stroke();
+  x.fillStyle=css('--w');x.beginPath();x.arc(30+270*(FC-.8)/.2,120-dl(Y,FC)/top*100,5,0,6.3);x.fill();
+  x.fillStyle=css('--mut');x.font='11px system-ui';x.textAlign='center';x.fillText('80%',30,136);x.fillText('fault coverage',165,146);x.fillText('100%',300,136);x.textAlign='left';x.fillText('escapes (DPPM)',36,22);
+  const d=dl(Y,FC);m.innerHTML=`Escapes: about <b style="color:${css(d>1000?'--w':'--ok')}">${Math.round(d).toLocaleString()} DPPM</b> (bad chips shipped per million) at ${Math.round(Y*100)}% yield and ${(FC*100).toFixed(1)}% coverage. Automotive customers expect single digits.`}
+ b.append(c,m,sl('Process yield',50,95,1,80,v=>{Y=v/100;draw()},v=>v+'%'),sl('Fault coverage',80,100,.1,95,v=>{FC=v/100;draw()},v=>v.toFixed(1)+'%'));
+ b.append($('<p class="pdm">Uses the Williams–Brown model: escapes = 1 − yield<sup>(1 − coverage)</sup>. Low-yield processes need much higher coverage to ship the same quality.</p>'));
+}
+
+/* 3 Stuck-at faults */
+function l3(b){const m=$('<div class="pdm"></div>'),NM=['a','b','c','n1 (a AND b)','y'];let site=3,sv=0;
+ const ev=(a,e,f,fs)=>{const v={a,b:e,c:f};if(fs===0)v.a=sv;if(fs===1)v.b=sv;if(fs===2)v.c=sv;let n1=v.a&v.b;if(fs===3)n1=sv;let y=n1|v.c;if(fs===4)y=sv;return y};
+ function draw(){let rows='',det=0;for(let i=0;i<8;i++){const a=i>>2&1,e=i>>1&1,f=i&1,g=ev(a,e,f,-1),h=ev(a,e,f,site),d=g!==h;if(d)det++;rows+=`<tr style="border-top:1px solid ${css('--line')};${d?'font-weight:600':''}"><td>${a}${e}${f}</td><td align=center>${g}</td><td align=center>${h}</td><td style="color:${css(d?'--ok':'--mut')}">${d?'✓ detects':'–'}</td></tr>`}
+  m.innerHTML=`Circuit: y = (a AND b) OR c · fault: <b>${NM[site]} stuck-at-${sv}</b><table style="width:100%;border-collapse:collapse;font-size:14px;margin:8px 0"><tr style="color:${css('--mut')}"><th align=left>a b c</th><th>good y</th><th>faulty y</th><th align=left>result</th></tr>${rows}</table><b>${det}</b> of 8 vectors detect this fault. A vector must <b>activate</b> the fault (drive the net to the opposite value) and <b>propagate</b> its effect to an output.`}
+ b.append(m,sl('Fault site',0,4,1,3,v=>{site=v;draw()},v=>NM[v].split(' ')[0]),rowOf(btn('Toggle stuck-at-0 / stuck-at-1',()=>{sv=1-sv;draw()})));
+}
+
+/* 4 Scan chain */
+function l4(b){const c=cv(320,170),m=$('<div class="pdm"></div>');let Q,si,p,cyc,out,mode,seed=3;
+ const fn=q=>[q[1]^q[2],q[0]&q[3],q[2]|q[0],q[1]^q[3]];
+ function init(){const r=rng(seed);si=Array.from({length:16},()=>r()<.5?1:0);Q=[0,0,0,0];p=0;cyc=0;out=[];mode='reset';draw()}
+ function shift(){out.push(Q[3]);Q=[si[p%16],Q[0],Q[1],Q[2]];p++;cyc++;mode='shift (SE=1)'}
+ function draw(){const x=c.x;x.clearRect(0,0,320,170);x.textAlign='center';x.font='13px system-ui';
+  Q.forEach((q,i)=>{const bx=60+i*62;x.strokeStyle=css('--mut');x.lineWidth=1.5;x.fillStyle=css(q?'--a':'--cell');x.fillRect(bx,60,44,44);x.strokeRect(bx,60,44,44);x.fillStyle=q?'#ffffff':css('--fg');x.fillText(q,bx+22,87);x.fillStyle=css('--mut');x.font='11px system-ui';x.fillText('FF'+(i+1),bx+22,120);x.font='13px system-ui';
+   if(i){x.strokeStyle=css('--b');x.beginPath();x.moveTo(bx-18,82);x.lineTo(bx,82);x.stroke()}});
+  x.fillStyle=css('--b');x.fillText('SI='+si[p%16],28,86);x.fillText('SO='+Q[3],300,86);
+  x.fillStyle=css('--fg');x.fillText('SE = '+(mode.startsWith('shift')?1:0)+'  (each flop has a mux: D or scan-in)',160,30);
+  m.innerHTML=`Mode: <b>${mode}</b> · clock cycles: <b>${cyc}</b><br>Scan-out so far: <b>${out.join('')||'–'}</b> · next pattern bits waiting: <b>${Array.from({length:6},(_,k)=>si[(p+k)%16]).join('')}…</b>`}
+ b.append(c,m,rowOf(btn('Shift 1 clock',()=>{shift();draw()}),btn('Shift 4 clocks',()=>{for(let i=0;i<4;i++)shift();draw()}),btn('Capture 1 clock',()=>{Q=fn(Q);cyc++;mode='capture (SE=0)';draw()}),btn('New pattern',()=>{seed=Math.floor(Math.random()*999)+1;init()},1)));
+ b.append($('<p class="pdm">Shift four times to load a pattern, capture once so the functional logic produces a response, then shift again to unload it. The unload overlaps the next pattern’s load, so each extra pattern costs about one chain length of clocks.</p>'));
+ init();
+}
+
+/* 5 Scan DRC checklist */
+function l5(b){const I=[['Clock driven by internal logic, not a pin',18,'add a test-mode mux so the tester controls it'],['Async reset driven by functional logic',6,'gate it so it stays inactive in test'],['ICG enable not forced on in test',12,'OR the enable with test_enable'],['Latch that stays opaque',3,'make it transparent in test mode'],['Tri-state bus that can fight',2,'force one driver on in test']],fx=I.map(()=>0),cov=$('<div class="pdm"></div>');
+ const rows=I.map((it,i)=>{const r=btn('',()=>{fx[i]^=1;upd()},1);r.style.cssText='display:block;width:100%;text-align:left;margin:4px 0';return r});
+ function upd(){rows.forEach((r,i)=>{r.innerHTML=(fx[i]?'✓ Fixed: ':'✗ ')+I[i][0]+' <span style="opacity:.7">— '+(fx[i]?I[i][2]:'costs up to '+I[i][1]+'% coverage')+'</span>'});
+  const loss=I.reduce((a,it,i)=>a+(fx[i]?0:it[1]),0);cov.innerHTML=`Achievable scan coverage: <b style="color:${css(loss>10?'--w':'--ok')}">${100-loss}%</b> · violations left: <b>${fx.filter(v=>!v).length}</b><br>Scan DRC fails when test can’t control or observe a flop, so those flops drop out of the chain or can’t be tested. (Losses are simplified and added together.)`}
+ b.append(...rows,cov);upd();
+}
+
+/* 6 Lock-up latch */
+function l6(b){const c=cv(320,130),m=$('<div class="pdm"></div>');let T=2,sk=.5,lk=0;
+ function draw(){const x=c.x,S=60,x0=20,hold=.3+(lk?T/2:0)-.05-sk;x.clearRect(0,0,320,130);
+  const wave=(y,s,col)=>{x.strokeStyle=css(col);x.lineWidth=2;x.beginPath();let pv=null;for(let t=0;t<=4;t+=.01){const lv=((((t-s)%T)+T)%T)<T/2?1:0,py=y-(lv?22:0);if(pv===null)x.moveTo(x0+t*S,py);else{if(py!==pv)x.lineTo(x0+t*S,pv);x.lineTo(x0+t*S,py)}pv=py}x.stroke()};
+  wave(50,0,'--a');wave(105,sk,'--b');x.fillStyle=css('--mut');x.font='11px system-ui';x.textAlign='left';x.fillText('launch clock',x0,14);x.fillText('capture clock (later by skew)',x0,69);
+  const arr=.3+(lk?T/2:0);x.strokeStyle=css(hold<0?'--w':'--ok');x.lineWidth=2;x.setLineDash([4,3]);x.beginPath();x.moveTo(x0+arr*S,20);x.lineTo(x0+arr*S,120);x.stroke();x.setLineDash([]);
+  x.fillStyle=css(hold<0?'--w':'--ok');x.fillText('new data arrives',Math.min(x0+arr*S+4,220),30);
+  m.innerHTML=`Hold slack = clk→Q 0.30 ${lk?'+ half-cycle latch delay ':''}− hold 0.05 − skew = <b style="color:${css(hold<0?'--w':'--ok')}">${hold.toFixed(2)} ns ${hold<0?'· VIOLATED: data races through':'· met'}</b>`}
+ b.append(c,m,sl('Clock skew',0,1,.05,.5,v=>{sk=v;draw()},v=>v.toFixed(2)+' ns'),sl('Clock period',1,4,.5,2,v=>{T=v;draw()},v=>v.toFixed(1)+' ns'),rowOf(btn('Toggle lock-up latch',()=>{lk=1-lk;draw()})));
+ b.append($('<p class="pdm">When scan chains cross between clock domains, skew can make the next flop capture the new bit instead of the old one. A lock-up latch holds the data for half a cycle, restoring the hold margin without slowing the shift clock.</p>'));
+}
+
+/* 7 Clock staggering and test power */
+function l7(b){const c=cv(320,150),m=$('<div class="pdm"></div>');let G=1;
+ function draw(){const x=c.x,pk=100/G;x.clearRect(0,0,320,150);x.strokeStyle=css('--line');x.beginPath();x.moveTo(20,125);x.lineTo(305,125);x.stroke();
+  for(let g=0;g<G;g++){const bx=30+g*(270/G),w=Math.min(24,250/G);x.fillStyle=css(pk>40?'--w':'--ok');x.fillRect(bx,125-pk,w,pk)}
+  x.strokeStyle=css('--a');x.setLineDash([5,4]);x.beginPath();x.moveTo(20,85);x.lineTo(305,85);x.stroke();x.setLineDash([]);
+  x.fillStyle=css('--a');x.font='11px system-ui';x.textAlign='left';x.fillText('IR-drop safe limit',24,80);x.fillStyle=css('--mut');x.fillText('time →  (each bar is one group of flops switching)',24,142);
+  m.innerHTML=`Peak switching current: <b style="color:${css(pk>40?'--w':'--ok')}">${Math.round(pk)}%</b> of the unstaggered case · time spread: <b>${((G-1)*.2).toFixed(1)} ns</b> · lock-up latches needed: <b>${G-1}</b>`}
+ b.append(c,m,sl('Staggered groups',1,8,1,1,v=>{G=v;draw()},v=>v));
+ b.append($('<p class="pdm">If every scan flop toggles on the same shift edge, the surge can drop the supply and corrupt the test. Staggering the clock into groups spreads that current out, at the price of extra lock-up latches and a longer clock tree.</p>'));
+}
+
+/* 8 Test time and compression */
+function l8(b){const m=$('<div class="pdm"></div>');let F=2e6,CH=1000,IO=16,P=8000;
+ const t=cy=>{const s=cy/1e8;return s<1?(s*1e3).toFixed(0)+' ms':s<120?s.toFixed(1)+' s':(s/60).toFixed(1)+' min'},bits=x=>x>1e9?(x/1e9).toFixed(1)+' Gbit':(x/1e6).toFixed(0)+' Mbit';
+ function draw(){const L=F/CH,L0=F/IO,c1=P*(L+1),c0=P*(L0+1),v1=P*IO*L*2,v0=P*IO*L0*2;
+  m.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:14px"><tr style="color:${css('--mut')}"><th align=left></th><th align=right>No compression</th><th align=right>With CODEC</th></tr>`+
+  `<tr style="border-top:1px solid ${css('--line')}"><td>Chain length</td><td align=right>${Math.round(L0).toLocaleString()}</td><td align=right><b>${Math.round(L).toLocaleString()}</b></td></tr>`+
+  `<tr style="border-top:1px solid ${css('--line')}"><td>Test time at 100 MHz shift</td><td align=right>${t(c0)}</td><td align=right><b style="color:${css('--ok')}">${t(c1)}</b></td></tr>`+
+  `<tr style="border-top:1px solid ${css('--line')}"><td>Tester data</td><td align=right>${bits(v0)}</td><td align=right><b style="color:${css('--ok')}">${bits(v1)}</b></td></tr></table>Compression ratio: <b>${(CH/IO).toFixed(0)}×</b> (${CH.toLocaleString()} internal chains fed by ${IO} tester channels)`}
+ b.append(m,sl('Scan flops',.1,10,.1,2,v=>{F=v*1e6;draw()},v=>v.toFixed(1)+' M'),sl('Internal chains',100,2000,100,1000,v=>{CH=v;draw()},v=>v),sl('Tester channels',4,64,4,16,v=>{IO=v;draw()},v=>v),sl('Patterns',2000,20000,1000,8000,v=>{P=v;draw()},v=>v.toLocaleString()));
+ b.append($('<p class="pdm">Test time is patterns × (chain length + 1) clocks. A decompressor/compressor (CODEC) lets a few tester pins drive many short internal chains. Real compression raises the pattern count a little and loses some diagnosis detail; this model keeps patterns fixed.</p>'));
+}
+
+/* 9 Test points */
+function l9(b){const m=$('<div class="pdm"></div>');let N=10,K=6,cp=0,op=0;
+ function draw(){const p1=cp?.5:Math.pow(.5,N),ob=op?1:Math.pow(.5,K),p=p1*ob,need=p>=1?1:Math.log(.05)/Math.log(1-p);
+  const f=v=>v<1e-3?v.toExponential(1):v.toFixed(3);
+  m.innerHTML=`Chance a random pattern sets the net to 1: <b>${f(p1)}</b> ${cp?'(control point forces it in test)':''}<br>Chance the effect reaches an output: <b>${f(ob)}</b> ${op?'(observation point captures it)':''}<br>Random patterns for 95% confidence of catching a stuck-at-0: <b style="color:${css(need>1e5?'--w':need>1e3?'--a':'--ok')}">${Math.ceil(need).toLocaleString()}</b>`}
+ const cb=btn('',()=>{cp^=1;ub()},1),ob=btn('',()=>{op^=1;ub()},1);
+ function ub(){cb.textContent=(cp?'✓':'+')+' Control point';ob.textContent=(op?'✓':'+')+' Observation point';draw()}
+ b.append(m,sl('AND fan-in feeding the net',2,20,1,10,v=>{N=v;draw()},v=>v),sl('Logic depth to an output',0,12,1,6,v=>{K=v;draw()},v=>v),rowOf(cb,ob));ub();
+ b.append($('<p class="pdm">A net driven by a wide AND is almost always 0, so random patterns rarely test it (poor <b>controllability</b>). A net buried under many gates rarely shows up at an output (poor <b>observability</b>). Test points add a tiny cell to fix either problem.</p>'));
+}
+
+/* 10 Transition faults at speed */
+function l10(b){const c=cv(320,120),m=$('<div class="pdm"></div>'),D=1.3,ts=.1;let T=3,dd=.4;
+ function draw(){const x=c.x,S=60,x0=30,arr=D+dd+ts,det=arr>T;x.clearRect(0,0,320,120);
+  x.fillStyle=css('--b');x.fillRect(x0,40,D*S,26);x.fillStyle=css('--w');x.fillRect(x0+D*S,40,dd*S,26);x.fillStyle=css('--mut');x.fillRect(x0+(D+dd)*S,40,ts*S,26);
+  x.strokeStyle=css(det?'--ok':'--w');x.lineWidth=2;x.setLineDash([5,4]);x.beginPath();x.moveTo(x0+T*S,25);x.lineTo(x0+T*S,85);x.stroke();x.setLineDash([]);
+  x.fillStyle=css('--fg');x.font='11px system-ui';x.textAlign='left';x.fillText('launch',x0,20);x.fillText('nominal path 1.3 ns',x0,82);x.fillText('defect delay',x0+D*S,98);x.fillStyle=css(det?'--ok':'--w');x.fillText('capture edge',Math.min(x0+T*S+4,240),20);
+  m.innerHTML=`Data needs <b>${arr.toFixed(2)} ns</b> (path + defect + setup); capture edge at <b>${T.toFixed(1)} ns</b> → <b style="color:${css(det?'--ok':'--w')}">${det?'FAIL seen: defective chip rejected':'passes: the slow defect ESCAPES'}</b>`}
+ const s=sl('Capture clock period',1,4,.1,3,v=>{T=v;draw()},v=>v.toFixed(1)+' ns'),st=(v)=>{const i=s.querySelector('input');i.value=v;i.oninput()};
+ b.append(c,m,s,sl('Defect extra delay',0,1.5,.1,.4,v=>{dd=v;draw()},v=>v.toFixed(1)+' ns'),rowOf(btn('At-speed capture (1.5 ns)',()=>st(1.5)),btn('Slow stuck-at clock (4 ns)',()=>st(4),1)));
+ b.append($('<p class="pdm">A transition fault is a gate that is slow to rise or fall. Scan tests launch a transition, then capture one functional clock later (launch-on-capture or launch-on-shift). Capturing with a slow clock lets a small extra delay hide; path-delay faults target specific long paths the same way.</p>'));
+}
+
+/* 11 MBIST and MARCH C- */
+function l11(b){const c=cv(320,150),m=$('<div class="pdm"></div>'),N=8,F=['No fault','Cell 3 stuck-at-1','Cell 5 stuck-at-0','Cell 2 cannot rise (0→1)','Writing 1 to cell 1 flips cell 6'],
+ EL=[['u',['w0']],['u',['r0','w1']],['u',['r1','w0']],['d',['r0','w1']],['d',['r1','w0']],['d',['r0']]],NM=['⇑(w0)','⇑(r0,w1)','⇑(r1,w0)','⇓(r0,w1)','⇓(r1,w0)','⇓(r0)'],ops=[];
+ EL.forEach(([d,o],e)=>{const a=[...Array(N).keys()];if(d==='d')a.reverse();a.forEach(ad=>o.forEach(op=>ops.push({e,ad,op})))});
+ let f=0,mem,pc,fail;
+ function init(){mem=Array(N).fill(0);if(f===1)mem[3]=1;pc=0;fail=null;draw()}
+ function step(){if(pc>=ops.length)return;const o=ops[pc++],v=+o.op[1];
+  if(o.op[0]==='w'){const old=mem[o.ad];let w=v;if(f===3&&o.ad===2&&v===1)w=old;mem[o.ad]=w;if(f===1&&o.ad===3)mem[3]=1;if(f===2&&o.ad===5)mem[5]=0;if(f===4&&o.ad===1&&old===0&&v===1)mem[6]^=1}
+  else if(mem[o.ad]!==v&&!fail)fail={o,got:mem[o.ad]}}
+ function draw(){const x=c.x,cur=pc?ops[pc-1]:null;x.clearRect(0,0,320,150);x.textAlign='center';x.font='13px system-ui';
+  mem.forEach((v,i)=>{const bx=12+i*37;x.fillStyle=css(v?'--a':'--cell');x.fillRect(bx,40,32,40);x.strokeStyle=css(cur&&cur.ad===i?'--w':'--mut');x.lineWidth=cur&&cur.ad===i?3:1;x.strokeRect(bx,40,32,40);x.fillStyle=v?'#ffffff':css('--fg');x.fillText(v,bx+16,65);x.fillStyle=css('--mut');x.font='11px system-ui';x.fillText('addr '+i,bx+16,96);x.font='13px system-ui'});
+  NM.forEach((n,e)=>{x.fillStyle=css(cur&&cur.e===e?'--a':'--mut');x.fillText(n,32+e*52,128)});x.fillStyle=css('--mut');x.font='11px system-ui';x.fillText('MARCH C− elements',160,18);
+  m.innerHTML=`Operation <b>${pc} / ${ops.length}</b>${cur?` · <b>${cur.op}</b> at address ${cur.ad}`:''}<br>`+(fail?`<b style="color:${css('--ok')}">Fault detected</b>: a read expected ${fail.o.op[1]} at address ${fail.o.ad} but got ${fail.got} (element ${NM[fail.o.e]})`:pc>=ops.length?(f?`<b style="color:${css('--w')}">Fault ESCAPED</b>`:`<b style="color:${css('--ok')}">Memory passed</b>`):'Step through the test…')}
+ b.append(c,m,sl('Injected fault',0,4,1,0,v=>{f=v;init()},v=>F[v]),rowOf(btn('Step',()=>{step();draw()}),btn('Run all',()=>{while(pc<ops.length)step();draw()}),btn('Reset',init,1)));
+ b.append($('<p class="pdm">MBIST wraps each memory with a small controller that writes and reads patterns on its own. MARCH C− sweeps the addresses up and down, reading back what it wrote, which exposes stuck-at, transition and coupling faults. Chips can use one shared controller for many memories or a separate controller per memory, trading area against test time and routing.</p>'));
+}
+
+/* 13 Quiz */
+function l13(b){const Q=[
+ ['A net is stuck-at-0. To detect it, a test must…',['Drive it to 1 and make that value visible at an output','Drive it to 0 and observe it','Toggle the clock at speed'],0,'Activation needs the opposite value, and propagation makes the difference observable.'],
+ ['A 1,000-flop chain is split into 10 equal chains. Shift time per pattern falls to about…',['1,000 clocks','100 clocks','10 clocks'],1,'Each chain now has 100 flops, so loading takes about 100 shifts.'],
+ ['What does a lock-up latch fix?',['Setup violations on the functional path','Hold violations when a scan chain crosses clock domains','Missing scan flops'],1,'It delays the data by half a cycle so the next flop cannot catch the new bit too early.'],
+ ['Which fault model needs an at-speed capture clock?',['Stuck-at','Transition','Bridging only'],1,'A slow-to-rise or slow-to-fall gate only fails if the capture happens at functional speed.'],
+ ['A net sits under a 12-deep chain of gates and is rarely seen at an output. The best fix is…',['A control point','An observation point','A wider clock tree'],1,'Observability is the problem, so capture the net in a test flop.'],
+ ['What does MARCH C− do?',['Sweeps addresses up and down, writing and reading to expose memory faults','Shifts data through scan chains','Measures leakage current'],0,'It is a fixed read/write sequence run by MBIST hardware.']];
+ let i=0,sc=0,done=0;const box=$('<div></div>');
+ function show(){done=0;if(i>=Q.length){box.innerHTML=`<p><b>Score: ${sc} / ${Q.length}</b></p>`;box.append(btn('Try again',()=>{i=0;sc=0;show()}));return}
+  const q=Q[i],bs=[],fb=$('<div class="pdm"></div>');box.innerHTML=`<p><b>${i+1}. ${q[0]}</b></p>`;
+  q[1].forEach((o,k)=>{const bt=btn(o,()=>{if(done)return;done=1;if(k===q[2])sc++;bs.forEach((x,j)=>{x.style.background=j===q[2]?css('--ok'):j===k?css('--w'):'';x.style.color=j===q[2]||j===k?'#fff':''});fb.innerHTML=(k===q[2]?'Correct. ':'Not quite. ')+q[3];box.append(btn(i<Q.length-1?'Next question':'See score',()=>{i++;show()}))},1);bt.style.cssText+='display:block;width:100%;text-align:left;margin:6px 0';bs.push(bt);box.append(bt)});box.append(fb)}
+ b.append(box);show();
+}
+
+const L=[
+ {ch:'Foundations',t:'Why DFT?',fn:l1,tx:'<p>Chips are tested on automatic test equipment, but you can’t probe the billions of nodes inside one. <b>Design for Test (DFT)</b> adds structures that let a tester control and observe internal state, so manufacturing defects are caught before chips ship. Better coverage means fewer bad chips in customers’ hands.</p>'},
+ {ch:'Foundations',t:'Defects & fault models',tx:'<p>Real <b>defects</b> are physical: opens, shorts, bridges between wires, weak vias, particles. Testers can’t chase each one, so DFT uses abstract <b>fault models</b>:</p><ul><li><b>Stuck-at:</b> a net is permanently 0 or 1.</li><li><b>Transition:</b> a gate is slow to rise or slow to fall.</li><li><b>Path delay:</b> a whole path is too slow.</li><li><b>Bridging:</b> two neighbouring nets are shorted, so an aggressor corrupts a victim.</li><li><b>IDDQ:</b> a defect makes the idle chip draw extra leakage current.</li></ul><p>Stuck-at is the workhorse; the other models catch what it misses.</p>'},
+ {ch:'Fault models',t:'Stuck-at faults',fn:l3,tx:'<p>Pick a net on a tiny circuit and a stuck value, then see which input vectors expose it. Notice that some vectors detect several faults at once, which is why ATPG tools can cover millions of faults with far fewer patterns.</p>'},
+ {ch:'Scan design',t:'Scan chains',fn:l4,tx:'<p>In <b>scan design</b> every flip-flop gets a mux so that, in test mode (<b>SE=1</b>), flops link into a shift register. The tester shifts a pattern in, pulses the clock once in functional mode to <b>capture</b> the logic’s response, then shifts the result out. This turns a hard sequential problem into a simple combinational one.</p>'},
+ {ch:'Scan design',t:'Making logic scannable',fn:l5,tx:'<p>Scan <b>design rule checks</b> find structures that block control or observation of flops. Typical culprits are internally generated clocks, uncontrolled asynchronous resets, clock-gating enables that switch off flops in test mode, and opaque latches. Each unfixed violation removes flops, and the logic behind them, from test.</p>'},
+ {ch:'Scan design',t:'Clock domains & lock-up latches',fn:l6,tx:'<p>A scan chain often crosses between flops on different clocks. If the receiving clock arrives later than the launching clock plus its clk→Q delay, the next flop captures the <b>new</b> bit instead of the old one: a hold violation in shift mode. A <b>lock-up latch</b> placed between the two retimes the data by half a cycle.</p>'},
+ {ch:'Scan design',t:'Clock staggering & test power',fn:l7,tx:'<p>During shift, thousands of flops can toggle on the same edge, drawing far more current than functional mode ever does. That surge causes IR drop that can fail good chips. <b>Clock staggering</b> offsets the shift clock between groups of flops so their switching is spread over time.</p>'},
+ {ch:'ATPG & compression',t:'Test time & compression',fn:l8,tx:'<p><b>ATPG</b> (automatic test pattern generation) creates the patterns. Every pattern costs a full chain length of shift clocks, so long chains mean long, expensive tester time. Compression and more chains cut that cost.</p>'},
+ {ch:'ATPG & compression',t:'Test point insertion',fn:l9,tx:'<p>Some logic resists random patterns, such as wide ANDs, deep reconvergent cones and rarely-enabled paths. <b>Control points</b> force a net to a chosen value in test mode; <b>observation points</b> copy a net into a scan flop. A few of them can remove thousands of patterns.</p>'},
+ {ch:'At-speed test',t:'Transition & path delay faults',fn:l10,tx:'<p>Some defects don’t break logic, they slow it down. Catching them means capturing at the chip’s real clock speed. The capture clock comes from the on-chip PLL, so pulses are fast even though shifting is slow.</p>'},
+ {ch:'Memory test',t:'MBIST & MARCH tests',fn:l11,tx:'<p>Memories are dense, hold most of a chip’s transistors and are too big to scan. Instead each gets <b>memory built-in self-test (MBIST)</b>. Inject a fault and step through <b>MARCH C−</b> to see exactly which read catches it.</p>'},
+ {ch:'Practice',t:'Test modes & constraints',tx:'<p>DFT needs its own timing constraints, one set per <b>mode</b>:</p><ul><li><b>Shift:</b> slow clock (tens of MHz), SE=1. Hold fixing matters most.</li><li><b>Stuck-at capture:</b> SE=0, usually a slow capture clock.</li><li><b>At-speed capture:</b> SE=0, functional-speed PLL pulses, full setup timing.</li></ul><p>The scan-enable is a high-fanout signal that switches between modes, so it is usually constrained as a case-analysis or false path and buffered separately. Memory BIST and boundary scan add their own modes.</p>'},
+ {ch:'Practice',t:'Test yourself',fn:l13,tx:'<p>Six quick questions covering the whole course.</p>'}
+];
+let cur=0;const seen=new Set([0]),main=document.getElementById('pd-main'),nav=document.getElementById('pd-nav');
+function drawNav(){nav.innerHTML='';let last='';L.forEach((l,i)=>{if(l.ch!==last){nav.append($(`<h3>${l.ch}</h3>`));last=l.ch}
+  const b=$(`<button class="${i===cur?'on':''}">${seen.has(i)&&i!==cur?'✓ ':''}${i+1}. ${l.t}${l.fn?'<span class="t">interactive</span>':''}</button>`);b.onclick=()=>show(i);nav.append(b)});
+  document.getElementById('pd-prog').textContent=seen.size+' / '+L.length+' visited'}
+function show(i){cur=i;seen.add(i);drawNav();const l=L[i];main.innerHTML=`<div class="pdk">${l.ch} · Lesson ${i+1}</div><h2>${l.t}</h2>${l.tx}`;
+  if(l.fn){const box=document.createElement('div');main.append(box);l.fn(box)}
+  const p=$('<div class="pdpg"></div>'),pr=$('<button class="alt">← Back</button>'),nx=$('<button>Next →</button>');
+  pr.onclick=()=>show(i-1);nx.onclick=()=>show(i+1);p.append(i?pr:document.createElement('span'),i<L.length-1?nx:document.createElement('span'));main.append(p);if(show.go)document.getElementById('pd-course').scrollIntoView();show.go=1}
+show(0);
+
+})();
+</script>
+<script>
+(function(){var d=document.querySelector('.nav-dd');if(!d)return;var t=d.querySelector('.nav-dd-toggle');
+t.addEventListener('click',function(e){if(matchMedia('(hover: none)').matches&&!d.classList.contains('open')){e.preventDefault();d.classList.add('open');t.setAttribute('aria-expanded','true')}});
+document.addEventListener('click',function(e){if(!d.contains(e.target)){d.classList.remove('open');t.setAttribute('aria-expanded','false')}});})();
+</script>
+</body>
+</html>
