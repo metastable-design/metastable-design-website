@@ -335,3 +335,8 @@ document.addEventListener('DOMContentLoaded', function () {
     body.insertBefore(btn, body.firstChild);
   });
 });
+
+
+(function(){var d=document.querySelector('.nav-dd');if(!d)return;var t=d.querySelector('.nav-dd-toggle');
+t.addEventListener('click',function(e){if(matchMedia('(hover: none)').matches&&!d.classList.contains('open')){e.preventDefault();d.classList.add('open');t.setAttribute('aria-expanded','true')}});
+document.addEventListener('click',function(e){if(!d.contains(e.target)){d.classList.remove('open');t.setAttribute('aria-expanded','false')}});})();
